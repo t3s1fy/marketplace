@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 from pathlib import Path
 from datetime import timedelta
+
+from django.conf.global_settings import AUTH_USER_MODEL
 from dotenv import load_dotenv
 import os
 
@@ -31,6 +33,8 @@ SECRET_KEY = 'django-insecure-dklka3qx4zj@+c8dmu7wh4um&u9txd@=3-k93*4dhq650f_mgu
 DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
+
+AUTH_USER_MODEL = "backend_api.User"
 
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": (
