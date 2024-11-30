@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,100..900;1,100..900&display=swap');
 /* Основные стили для страницы */
 .auth-page {
   flex-grow: 1;
@@ -9,7 +10,9 @@
   background-color: transparent;
   margin: 0;
   padding: 0;
-  box-shadow: 0 4px 4px -1px rgba(12, 12, 13, 0.1), 0 4px 4px -1px rgba(12, 12, 13, 0.05);
+  box-shadow:
+    0 4px 4px -1px rgba(12, 12, 13, 0.1),
+    0 4px 4px -1px rgba(12, 12, 13, 0.05);
 }
 
 /* Контейнер для формы логина */
@@ -45,7 +48,7 @@
 
 .auth-title {
   font-size: 16px;
-  font-family: 'IBM Plex Mono', monospace;
+  font-family: "IBM Plex Mono", monospace;
   font-weight: 400;
   color: #000000;
   cursor: pointer;
@@ -72,16 +75,26 @@
 }
 
 .auth-title-container.active .sub-line {
-  background-color: #9C7C73; /* Цветная линия для активного состояния */
+  background-color: #9c7c73; /* Цветная линия для активного состояния */
 }
 
 /* Главная линия под блоком */
 .line {
   height: 1px;
-  background-color:#9C7C73;
+  background-color: #9c7c73;
   margin-top: 0;
-  margin-bottom: 79px;
 }
+.input-container-login {
+  margin-top: 79px;
+}
+
+.input-container-register {
+  flex-direction: column;
+  display: flex;
+  margin-top: 24px;
+  align-items: center;
+}
+
 /* Контейнер формы */
 .auth-form-wrapper {
   display: flex;
@@ -92,66 +105,199 @@
 }
 
 /* Стиль для группы ввода */
-.input-group {
+.input-group-login {
   height: 72px;
   width: 325px;
   text-align: left;
   margin-bottom: 32px;
 }
 
-.input-group-2 {
+.input-group-login-2 {
   height: 89px;
   width: 325px;
   text-align: left;
   margin-bottom: 32px;
 }
 
-.input-group label {
+.input-group-register {
+  height: 72px;
+  width: 325px;
+  text-align: left;
+  margin-bottom: 10px;
+}
+
+.input-group-register-2 {
+  height: 72px;
+  width: 325px;
+  text-align: left;
+  margin-bottom: 10px;
+}
+
+.password-wrapper-reg {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 50px;
+  border-radius: 10px;
+  border: 1px solid #5e3023;
+}
+
+.input-group-register-3 {
+  height: 72px;
+  width: 325px;
+  text-align: left;
+}
+
+.input-group-login label {
   display: block;
   font-size: 16px;
   color: black;
-  font-family: 'IBM Plex Mono', monospace;
+  font-family: "IBM Plex Mono", monospace;
   font-weight: 400;
   margin-bottom: 1px;
 }
 
-.input-group-2 label {
+.input-group-login-2 label {
   display: block;
   font-size: 16px;
   color: black;
-  font-family: 'IBM Plex Mono', monospace;
+  font-family: "IBM Plex Mono", monospace;
   font-weight: 400;
   margin-bottom: 1px;
 }
 
-.input-group input {
+.input-group-register label {
+  display: block;
+  font-size: 16px;
+  color: black;
+  font-family: "IBM Plex Mono", monospace;
+  font-weight: 400;
+  margin-bottom: 1px;
+}
+
+.input-group-register-2 label {
+  display: block;
+  font-size: 16px;
+  color: black;
+  font-family: "IBM Plex Mono", monospace;
+  font-weight: 400;
+  margin-bottom: 1px;
+}
+
+.input-group-register-3 label {
+  display: block;
+  font-size: 16px;
+  color: black;
+  font-family: "IBM Plex Mono", monospace;
+  font-weight: 400;
+  margin-bottom: 1px;
+}
+
+.input-group-login input {
   box-sizing: border-box;
   padding-left: 7px;
   height: 50px;
   width: 100%;
   font-size: 16px;
   border-radius: 10px;
-  font-family: 'IBM Plex Mono', monospace;
+  font-family: "IBM Plex Mono", monospace;
   font-weight: 400;
-  color: #000000;
-  border: 1px solid #5E3023;
+  color: #5e3023;
+  border: 1px solid #5e3023;
   background-color: white;
 }
+.input-group-login input:focus {
+  outline: none;
+}
 
-.input-group-2 input {
+.input-group-login-2 input {
   box-sizing: border-box;
   padding-left: 7px;
   height: 50px;
   width: 100%;
   font-size: 16px;
   border-radius: 10px;
-  font-family: 'IBM Plex Mono', monospace;
+  font-family: "IBM Plex Mono", monospace;
   font-weight: 400;
-  color: #000000;
-  border: 1px solid #5E3023;
+  color: #5e3023;
+  border: 1px solid #5e3023;
   background-color: white;
 }
 
+.input-group-login-2 input:focus {
+  outline: none;
+}
+
+.input-group-register input {
+  box-sizing: border-box;
+  padding-left: 7px;
+  height: 50px;
+  width: 100%;
+  font-size: 16px;
+  border-radius: 10px;
+  font-family: "IBM Plex Mono", monospace;
+  font-weight: 400;
+  color: #5e3023;
+  border: 1px solid #5e3023;
+  background-color: white;
+}
+
+.input-group-register input:focus {
+  outline: none;
+}
+
+.input-group-register-2 input {
+  box-sizing: border-box;
+  padding-left: 7px;
+  height: 50px;
+  width: 100%;
+  font-size: 16px;
+  border: none;
+  outline: none;
+  font-family: "IBM Plex Mono", monospace;
+  font-weight: 400;
+  color: #5e3023;
+  background-color: transparent;
+}
+
+.input-group-register-3 input {
+  box-sizing: border-box;
+  padding-left: 7px;
+  height: 50px;
+  width: 100%;
+  font-size: 16px;
+  border: none;
+  outline: none;
+  font-family: "IBM Plex Mono", monospace;
+  font-weight: 400;
+  color: #5e3023;
+  background-color: transparent;
+}
+
+.show-password-1 {
+  border: none;
+  background-color: transparent;
+  width: 48px;
+  height: 48px;
+  margin-right: 0;
+  cursor: pointer;
+}
+
+.show-password-2 {
+  border: none;
+  background-color: transparent;
+  width: 48px;
+  height: 48px;
+  margin-right: 0;
+  cursor: pointer;
+}
+
+.form {
+  width: 100%;
+  height: 30px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
 /* Ссылка на забытый пароль */
 .forgot-password {
   text-align: right;
@@ -159,7 +305,7 @@
 
 .forgot-password a {
   font-size: 13px;
-  font-family: 'IBM Plex Mono', monospace ;
+  font-family: "IBM Plex Mono", monospace;
   font-weight: 400;
   color: black;
   text-decoration: none;
@@ -175,10 +321,10 @@
   width: 325px;
   height: 50px;
   font-size: 20px;
-  font-family: 'IBM Plex Mono', monospace;
+  font-family: "IBM Plex Mono", monospace;
   font-weight: 400;
   color: black;
-  background-color: #EAE0D6;
+  background-color: #eae0d6;
   border: none;
   border-radius: 10px;
   cursor: pointer;
@@ -187,6 +333,34 @@
 
 .login-btn:hover {
   background-color: #dad2c9;
+}
+
+.reg-btn {
+  margin-bottom: 25px;
+  width: 325px;
+  height: 50px;
+  font-size: 20px;
+  font-family: "IBM Plex Mono", monospace;
+  font-weight: 400;
+  color: black;
+  background-color: #eae0d6;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.reg-btn:hover {
+  background-color: #dad2c9;
+}
+
+.reg-btn:disabled {
+  cursor: not-allowed; /* Изменяем курсор */
+}
+
+.reg-btn:disabled:hover {
+  background-color: #eae0d6;
+  cursor: not-allowed; /* Изменяем курсор */
 }
 
 .divider {
@@ -202,14 +376,14 @@
 .divider::after {
   content: "";
   flex: 1;
-  border-bottom: 1px solid #EAE0D6; /* Цвет линии */
+  border-bottom: 1px solid #eae0d6; /* Цвет линии */
 }
 
 .divider span {
   box-sizing: border-box;
-  padding-bottom: 3px ;
+  padding-bottom: 3px;
   font-size: 14px;
-  font-family: 'Roboto Mono', monospace;
+  font-family: "Roboto Mono", monospace;
   font-weight: 400;
   color: black;
   white-space: nowrap;
@@ -219,19 +393,25 @@
 .social-login button {
   width: 360px;
   height: 44px;
-  font-size: 14px;
-  background-color: #FFFFFF;
-  color: #475156;
-  border: 1px solid #E4E7E9;
+  background-color: #ffffff;
+  border: 1px solid #e4e7e9;
   border-radius: 5px;
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 12px;
   cursor: pointer;
 }
-
+.social-login button p {
+  margin: auto;
+  font-family: "Roboto Mono", monospace;
+  font-size: 14px;
+  color: #475156;
+  background-color: transparent;
+  text-align: center;
+}
 .social-login button img {
+  position: absolute;
+  margin-left: 16px;
+  background: transparent;
   width: 20px;
   height: 20px;
 }

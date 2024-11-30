@@ -16,6 +16,7 @@ import Settings from "./pages/Settings";
 import {
   ADMIN_ROUTE,
   BASKET_ROUTE,
+  CONFIRM_EMAIL_ROUTE,
   CONTACTS_ROUTE,
   FAQ_ROUTE,
   FORGOT_PASSWORD_ROUTE,
@@ -32,6 +33,7 @@ import {
   WISHLIST_ROUTE,
 } from "./utils/consts";
 import Basket from "./pages/Basket";
+import ConfirmEmail from "./pages/ConfirmEmail";
 
 export const adminRoutes = [
   {
@@ -75,6 +77,11 @@ export const authRoutes = [
 ];
 
 export const publicRoutes = [
+  {
+    path: CONFIRM_EMAIL_ROUTE,
+    Component: ConfirmEmail,
+  },
+
   {
     path: HELPER_ROUTE,
     Component: Helper,
