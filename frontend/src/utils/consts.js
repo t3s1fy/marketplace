@@ -1,0 +1,16 @@
+export const ADMIN_ROUTE = "/admin"; //Странца админа
+export const SELLER_ROUTE = "/seller"; //страница продовца
+export const LOGIN_ROUTE = "/login"; //Страница логина
+export const REGISTRATION_ROUTE = "/registration"; //Страница регистрации
+export const HELPER_ROUTE = "/helper";
+export const CONTACTS_ROUTE = "/contacts";
+export const SETTINGS_ROUTE = "/settings";
+export const SHOP_ROUTE = "/"; //Главная страница
+export const FAQ_ROUTE = "/FAQ"; // FAQ
+export const FORGOT_PASSWORD_ROUTE = "/forgot-password"; //Страница восстановления пароля
+export const PAGE_NOT_FOUND_ROUTE = "/PageNotFound";
+export const PRODUCT_ROUTE = "/product"; //Страница товара
+export const MAKING_ORDER_ROUTE = "/order"; //Страница оформления заказа
+export const PROFILE_ROUTE = "/profile"; //Страница профиля
+export const BASKET_ROUTE = "/basket"; //Страница корзины
+export const WISHLIST_ROUTE = "/wishlist"; //Страница избранных товаров

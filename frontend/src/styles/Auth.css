@@ -1,0 +1,246 @@
+/* Основные стили для страницы */
+.auth-page {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  background-color: transparent;
+  margin: 0;
+  padding: 0;
+  box-shadow: 0 4px 4px -1px rgba(12, 12, 13, 0.1), 0 4px 4px -1px rgba(12, 12, 13, 0.05);
+}
+
+/* Контейнер для формы логина */
+.auth-container {
+  margin-top: 51px;
+  margin-bottom: 31px;
+  width: 433px;
+  height: 618px;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  background-color: white;
+  border-radius: 10px;
+  text-align: center;
+}
+/* Строка с "Вход" и "Регистрация" */
+.auth-header {
+  height: 50px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  margin-bottom: 0; /* Убираем отступ снизу */
+  background: transparent;
+}
+
+.auth-title-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Центрируем текст по горизонтали */
+  justify-content: center; /* Центрируем текст по вертикали */
+  height: 100%;
+  width: 50%; /* Каждая колонка занимает половину ширины */
+  position: relative; /* Устанавливаем для использования позиционирования линии */
+}
+
+.auth-title {
+  font-size: 16px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-weight: 400;
+  color: #000000;
+  cursor: pointer;
+  text-align: center; /* Центрируем текст в блоке */
+  margin: 0; /* Убираем лишние отступы */
+}
+
+.auth-title a {
+  text-decoration: none;
+  color: #000000;
+}
+
+.auth-title.active {
+  color: #000000; /* Цвет активного текста "Вход" */
+}
+
+/* Линия под "Вход" и "Регистрация" */
+.sub-line {
+  height: 4px; /* Толщина линии */
+  width: 100%; /* Ширина линии */
+  background-color: transparent; /* По умолчанию прозрачная */
+  position: absolute; /* Абсолютное позиционирование */
+  bottom: 0; /* Прижимаем к низу контейнера */
+}
+
+.auth-title-container.active .sub-line {
+  background-color: #9C7C73; /* Цветная линия для активного состояния */
+}
+
+/* Главная линия под блоком */
+.line {
+  height: 1px;
+  background-color:#9C7C73;
+  margin-top: 0;
+  margin-bottom: 79px;
+}
+/* Контейнер формы */
+.auth-form-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 32px;
+}
+
+/* Стиль для группы ввода */
+.input-group {
+  height: 72px;
+  width: 325px;
+  text-align: left;
+  margin-bottom: 32px;
+}
+
+.input-group-2 {
+  height: 89px;
+  width: 325px;
+  text-align: left;
+  margin-bottom: 32px;
+}
+
+.input-group label {
+  display: block;
+  font-size: 16px;
+  color: black;
+  font-family: 'IBM Plex Mono', monospace;
+  font-weight: 400;
+  margin-bottom: 1px;
+}
+
+.input-group-2 label {
+  display: block;
+  font-size: 16px;
+  color: black;
+  font-family: 'IBM Plex Mono', monospace;
+  font-weight: 400;
+  margin-bottom: 1px;
+}
+
+.input-group input {
+  box-sizing: border-box;
+  padding-left: 7px;
+  height: 50px;
+  width: 100%;
+  font-size: 16px;
+  border-radius: 10px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-weight: 400;
+  color: #000000;
+  border: 1px solid #5E3023;
+  background-color: white;
+}
+
+.input-group-2 input {
+  box-sizing: border-box;
+  padding-left: 7px;
+  height: 50px;
+  width: 100%;
+  font-size: 16px;
+  border-radius: 10px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-weight: 400;
+  color: #000000;
+  border: 1px solid #5E3023;
+  background-color: white;
+}
+
+/* Ссылка на забытый пароль */
+.forgot-password {
+  text-align: right;
+}
+
+.forgot-password a {
+  font-size: 13px;
+  font-family: 'IBM Plex Mono', monospace ;
+  font-weight: 400;
+  color: black;
+  text-decoration: none;
+}
+
+.forgot-password a:hover {
+  color: rgba(0, 0, 0, 0.71);
+}
+
+/* Кнопка "Войти" */
+.login-btn {
+  margin-bottom: 25px;
+  width: 325px;
+  height: 50px;
+  font-size: 20px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-weight: 400;
+  color: black;
+  background-color: #EAE0D6;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.login-btn:hover {
+  background-color: #dad2c9;
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 360px;
+  position: relative;
+  margin-bottom: 25px;
+}
+
+.divider::before,
+.divider::after {
+  content: "";
+  flex: 1;
+  border-bottom: 1px solid #EAE0D6; /* Цвет линии */
+}
+
+.divider span {
+  box-sizing: border-box;
+  padding-bottom: 3px ;
+  font-size: 14px;
+  font-family: 'Roboto Mono', monospace;
+  font-weight: 400;
+  color: black;
+  white-space: nowrap;
+}
+
+/* Стиль для кнопок входа через Google и Apple */
+.social-login button {
+  width: 360px;
+  height: 44px;
+  font-size: 14px;
+  background-color: #FFFFFF;
+  color: #475156;
+  border: 1px solid #E4E7E9;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  cursor: pointer;
+}
+
+.social-login button img {
+  width: 20px;
+  height: 20px;
+}
+
+.social-login button:hover {
+  background-color: rgb(246, 246, 246);
+}
+
+/* Стиль для контейнера соцсетей (Google и Apple) */
+.social-login button:first-of-type {
+  margin-bottom: 10px;
+}

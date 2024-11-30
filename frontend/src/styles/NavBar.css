@@ -1,0 +1,96 @@
+header {
+  width: 100%;
+}
+
+.navbar_top{
+  width: 100%;
+  height: 100px;
+  margin: 0;
+  padding: 0;
+  background-color: #EAE0D6;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.navbar-top-right {
+  display: flex;
+  justify-items: center;
+  align-items: center;
+}
+
+.announcement-text {
+  font-family: 'IBM Plex Mono', monospace; /* Используем шрифт IBM Plex Mono */
+  font-weight: 400; /* Вес шрифта */
+  margin-right: 70px;
+  font-size: 16px; /* Размер шрифта */
+  color: #5E3030; /* Цвет текста */
+  text-decoration: none; /* Убираем подчеркивание */
+}
+.navbar-bottom {
+  width: 100%;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  background-color: #ffffff;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.logo {
+  margin-left: 33px;
+  margin-top: 0;
+  height: 100%;
+}
+.search-box {
+  margin-left: 33px;
+  width: 70%;
+  height: 55px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #FFFFFF;
+  border: 1px solid #DAB49D;
+  border-radius: 20px;
+}
+
+.search-box input {
+  margin-left: 28px;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  color: #5E3023;
+  font-family: 'Roboto Mono', monospace;
+  font-size: 16px;
+  min-width: 90%;
+}
+
+.search-box input::placeholder {
+  color: #5E3023;
+}
+
+.search-box button {
+
+  height: 48px;
+  width: 48px;
+  margin-right: 12px;
+  border: none;
+}
+.search-box img {
+  cursor: pointer;
+}
+.icons {
+  display: flex;
+  gap: 20px; /* Отступы между элементами */
+  margin-left: 46px;
+  margin-right: 70px;
+
+}
+
+.icons button {
+  cursor: pointer;
+  border: none;
+  width: 48px;
+  height: 48px;
+}
+
+
+

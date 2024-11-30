@@ -1,12 +1,19 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import App from './App';
+import React, { createContext } from "react";
+import ReactDOM from "react-dom/client";
+import App from "./App";
+import UserStore from "./store/UserStore";
+import ProductStore from "./store/ProductStore";
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+export const Context = createContext(null);
+
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-    <div>
-        Приложение работает!
-        <button>Нажми,если хочешь что бы тебе накончали за шиворот</button>
-    </div>
+  <Context.Provider
+    value={{
+      user: new UserStore(),
+      product: new ProductStore(),
+    }}
+  >
+    <App />
+  </Context.Provider>,
 );
-
