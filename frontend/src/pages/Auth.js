@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Checkbox } from "../components/checkbox/Checkbox";
+import { useInput, useValidation } from "../components/validation/validation";
 import apple_icon from "../assets/icons/apple_icon.svg";
 import google_icon from "../assets/icons/google_icon.svg";
 import eye_icon from "../assets/icons/eye_icon.svg";
@@ -13,6 +14,21 @@ import {
 } from "../utils/consts";
 
 const Auth = () => {
+  //Для валидации
+  const email = useInput("", { isEmpty: true, minLength: 3, isEmail: true });
+  const password = useInput("", { isEmpty: true, minLength: 8, maxLength: 20 });
+  const confirmPassword = useInput("", { isMatch: true }, password.value);
+
+  const [passwordsMatch, setPasswordsMatch] = useState(false);
+  // Проверка на совпадение паролей
+  useEffect(() => {
+    if (password.value === confirmPassword.value) {
+      setPasswordsMatch(true);
+    } else {
+      setPasswordsMatch(false);
+    }
+  }, [password.value, confirmPassword.value]); // Следим за изменением значений паролей
+
   const location = useLocation();
   const isLogin = location.pathname === LOGIN_ROUTE;
   const navigate = useNavigate(); // Инициализируем хук для навигации
@@ -79,18 +95,51 @@ const Auth = () => {
                 <label htmlFor="email" className="input-label">
                   Почта
                 </label>
-                <input type="email" id="email" placeholder="" />
+                <input
+                  onChange={(e) => email.onChange(e)}
+                  onBlur={(e) => email.onBlur(e)}
+                  value={email.value}
+                  type="email"
+                  id="email"
+                  placeholder=""
+                />
               </div>
-
+              {email.isDirty && email.isEmpty && (
+                <p className="valid-error">Поле не может быть пустым</p>
+              )}
+              {email.isDirty && email.minLengthError && (
+                <p className="valid-error">Некорректная длина</p>
+              )}
+              {email.isDirty && email.emailError && (
+                <p className="valid-error">Некорректный email</p>
+              )}
               {/* Поле для ввода пароля с ссылкой "Не помню пароль" */}
               <div className="input-group-login-2">
                 <label htmlFor="password" className="input-label">
                   Пароль
                 </label>
                 <div className="password-wrapper">
-                  <input type="password" id="password" placeholder="" />
+                  <input
+                    onChange={(e) => password.onChange(e)}
+                    onBlur={(e) => password.onBlur(e)}
+                    value={password.value}
+                    type="password"
+                    id="password"
+                    placeholder=""
+                  />
                   <div className="forgot-password">
                     <Link to={FORGOT_PASSWORD_ROUTE}>Не помню пароль</Link>
+                    <div>
+                      {password.isDirty && password.isEmpty && (
+                        <p className="valid-error">Поле не может быть пустым</p>
+                      )}
+                      {password.isDirty && password.minLengthError && (
+                        <p className="valid-error">Некорректная длина</p>
+                      )}
+                      {password.isDirty && password.maxLengthError && (
+                        <p className="valid-error">Слишком длинный пароль</p>
+                      )}
+                    </div>
                   </div>
                 </div>
               </div>
@@ -102,8 +151,24 @@ const Auth = () => {
                 <label htmlFor="email" className="input-label">
                   Почта
                 </label>
-                <input type="email" id="email" placeholder="" />
+                <input
+                  onChange={(e) => email.onChange(e)}
+                  onBlur={(e) => email.onBlur(e)}
+                  value={email.value}
+                  type="email"
+                  id="email"
+                  placeholder=""
+                />
               </div>
+              {email.isDirty && email.isEmpty && (
+                <p className="valid-error">Поле не может быть пустым</p>
+              )}
+              {email.isDirty && email.minLengthError && (
+                <p className="valid-error">Некорректная длина</p>
+              )}
+              {email.isDirty && email.emailError && (
+                <p className="valid-error">Некорректный email</p>
+              )}
               {/* Поле для ввода пароля с ссылкой "Не помню пароль" */}
               <div className="input-group-register-2">
                 <label htmlFor="password" className="input-label">
@@ -111,6 +176,9 @@ const Auth = () => {
                 </label>
                 <div className="password-wrapper-reg">
                   <input
+                    onChange={(e) => password.onChange(e)}
+                    onBlur={(e) => password.onBlur(e)}
+                    value={password.value}
                     type={showPassword1 ? "text" : "password"}
                     id="password"
                     placeholder=""
@@ -126,12 +194,24 @@ const Auth = () => {
                   </button>
                 </div>
               </div>
+              {password.isDirty && password.isEmpty && (
+                <p className="valid-error">Поле не может быть пустым</p>
+              )}
+              {password.isDirty && password.minLengthError && (
+                <p className="valid-error">Некорректная длина</p>
+              )}
+              {password.isDirty && password.maxLengthError && (
+                <p className="valid-error">Слишком длинный пароль</p>
+              )}
               <div className="input-group-register-3">
                 <label htmlFor="password" className="input-label">
                   Повторите пароль
                 </label>
                 <div className="password-wrapper-reg">
                   <input
+                    onChange={(e) => confirmPassword.onChange(e)}
+                    onBlur={(e) => confirmPassword.onBlur(e)}
+                    value={confirmPassword.value}
                     type={showPassword2 ? "text" : "password"}
                     id="password-confirm"
                     placeholder=""
@@ -147,6 +227,9 @@ const Auth = () => {
                   </button>
                 </div>
               </div>
+              {confirmPassword.matchError && (
+                <p className="valid-error">Пароли не совпадают</p>
+              )}
               <form className="form">
                 <Checkbox isChecked={rulesChecked} onChange={setRulesChecked}>
                   Вы согласны с <a href="#">условиями</a> политики использования
@@ -157,11 +240,21 @@ const Auth = () => {
           )}
 
           {isLogin ? (
-            <button className="login-btn">Войти</button>
+            <button
+              disabled={!email.inputValid || !password.inputValid}
+              className="login-btn"
+            >
+              Войти
+            </button>
           ) : (
             <button
               className="reg-btn"
-              disabled={!rulesChecked}
+              disabled={
+                !rulesChecked ||
+                !email.inputValid ||
+                !password.inputValid ||
+                !passwordsMatch
+              }
               onClick={handleRegisterClick}
             >
               Регистрация

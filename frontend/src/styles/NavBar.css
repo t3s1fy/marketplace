@@ -4,7 +4,7 @@ header {
 
 .navbar_top{
   width: 100%;
-  height: 100px;
+  height: 60px;
   margin: 0;
   padding: 0;
   background-color: #EAE0D6;
@@ -42,7 +42,7 @@ header {
 }
 .search-box {
   margin-left: 33px;
-  width: 70%;
+  width: 1251px;
   height: 55px;
   display: flex;
   align-items: center;
@@ -50,6 +50,28 @@ header {
   background-color: #FFFFFF;
   border: 1px solid #DAB49D;
   border-radius: 20px;
+  transition: border-color 0.2s ease-in-out;
+}
+
+.search-box-not-login {
+  margin-left: 33px;
+  width: 830px;
+  height: 55px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #FFFFFF;
+  border: 1px solid #DAB49D;
+  border-radius: 20px;
+  transition: border-color 0.2s ease-in-out;
+}
+
+.search-box:focus-within {
+  border-color: #5E3023; /* цвет рамки, когда фокус внутри контейнера */
+}
+
+.search-box-not-login:focus-within {
+  border-color: #5E3023; /* цвет рамки, когда фокус внутри контейнера */
 }
 
 .search-box input {
@@ -60,23 +82,98 @@ header {
   color: #5E3023;
   font-family: 'Roboto Mono', monospace;
   font-size: 16px;
-  min-width: 90%;
+  width: 1000px;
+  transition: color 0.2s ease-in-out;
+}
+
+.search-box-not-login input {
+  margin-left: 28px;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  color: #5E3023;
+  font-family: 'Roboto Mono', monospace;
+  font-size: 16px;
+  width: 700px;
+  transition: color 0.2s ease-in-out;
 }
 
 .search-box input::placeholder {
   color: #5E3023;
+  transition: color 0.2s ease-in-out;
+}
+
+.search-box-not-login input::placeholder {
+  color: #5E3023;
+  transition: color 0.2s ease-in-out;
+}
+
+.search-box input:focus::placeholder {
+  color: #cfc1bd;
+}
+
+.search-box-not-login input:focus::placeholder {
+  color: #cfc1bd;
 }
 
 .search-box button {
-
   height: 48px;
   width: 48px;
   margin-right: 12px;
   border: none;
 }
+
+.search-box-not-login button {
+  height: 48px;
+  width: 48px;
+  margin-right: 12px; /*ТУТ*/
+  border: none;
+}
+
 .search-box img {
   cursor: pointer;
 }
+
+.search-box-not-login img {
+  cursor: pointer;
+}
+
+.button-container {
+  gap: 20px;
+  margin-left: 47px;
+  margin-right: 20px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nav-log-btn {
+  cursor: pointer;
+  border: 1px solid #DAB49D;
+  border-radius: 10px;
+  background-color: #FFFFFF;
+  text-align: center;
+  font-family: 'Roboto Mono', monospace;
+  font-size: 16px;
+  color: #5E3023;
+  width: 190px;
+  height: 55px;
+}
+
+.nav-reg-btn {
+  cursor: pointer;
+  border: 1px solid #DAB49D;
+  border-radius: 10px;
+  background-color: #DAB49D;
+  text-align: center;
+  font-family: 'Roboto Mono', monospace;
+  font-size: 16px;
+  color: #5E3023;
+  width: 190px;
+  height: 55px;
+}
+
 .icons {
   display: flex;
   gap: 20px; /* Отступы между элементами */
@@ -85,7 +182,20 @@ header {
 
 }
 
+.icons-not-login {
+  display: flex;
+  gap: 20px; /* Отступы между элементами */
+  margin-right: 70px;
+}
+
 .icons button {
+  cursor: pointer;
+  border: none;
+  width: 48px;
+  height: 48px;
+}
+
+.icons-not-login button {
   cursor: pointer;
   border: none;
   width: 48px;
