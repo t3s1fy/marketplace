@@ -1,6 +1,6 @@
 from django.contrib.auth import get_user_model
 from rest_framework import serializers
-from .models import Note
+from .models import Note, Product
 
 User = get_user_model()
 
@@ -22,3 +22,20 @@ class NoteSerializer(serializers.ModelSerializer):
         model = Note
         fields = ["id", "title", "content", "created_at", "author"]
         extra_kwargs = {"author": {"read_only": True}}
+
+class ProductSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Product
+        fields = ['id', 'name', 'description', 'price', 'is_available', 'photo', 'seller']
+
+    def create(self, validated_data):
+        user = self.context['request'].user
+        if user.role not in ['admin', 'seller']:
+            raise serializers.ValidationError("Недостаточно прав для создания товара.")
+        return super().create(validated_data)
+
+    def update(self, instance, validated_data):
+        user = self.context['request'].user
+        if not instance.can_be_edited_by(user):
+            raise serializers.ValidationError("Недостаточно прав для редактирования товара.")
+        return super().update(instance, validated_data)

@@ -1,6 +1,8 @@
 from django.contrib.auth.base_user import AbstractBaseUser, BaseUserManager
 from django.contrib.auth.models import PermissionsMixin
 from django.db import models
+from marketplace import settings
+
 
 class UserManager(BaseUserManager):
     def create_user(self, email, password=None, role='user', **extra_fields):
@@ -48,3 +50,31 @@ class Note(models.Model):
 
     def __str__(self):
         return self.title
+
+class Product(models.Model):
+    id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=255, verbose_name="Название")
+    description = models.TextField(blank=True, verbose_name="Описание")
+    price = models.DecimalField(max_digits=10, decimal_places=2, verbose_name="Цена")
+    is_available = models.BooleanField(default=True, verbose_name="Наличие")
+    photo = models.ImageField(
+        upload_to="product_photos/",
+        blank=True,
+        null=True,
+        verbose_name="Фото товара"
+    )
+    seller = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        related_name="products",
+        verbose_name="Продавец",
+    )
+
+    def can_be_edited_by(self, user):
+        return user.role in ['admin', 'seller'] and (user.role == 'admin' or self.seller == user)
+
+    def can_be_deleted_by(self, user):
+        return user.role == 'admin'
+
+    def __str__(self):
+        return f"{self.name} - {self.seller.email}"
