@@ -204,7 +204,7 @@ const Auth = () => {
                 <p className="valid-error">Слишком длинный пароль</p>
               )}
               <div className="input-group-register-3">
-                <label htmlFor="password" className="input-label">
+                <label htmlFor="password-confirm" className="input-label">
                   Повторите пароль
                 </label>
                 <div className="password-wrapper-reg">
