@@ -1,6 +1,6 @@
 from django.contrib.auth import get_user_model
 from rest_framework import serializers
-from .models import Note, Product
+from .models import Note, Product, CartItem, Cart
 
 User = get_user_model()
 
@@ -39,3 +39,18 @@ class ProductSerializer(serializers.ModelSerializer):
         if not instance.can_be_edited_by(user):
             raise serializers.ValidationError("Недостаточно прав для редактирования товара.")
         return super().update(instance, validated_data)
+
+class CartItemSerializer(serializers.ModelSerializer):
+    product_name = serializers.CharField(source='product.name', read_only=True)
+
+    class Meta:
+        model = CartItem
+        fields = ['id', 'product', 'product_name', 'quantity', 'total_price']
+
+class CartSerializer(serializers.ModelSerializer):
+    items = CartItemSerializer(many=True, read_only=True)
+    total_price = serializers.ReadOnlyField()
+
+    class Meta:
+        model = Cart
+        fields = ['id', 'user', 'items', 'total_price']
