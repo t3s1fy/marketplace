@@ -1,7 +1,8 @@
 import React, { useContext } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
+
 import { adminRoutes, authRoutes, publicRoutes, sellerRoutes } from "../routes";
-import { PAGE_NOT_FOUND_ROUTE } from "../utils/consts";
+import { LOGIN_ROUTE, PAGE_NOT_FOUND_ROUTE } from "../utils/consts";
 import { Context } from "../index";
 
 const AppRouter = () => {
@@ -25,6 +26,32 @@ const AppRouter = () => {
       {publicRoutes.map(({ path, Component }) => (
         <Route key={path} path={path} element={<Component />} exact />
       ))}
+      {(!user.isAuth || !user.isSeller || !user.isAdmin) &&
+        authRoutes.map(({ path, Component }) => (
+          <Route
+            key={path}
+            path={path}
+            element={<Navigate to={LOGIN_ROUTE} />}
+            exact
+          />
+        )) &&
+        sellerRoutes.map(({ path, Component }) => (
+          <Route
+            key={path}
+            path={path}
+            element={<Navigate to={LOGIN_ROUTE} />}
+            exact
+          />
+        )) &&
+        adminRoutes.map(({ path, Component }) => (
+          <Route
+            key={path}
+            path={path}
+            element={<Navigate to={LOGIN_ROUTE} />}
+            exact
+          />
+        ))}
+
       <Route path="*" element={<Navigate to={PAGE_NOT_FOUND_ROUTE} />} />
     </Routes>
   );

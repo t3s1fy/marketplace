@@ -1,0 +1,80 @@
+.page-not-found {
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  background-color: transparent;
+  margin: 0;
+  padding: 0;
+  box-shadow:
+    0 4px 4px -1px rgba(12, 12, 13, 0.1),
+    0 4px 4px -1px rgba(12, 12, 13, 0.05);
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+ margin-top: 182px;
+  margin-bottom: 233px;
+}
+
+.error-block {
+  width: 898px;
+  height: 115px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 40px;
+}
+
+.error-block p {
+  font-size: 110px;
+  font-weight: 500;
+  font-family: 'IBM Plex Mono', monospace;
+  color: #5E3023;
+  line-height: 115px;
+}
+
+.message-block {
+  width: 659px;
+  height: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 46px;
+}
+
+.message-block p {
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 24px;
+  font-family: 'IBM Plex Mono', monospace;
+  color: black;
+}
+
+.btn-block {
+ width: fit-content;
+  height: fit-content;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn-block button {
+  width: 307px;
+  height: 60px;
+  background-color: #5E3023E5;
+  border: none;
+  border-radius: 10px;
+  font-size: 32px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-weight: 400;
+  line-height: 42px;
+  color: #fff;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}

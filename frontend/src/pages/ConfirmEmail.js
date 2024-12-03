@@ -2,8 +2,11 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "../styles/ConfirmEmail.css";
 import { LOGIN_ROUTE, REGISTRATION_ROUTE } from "../utils/consts";
+import { useInput } from "../components/validation/validation";
+import { values } from "mobx";
 
 const ConfirmEmail = () => {
+  const code = useInput("", { isEmpty: true, minLength: 6 });
   return (
     <div className="confirm-email-page">
       <div className="confirm-email-container">
@@ -21,14 +24,27 @@ const ConfirmEmail = () => {
               Код верификации
             </label>
             <input
+              onChange={(e) => code.onChange(e)}
+              onBlur={(e) => code.onBlur(e)}
+              value={code.value}
               type="text"
               name="verificationCode"
               id="verificationCode"
               placeholder=""
             />
-            <a className="send-code-again" href="#">
-              отправить новый код
-            </a>
+            <div className="valid-block">
+              <a className="send-code-again" href="#">
+                отправить новый код
+              </a>
+              <div>
+                {code.isDirty && code.isEmpty && (
+                  <p className="valid-error">Поле не может быть пустым</p>
+                )}
+                {code.isDirty && code.minLengthError && (
+                  <p className="valid-error">Некорректная длина</p>
+                )}
+              </div>
+            </div>
           </div>
           <button className="confirm-btn">Подтвердить</button>
           <div className="line-body"></div>

@@ -77,7 +77,7 @@
 .input-block {
   display: flex;
   flex-direction: column;
-  height: 89px;
+  height: fit-content;
   width: 325px;
 }
 
@@ -111,7 +111,14 @@
   border-color: #895637;
 }
 
-.input-block a {
+.valid-block {
+  width: 100%;
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+}
+
+.send-code-again {
   text-decoration: none;
   top: 0;
   font-size: 13px;
@@ -122,7 +129,16 @@
   transition: color 0.2s ease;
 }
 
-.input-block a:hover   {
+.valid-error {
+
+  text-align: left;
+  top: 0;
+  font-family: 'Barlow', monospace;
+  font-size: 12px;
+  color: #5E3023;
+}
+
+.send-code-again:hover   {
   color: #9C7C73;
 }
 
