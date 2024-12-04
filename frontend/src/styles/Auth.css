@@ -364,15 +364,19 @@ input:-webkit-autofill {
   font-family: "IBM Plex Mono", monospace;
   font-weight: 400;
   color: black;
-  background-color: #eae0d6;
+  background-color: #EAE0D6;
   border: none;
   border-radius: 10px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: border,background-color 0.3s linear;
 }
 
 .login-btn:hover {
-  background-color: #dad2c9;
+  border: 3px solid #987B72;
+}
+
+.login-btn:focus {
+  background-color: #6C4235B2;
 }
 .login-btn:disabled {
   cursor: not-allowed; /* Изменяем курсор */
@@ -390,11 +394,15 @@ input:-webkit-autofill {
   border: none;
   border-radius: 10px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: border,background-color 0.3s ease;
 }
 
 .reg-btn:hover {
-  background-color: #dad2c9;
+  border: 3px solid #987B72;
+}
+
+.reg-btn:focus {
+  background-color: #6C4235B2;
 }
 
 .reg-btn:disabled {
@@ -402,7 +410,6 @@ input:-webkit-autofill {
 }
 
 .reg-btn:disabled:hover {
-  background-color: #eae0d6;
   cursor: not-allowed; /* Изменяем курсор */
 }
 

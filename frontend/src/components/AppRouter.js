@@ -34,22 +34,6 @@ const AppRouter = () => {
             element={<Navigate to={LOGIN_ROUTE} />}
             exact
           />
-        )) &&
-        sellerRoutes.map(({ path, Component }) => (
-          <Route
-            key={path}
-            path={path}
-            element={<Navigate to={LOGIN_ROUTE} />}
-            exact
-          />
-        )) &&
-        adminRoutes.map(({ path, Component }) => (
-          <Route
-            key={path}
-            path={path}
-            element={<Navigate to={LOGIN_ROUTE} />}
-            exact
-          />
         ))}
 
       <Route path="*" element={<Navigate to={PAGE_NOT_FOUND_ROUTE} />} />

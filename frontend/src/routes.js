@@ -12,6 +12,10 @@ import PageNotFound from "./pages/PageNotFound";
 import Helper from "./pages/Helper";
 import Contacts from "./pages/Contacts";
 import Settings from "./pages/Settings";
+import Basket from "./pages/Basket";
+import ConfirmEmail from "./pages/ConfirmEmail";
+import ForgotPasswordStepTwo from "./pages/ForgotPasswordStepTwo";
+import ForgotPasswordStepThree from "./pages/ForgotPasswordStepThree";
 
 import {
   ADMIN_ROUTE,
@@ -31,9 +35,9 @@ import {
   SETTINGS_ROUTE,
   SHOP_ROUTE,
   WISHLIST_ROUTE,
+  FORGOT_PASSWORD_STEP_TWO_ROUTE,
+  FORGOT_PASSWORD_STEP_THREE_ROUTE,
 } from "./utils/consts";
-import Basket from "./pages/Basket";
-import ConfirmEmail from "./pages/ConfirmEmail";
 
 export const adminRoutes = [
   {
@@ -118,5 +122,14 @@ export const publicRoutes = [
   {
     path: PAGE_NOT_FOUND_ROUTE,
     Component: PageNotFound,
+  },
+  {
+    path: FORGOT_PASSWORD_STEP_TWO_ROUTE,
+    Component: ForgotPasswordStepTwo,
+  },
+
+  {
+    path: FORGOT_PASSWORD_STEP_THREE_ROUTE,
+    Component: ForgotPasswordStepThree,
   },
 ];

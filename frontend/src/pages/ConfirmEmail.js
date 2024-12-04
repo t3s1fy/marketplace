@@ -46,7 +46,9 @@ const ConfirmEmail = () => {
               </div>
             </div>
           </div>
-          <button className="confirm-btn">Подтвердить</button>
+          <button className="confirm-btn" disabled={!code.inputValid}>
+            Подтвердить
+          </button>
           <div className="line-body"></div>
           <div className="faq-text">
             <p>

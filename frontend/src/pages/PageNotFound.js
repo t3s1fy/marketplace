@@ -6,7 +6,7 @@ import "../styles/PageNotFound.css";
 const PageNotFound = () => {
   const navigate = useNavigate();
 
-  const handleRegisterClick = () => {
+  const handleBackClick = () => {
     // Переходим на главную страницу
     navigate(SHOP_ROUTE);
   };
@@ -23,7 +23,9 @@ const PageNotFound = () => {
           </p>
         </div>
         <div className="btn-block">
-          <button className="btn-back">Вернуться</button>
+          <button className="btn-back" onClick={handleBackClick}>
+            Вернуться
+          </button>
         </div>
       </div>
     </div>
