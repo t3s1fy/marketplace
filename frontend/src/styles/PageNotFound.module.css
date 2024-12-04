@@ -1,4 +1,4 @@
-.page-not-found {
+.pageNotFound {
   flex-grow: 1;
   display: flex;
   justify-content: center;
@@ -21,7 +21,7 @@
   margin-bottom: 233px;
 }
 
-.error-block {
+.errorBlock {
   width: 898px;
   height: 115px;
   display: flex;
@@ -30,7 +30,7 @@
   margin-bottom: 40px;
 }
 
-.error-block p {
+.errorBlock p {
   font-size: 110px;
   font-weight: 500;
   font-family: 'IBM Plex Mono', monospace;
@@ -38,7 +38,7 @@
   line-height: 115px;
 }
 
-.message-block {
+.messageBlock {
   width: 659px;
   height: 24px;
   display: flex;
@@ -47,7 +47,7 @@
   margin-bottom: 46px;
 }
 
-.message-block p {
+.messageBlock p {
   font-size: 18px;
   font-weight: 400;
   line-height: 24px;
@@ -55,7 +55,7 @@
   color: black;
 }
 
-.btn-block {
+.btnBlock {
  width: fit-content;
   height: fit-content;
   display: flex;
@@ -63,7 +63,7 @@
   align-items: center;
 }
 
-.btn-block button {
+.btnBack {
   width: 307px;
   height: 60px;
   background-color: #5E3023E5;

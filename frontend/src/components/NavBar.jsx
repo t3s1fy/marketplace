@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import "../styles/NavBar.css";
+import styles from "../styles/NavBar.module.css";
 import { Context } from "../index";
 
 import logo from "../assets/icons/marketpalceLogo.png";
@@ -41,34 +41,34 @@ const NavBar = observer(() => {
     navigate(REGISTRATION_ROUTE);
   };
   return (
-    <header className="header_1">
-      <div className="navbar_top">
-        <div className="navbar-top-right">
-          <NavLink to={CONTACTS_ROUTE} className="announcement-text">
+    <header>
+      <div className={styles.navbarTop}>
+        <div className={styles.navbarTopRight}>
+          <NavLink to={CONTACTS_ROUTE} className={styles.announcementText}>
             Контакты
           </NavLink>
-          <NavLink to={HELPER_ROUTE} className="announcement-text">
+          <NavLink to={HELPER_ROUTE} className={styles.announcementText}>
             Помощь
           </NavLink>
         </div>
       </div>
-      <div className="navbar-bottom">
-        <div className="logo">
+      <div className={styles.navbarBottom}>
+        <div className={styles.logo}>
           <NavLink to={SHOP_ROUTE}>
             <img src={logo} alt="Логотип" />
           </NavLink>
         </div>
         {user.isAuth || user.isSeller || user.isAdmin ? (
           <>
-            <div className="search-box">
+            <div className={styles.searchBox}>
               <input type="text" placeholder="Поиск..." />
-              <button className="search-btn">
+              <button>
                 <img src={search_icon} alt="search" />
               </button>
             </div>
 
-            <div className="icons">
-              <button className="notification-button">
+            <div className={styles.icons}>
+              <button>
                 <img src={alert_icon} alt="alert" />
               </button>
               <NavLink to={BASKET_ROUTE}>
@@ -83,29 +83,29 @@ const NavBar = observer(() => {
               <NavLink to={SETTINGS_ROUTE}>
                 <img src={settings_icon} alt="Settings" />
               </NavLink>
-              <button className="more-button">
+              <button>
                 <img src={more_icon} alt="more" />
               </button>
             </div>
           </>
         ) : (
           <>
-            <div className="search-box-not-login">
+            <div className={styles.searchBoxNotLogin}>
               <input type="text" placeholder="Поиск..." />
-              <button className="search-btn">
+              <button>
                 <img src={search_icon} alt="search" />
               </button>
             </div>
-            <div className="button-container">
-              <button className="nav-log-btn" onClick={linkToLog}>
+            <div className={styles.buttonContainer}>
+              <button className={styles.navLogBtn} onClick={linkToLog}>
                 Войти в аккаунт
               </button>
-              <button className="nav-reg-btn" onClick={linkToReg}>
+              <button className={styles.navRegBtn} onClick={linkToReg}>
                 Регистрация
               </button>
             </div>
-            <div className="icons-not-login">
-              <button className="notification-button">
+            <div className={styles.iconsNotLogin}>
+              <button>
                 <img src={alert_icon} alt="alert" />
               </button>
               <NavLink to={BASKET_ROUTE}>
@@ -120,7 +120,7 @@ const NavBar = observer(() => {
               <NavLink to={SETTINGS_ROUTE}>
                 <img src={settings_icon} alt="Settings" />
               </NavLink>
-              <button className="more-button">
+              <button>
                 <img src={more_icon} alt="more" />
               </button>
             </div>

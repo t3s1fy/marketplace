@@ -13,6 +13,8 @@ import {
   CONFIRM_EMAIL_ROUTE,
 } from "../utils/consts";
 
+import styles from "../components/checkbox/Checkbox.module.css";
+
 const Auth = () => {
   //Для валидации
   const email = useInput("", { isEmpty: true, minLength: 3, isEmail: true });
@@ -232,8 +234,11 @@ const Auth = () => {
               )}
               <form className="form">
                 <Checkbox isChecked={rulesChecked} onChange={setRulesChecked}>
-                  Вы согласны с <a href="#">условиями</a> политики использования
-                  и кондефициальности.
+                  Вы согласны с{" "}
+                  <Link className={styles.linkRules} to="#">
+                    условиями
+                  </Link>{" "}
+                  политики использования и кондефициальности.
                 </Checkbox>
               </form>
             </div>

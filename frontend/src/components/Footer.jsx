@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import "../styles/Footer.css";
+import styles from "../styles/Footer.module.css";
 import { Context } from "../index";
 
 import instagram_icon from "../assets/icons/instagram-icon.svg";
@@ -8,13 +8,14 @@ import facebook_icon from "../assets/icons/facebook_icon.svg";
 import twitter_icon from "../assets/icons/twitter_icon.svg";
 import dribble_icon from "../assets/icons/dribbble_icon.svg";
 import linkedin_icon from "../assets/icons/linkedin_icon.svg";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   const { user } = useContext(Context);
   return (
-    <footer className="footer">
-      <div className="footer-content">
-        <div className="footer-icons">
+    <footer className={styles.footer}>
+      <div className={styles.footerContent}>
+        <div className={styles.footerIcons}>
           <a
             href="https://instagram.com"
             target="_blank"
@@ -59,29 +60,29 @@ const Footer = () => {
             <img src={linkedin_icon} alt="linkedin icon" />
           </a>
         </div>
-        <div className="footer-links">
-          <a href="#" className="footer-link">
+        <div className={styles.footerLinks}>
+          <Link to="#" className={styles.footerLink}>
             Item first
-          </a>
-          <a href="#" className="footer-link">
+          </Link>
+          <Link to="#" className={styles.footerLink}>
             Item two
-          </a>
-          <a href="#" className="footer-link">
+          </Link>
+          <Link to="#" className={styles.footerLink}>
             Item three
-          </a>
-          <a href="#" className="footer-link">
+          </Link>
+          <Link to="#" className={styles.footerLink}>
             Item four
-          </a>
-          <a href="#" className="footer-link">
+          </Link>
+          <Link to="#" className={styles.footerLink}>
             Item five
-          </a>
-          <a href="#" className="footer-link">
+          </Link>
+          <Link to="#" className={styles.footerLink}>
             Item six
-          </a>
+          </Link>
         </div>
         {/* Линия */}
-        <hr className="footer-line" />
-        <p className="footer-text">© 2024 All Rights Reserved</p>
+        <hr className={styles.footerLine} />
+        <p className={styles.footerText}>© 2024 All Rights Reserved</p>
       </div>
     </footer>
   );

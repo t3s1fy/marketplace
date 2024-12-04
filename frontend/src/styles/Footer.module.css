@@ -10,15 +10,13 @@
   text-align: center;
 }
 
-
-
-.footer-content {
+.footerContent {
   max-width: 1760px; /* Максимальная ширина футера */
   height: 100%;
   margin: 0 auto; /* Центрируем футер */
 }
 
-.footer-icons {
+.footerIcons {
   display: flex;
   justify-content: center;
   gap: 16px; /* Расстояние между иконками */
@@ -26,20 +24,20 @@
   margin-top: 15px;
 }
 
-.footer-icons a img {
+.footerIcons a img {
   width: 24px; /* Размер иконки */
   height: 24px;
 
 }
 
-.footer-links {
+.footerLinks {
   display: flex;
   justify-content: center;
   gap: 32px; /* Расстояние между текстовыми ссылками */
   margin-bottom: 32px;
 }
 
-.footer-link {
+.footerLink {
   color: #5E3023;
   text-decoration: none; /* Убираем подчеркивание */
   font-size: 14px;
@@ -48,17 +46,17 @@
   transition: color 0.3s ease;
 }
 
-.footer-link:hover {
+.footerLink:hover {
   color: rgba(94, 48, 35, 0.7); /* Изменение цвета при наведении */
 }
 
-.footer-line {
+.footerLine {
   border: 0;
   border-top: 1px solid #EAE0D6; /* Линия */
   margin-bottom: 25px;
 }
 
-.footer-text {
+.footerText {
   font-size: 10px;
   font-family: 'IBM Plex Mono', monospace;
   font-weight: 400;
