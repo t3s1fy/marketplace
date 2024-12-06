@@ -30,14 +30,21 @@ import { observer } from "mobx-react-lite";
 const NavBar = observer(() => {
   //меню профиля
   const [isOpen, setOpen] = useState(false);
+  const [isOpenAl, setOpenAl] = useState(false);
   const { user } = useContext(Context);
   const navigate = useNavigate(); // Инициализируем хук для навигации
 
   const menuRef = useRef(null);
+  const menuRefAl = useRef(null);
   const buttonRef = useRef(null); // Добавим реф для кнопки открытия меню
+  const buttonRefAl = useRef(null);
 
   UseClickOutside(menuRef, buttonRef, () => {
     if (isOpen) setOpen(false);
+  });
+
+  UseClickOutside(menuRefAl, buttonRefAl, () => {
+    if (isOpenAl) setOpenAl(false);
   });
 
   const linkToLog = () => {
@@ -90,9 +97,22 @@ const NavBar = observer(() => {
             </div>
 
             <div className={styles.icons}>
-              <button className={styles.iconButton}>
+              <button
+                className={styles.iconButton}
+                onClick={() => setOpenAl(!isOpenAl)}
+                ref={buttonRefAl}
+              >
                 <img src={alert_icon} alt="alert" />
               </button>
+              <nav
+                className={`${styles.alertMenu} ${isOpenAl ? styles.active : ""}`}
+                ref={menuRefAl}
+              >
+                <div className={styles.alertList}>
+                  <p className={styles.alertText}>Уведомления</p>
+                  <div className={styles.alertBody}></div>
+                </div>
+              </nav>
               <NavLink to={BASKET_ROUTE}>
                 <img src={basket_icon} alt="basket" />
               </NavLink>
