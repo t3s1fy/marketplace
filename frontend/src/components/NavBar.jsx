@@ -57,9 +57,20 @@ const NavBar = observer(() => {
   };
 
   const menuRef = useRef(null);
+
+  const buttonRef = useRef(null);
+
   UseClickOutside(menuRef, () => {
     if (isOpen) setTimeout(() => setOpen(false), 50);
   });
+
+  const handleMenuClick = (e) => {
+    // Прерываем событие, чтобы клик по кнопке не срабатывал для "вне меню"
+    e.stopPropagation();
+
+    // Переключаем состояние меню (открыть или закрыть)
+    setOpen(!isOpen);
+  };
   return (
     <header>
       <div className={styles.navbarTop}>
@@ -137,7 +148,8 @@ const NavBar = observer(() => {
               </NavLink>
               <button
                 className={styles.iconButton}
-                onClick={() => setOpen(!isOpen)}
+                onClick={handleMenuClick}
+                ref={menuRef}
               >
                 <img src={profile_icon} alt="Profile" />
               </button>
