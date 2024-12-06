@@ -31,12 +31,15 @@ const Auth = () => {
     }
   }, [password.value, confirmPassword.value]); // Следим за изменением значений паролей
 
+  //Блок для проверки текущей ссылки
   const location = useLocation();
   const isLogin = location.pathname === LOGIN_ROUTE;
   const navigate = useNavigate(); // Инициализируем хук для навигации
 
+  //Для чекбокса
   const [rulesChecked, setRulesChecked] = useState(false);
 
+  //функционал для скрытия пароля
   const [showPassword1, setShowPassword1] = useState(false);
   const [showPassword2, setShowPassword2] = useState(false);
 

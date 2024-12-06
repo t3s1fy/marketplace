@@ -1,7 +1,7 @@
-import React, { useContext } from "react";
+import React, { useContext, useRef, useState } from "react";
 import styles from "../styles/NavBar.module.css";
 import { Context } from "../index";
-
+import { UseClickOutside } from "./hooks/useClickOutside";
 import logo from "../assets/icons/marketpalceLogo.png";
 import search_icon from "../assets/icons/search_icon.svg";
 import alert_icon from "../assets/icons/alert_Icon.svg";
@@ -28,6 +28,9 @@ import {
 import { observer } from "mobx-react-lite";
 
 const NavBar = observer(() => {
+  //меню профиля
+  const [isOpen, setOpen] = useState(false);
+
   const { user } = useContext(Context);
   const navigate = useNavigate(); // Инициализируем хук для навигации
 
@@ -40,6 +43,23 @@ const NavBar = observer(() => {
     // Переходим на страницу подтверждения email
     navigate(REGISTRATION_ROUTE);
   };
+
+  const menuLinkToLog = () => {
+    // Переходим на страницу подтверждения email и закрываем меню
+    navigate(LOGIN_ROUTE);
+    setTimeout(() => setOpen(false), 50);
+  };
+
+  const menuLinkToReg = () => {
+    // Переходим на страницу подтверждения email и закрываем меню
+    navigate(REGISTRATION_ROUTE);
+    setTimeout(() => setOpen(false), 50);
+  };
+
+  const menuRef = useRef(null);
+  UseClickOutside(menuRef, () => {
+    if (isOpen) setTimeout(() => setOpen(false), 50);
+  });
   return (
     <header>
       <div className={styles.navbarTop}>
@@ -68,7 +88,7 @@ const NavBar = observer(() => {
             </div>
 
             <div className={styles.icons}>
-              <button>
+              <button className={styles.iconButton}>
                 <img src={alert_icon} alt="alert" />
               </button>
               <NavLink to={BASKET_ROUTE}>
@@ -77,13 +97,14 @@ const NavBar = observer(() => {
               <NavLink to={WISHLIST_ROUTE}>
                 <img src={heart_icon} alt="Wishlist" />
               </NavLink>
+              {}
               <NavLink to={PROFILE_ROUTE}>
                 <img src={profile_icon} alt="Profile" />
               </NavLink>
               <NavLink to={SETTINGS_ROUTE}>
                 <img src={settings_icon} alt="Settings" />
               </NavLink>
-              <button>
+              <button className={styles.iconButton}>
                 <img src={more_icon} alt="more" />
               </button>
             </div>
@@ -105,7 +126,7 @@ const NavBar = observer(() => {
               </button>
             </div>
             <div className={styles.iconsNotLogin}>
-              <button>
+              <button className={styles.iconButton}>
                 <img src={alert_icon} alt="alert" />
               </button>
               <NavLink to={BASKET_ROUTE}>
@@ -114,13 +135,35 @@ const NavBar = observer(() => {
               <NavLink to={WISHLIST_ROUTE}>
                 <img src={heart_icon} alt="Wishlist" />
               </NavLink>
-              <NavLink to={PROFILE_ROUTE}>
+              <button
+                className={styles.iconButton}
+                onClick={() => setOpen(!isOpen)}
+              >
                 <img src={profile_icon} alt="Profile" />
-              </NavLink>
+              </button>
+
+              {/* ВСПЛЫВАЮЩЕЕ МЕНЮ*/}
+              <nav
+                className={`${styles.menu} ${isOpen ? styles.active : ""}`}
+                ref={menuRef}
+              >
+                <div className={styles.menuList}>
+                  <p className={styles.textAuth}>
+                    Войдите или зарегистрируйтесь, чтобы использовать полный
+                    функционал маркетплейса.
+                  </p>
+                  <button onClick={menuLinkToLog} className={styles.authBtn}>
+                    Войти
+                  </button>
+                  <button onClick={menuLinkToReg} className={styles.authBtn}>
+                    Зарегистрироваться
+                  </button>
+                </div>
+              </nav>
               <NavLink to={SETTINGS_ROUTE}>
                 <img src={settings_icon} alt="Settings" />
               </NavLink>
-              <button>
+              <button className={styles.iconButton}>
                 <img src={more_icon} alt="more" />
               </button>
             </div>
