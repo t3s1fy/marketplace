@@ -1,27 +1,30 @@
 from django.contrib.auth import get_user_model
 from rest_framework import serializers
-from .models import Note, Product, CartItem, Cart
+from .models import Product, CartItem, Cart, ConfirmationCode
 
 User = get_user_model()
+
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ["id", "email", "password", "role"]
-        extra_kwargs = {"password": {"write_only": True}}
+        extra_kwargs = {
+            "password": {"write_only": True},
+        }
 
     def create(self, validated_data):
         password = validated_data.pop("password")
-        user = User.objects.create_user(**validated_data)
+        user = User.objects.create(**validated_data, is_active=False)
         user.set_password(password)
         user.save()
         return user
 
-class NoteSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Note
-        fields = ["id", "title", "content", "created_at", "author"]
-        extra_kwargs = {"author": {"read_only": True}}
+
+class ConfirmRegistrationSerializer(serializers.Serializer):
+    email = serializers.EmailField()
+    confirmation_code = serializers.CharField(max_length=6)
+
 
 class ProductSerializer(serializers.ModelSerializer):
     class Meta:
@@ -40,12 +43,14 @@ class ProductSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError("Недостаточно прав для редактирования товара.")
         return super().update(instance, validated_data)
 
+
 class CartItemSerializer(serializers.ModelSerializer):
     product_name = serializers.CharField(source='product.name', read_only=True)
 
     class Meta:
         model = CartItem
         fields = ['id', 'product', 'product_name', 'quantity', 'total_price']
+
 
 class CartSerializer(serializers.ModelSerializer):
     items = CartItemSerializer(many=True, read_only=True)

@@ -1,3 +1,5 @@
+from datetime import timedelta
+from django.utils.timezone import now
 from django.contrib.auth.base_user import AbstractBaseUser, BaseUserManager
 from django.contrib.auth.models import PermissionsMixin
 from django.db import models
@@ -23,9 +25,9 @@ class UserManager(BaseUserManager):
             raise ValueError('Суперпользователь должен иметь is_superuser=True.')
         return self.create_user(email, password, **extra_fields)
 
+
 class User(AbstractBaseUser, PermissionsMixin):
     ROLE_CHOICES = [
-        ('admin', 'Admin'),
         ('user', 'User'),
         ('seller', 'Seller'),
     ]
@@ -33,7 +35,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(unique=True, max_length=255)
     password = models.CharField(max_length=128)
     role = models.CharField(max_length=50, choices=ROLE_CHOICES, default='user')
-    is_active = models.BooleanField(default=True)
+    is_active = models.BooleanField(default=False)
     is_staff = models.BooleanField(default=False)
     objects = UserManager()
     USERNAME_FIELD = 'email'
@@ -42,14 +44,18 @@ class User(AbstractBaseUser, PermissionsMixin):
     def __str__(self):
         return f"{self.email} ({self.role})"
 
-class Note(models.Model):
-    title = models.CharField(max_length=100)
-    content = models.TextField()
+
+class ConfirmationCode(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='confirmation_code')
+    code = models.CharField(max_length=6, unique=True)
     created_at = models.DateTimeField(auto_now_add=True)
-    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name="notes")
+
+    def is_valid(self):
+        return now() - self.created_at < timedelta(minutes=10)
 
     def __str__(self):
-        return self.title
+        return f"Код подтверждения для {self.user.email}: {self.code}"
+
 
 class Product(models.Model):
     id = models.AutoField(primary_key=True)
@@ -79,6 +85,7 @@ class Product(models.Model):
     def __str__(self):
         return f"{self.name} - {self.seller.email}"
 
+
 class Cart(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='cart')
     created_at = models.DateTimeField(auto_now_add=True)
@@ -90,6 +97,7 @@ class Cart(models.Model):
     @property
     def total_price(self):
         return sum(item.total_price for item in self.items.all())
+
 
 class CartItem(models.Model):
     cart = models.ForeignKey(Cart, on_delete=models.CASCADE, related_name='items')

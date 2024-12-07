@@ -13,12 +13,15 @@ class ProductAdmin(admin.ModelAdmin):
         if obj.photo:
             return f'<img src="{obj.photo.url}" style="width: 50px; height: 50px;" />'
         return "Нет фото"
+
     photo_preview.allow_tags = True
     photo_preview.short_description = "Фото"
+
 
 @admin.register(Cart)
 class CartAdmin(admin.ModelAdmin):
     list_display = ['user', 'created_at', 'updated_at']
+
 
 @admin.register(CartItem)
 class CartItemAdmin(admin.ModelAdmin):
