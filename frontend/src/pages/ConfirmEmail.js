@@ -1,12 +1,58 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useContext, useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import styles from "../styles/ConfirmEmail.module.css";
-import { FAQ_ROUTE, LOGIN_ROUTE, REGISTRATION_ROUTE } from "../utils/consts";
+import {
+  FAQ_ROUTE,
+  LOGIN_ROUTE,
+  REGISTRATION_ROUTE,
+  SHOP_ROUTE,
+} from "../utils/consts";
 import { useInput } from "../components/validation/validation";
 import { values } from "mobx";
+import axios from "axios";
+import { observer } from "mobx-react-lite";
+import { Context } from "../index";
 
-const ConfirmEmail = () => {
+const ConfirmEmail = observer(() => {
+  const { user } = useContext(Context);
+  const { state } = useLocation(); // Получаем состояние, переданное через navigate
+  const email = state?.email; // Извлекаем email из состояния
   const code = useInput("", { isEmpty: true, minLength: 6 });
+
+  const [loading, setLoading] = useState(false); // Состояние загрузки для кнопки
+  const [error, setError] = useState(""); // Состояние для ошибок
+
+  const navigate = useNavigate(); // Хук для навигации после успешного подтверждения
+
+  const handleSubmit = async () => {
+    if (code.inputValid) {
+      setLoading(true);
+      setError(""); // Очищаем ошибки перед отправкой запроса
+
+      try {
+        const response = await axios.post(
+          "https://6fdc-94-140-149-103.ngrok-free.app/api/user/registration-confirm", // URL на сервер
+          { email: email, confirmation_code: code.value }, // Отправляем код из инпута
+          {
+            headers: {
+              "Content-Type": "application/json", // Указываем тип данных
+            },
+          },
+        );
+
+        if (response.status === 200) {
+          // Если код подтверждения верен, перенаправляем пользователя на страницу входа
+          navigate(SHOP_ROUTE);
+          user.setUser(user);
+          user.setIsAuth(true);
+        }
+      } catch (err) {
+        setError("Ошибка при подтверждении кода. Попробуйте еще раз.");
+      } finally {
+        setLoading(false); // Останавливаем индикатор загрузки
+      }
+    }
+  };
   return (
     <div className={styles.confirmEmailPage}>
       <div className={styles.confirmEmailContainer}>
@@ -44,7 +90,11 @@ const ConfirmEmail = () => {
               </div>
             </div>
           </div>
-          <button className={styles.confirmBtn} disabled={!code.inputValid}>
+          <button
+            onClick={handleSubmit}
+            className={styles.confirmBtn}
+            disabled={!code.inputValid}
+          >
             Подтвердить
           </button>
           <div className={styles.lineBody}></div>
@@ -63,6 +113,6 @@ const ConfirmEmail = () => {
       </div>
     </div>
   );
-};
+});
 
 export default ConfirmEmail;

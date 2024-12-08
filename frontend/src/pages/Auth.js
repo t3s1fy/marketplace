@@ -13,7 +13,10 @@ import {
   CONFIRM_EMAIL_ROUTE,
 } from "../utils/consts";
 
+import axios from "axios";
+
 import styles from "../components/checkbox/Checkbox.module.css";
+import api from "../api/api";
 
 const Auth = () => {
   //Для валидации
@@ -52,10 +55,39 @@ const Auth = () => {
   };
 
   // Обработчик для кнопки регистрации
-  const handleRegisterClick = () => {
-    if (rulesChecked) {
-      // Переходим на страницу подтверждения email
-      navigate(CONFIRM_EMAIL_ROUTE);
+  const handleRegisterClick = async () => {
+    if (
+      rulesChecked &&
+      email.inputValid &&
+      password.inputValid &&
+      passwordsMatch
+    ) {
+      try {
+        const userData = {
+          email: email.value,
+          password: password.value,
+        };
+
+        // Отправляем POST запрос на сервер Django через axios
+        const response = await axios.post(
+          "https://6fdc-94-140-149-103.ngrok-free.app/api/user/registration", // Замените на ваш ngrok URL для API
+          userData,
+          {
+            headers: {
+              "Content-Type": "application/json", // Отправляем данные как JSON
+            },
+          },
+        );
+
+        console.log("Регистрация прошла успешно:", response.data);
+        // Можно перейти на страницу подтверждения email
+        navigate(CONFIRM_EMAIL_ROUTE, { state: { email: email.value } });
+      } catch (error) {
+        console.error("Ошибка при регистрации:", error);
+        alert("Ошибка при регистрации. Попробуйте позже.");
+      }
+    } else {
+      alert("Пожалуйста, убедитесь, что все поля заполнены корректно.");
     }
   };
 

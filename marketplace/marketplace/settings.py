@@ -88,7 +88,10 @@ MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware'
 ]
 
-CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:3000',
+    'https://6fdc-94-140-149-103.ngrok-free.app'
+]
 CORS_ALLOWS_CREDENTIALS = True
 
 ROOT_URLCONF = 'marketplace.urls'
