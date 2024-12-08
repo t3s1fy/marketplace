@@ -26,6 +26,21 @@ class ConfirmRegistrationSerializer(serializers.Serializer):
     confirmation_code = serializers.CharField(max_length=6)
 
 
+class LoginSerializer(serializers.Serializer):
+    email = serializers.EmailField()
+    password = serializers.CharField()
+
+
+class PasswordResetRequestSerializer(serializers.Serializer):
+    email = serializers.EmailField(required=True)
+
+
+class PasswordResetConfirmSerializer(serializers.Serializer):
+    email = serializers.EmailField(required=True)
+    code = serializers.CharField(required=True)
+    new_password = serializers.CharField(write_only=True, required=True, min_length=8)
+
+
 class ProductSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product

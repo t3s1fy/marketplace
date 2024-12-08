@@ -5,7 +5,8 @@ from django.core.mail import send_mail
 from django.contrib.auth import get_user_model, authenticate
 from rest_framework import generics, status
 from marketplace.settings import EMAIL_HOST, DEFAULT_FROM_EMAIL
-from .serializers import UserSerializer, CartSerializer, ConfirmRegistrationSerializer
+from .serializers import UserSerializer, CartSerializer, ConfirmRegistrationSerializer, PasswordResetConfirmSerializer, \
+    PasswordResetRequestSerializer, LoginSerializer
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from .models import Product, Cart, CartItem, ConfirmationCode
 from rest_framework.views import APIView
@@ -67,11 +68,14 @@ class ConfirmRegistrationView(generics.CreateAPIView):
         return Response({"detail": "Регистрация успешно подтверждена!"}, status=status.HTTP_200_OK)
 
 
-class PasswordResetRequestView(APIView):
+class PasswordResetRequestView(generics.CreateAPIView):
+    permission_classes = [AllowAny]
+    serializer_class = PasswordResetRequestSerializer
+
     def post(self, request):
-        email = request.data.get("email")
-        if not email:
-            return Response({"error": "Введите email"}, status=status.HTTP_400_BAD_REQUEST)
+        serializer = self.serializer_class(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        email = serializer.validated_data['email']
         if cache.get(email):
             return Response({"error": "Вы сможете запросить код через 5 минут"}, status=status.HTTP_429_TOO_MANY_REQUESTS)
 
@@ -91,13 +95,16 @@ class PasswordResetRequestView(APIView):
             return Response({"error": "Пользователь с таким email не существует"}, status=status.HTTP_404_NOT_FOUND)
 
 
-class PasswordResetConfirmView(APIView):
+class PasswordResetConfirmView(generics.CreateAPIView):
     permission_classes = [AllowAny]
+    serializer_class = PasswordResetConfirmSerializer
 
     def post(self, request):
-        email = request.data.get('email')
-        code = request.data.get('code')
-        new_password = request.data.get('new_password')
+        serializer = self.serializer_class(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        email = serializer.validated_data['email']
+        code = serializer.validated_data['code']
+        new_password = serializer.validated_data['new_password']
 
         try:
             user = User.objects.get(email=email)
@@ -112,12 +119,15 @@ class PasswordResetConfirmView(APIView):
             return Response({"error": "Пользователь не найден."}, status=404)
 
 
-class LoginView(APIView):
+class LoginView(generics.CreateAPIView):
     permission_classes = [AllowAny]
+    serializer_class = LoginSerializer
 
     def post(self, request):
-        email = request.data.get('email')
-        password = request.data.get('password')
+        serializer = self.serializer_class(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        email = serializer.validated_data['email']
+        password = serializer.validated_data['password']
         user = authenticate(email=email, password=password)
         if user:
             refresh = RefreshToken.for_user(user)
