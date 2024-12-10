@@ -79,17 +79,6 @@ const Auth = observer(() => {
       }
     } catch (error) {
       console.error("Ошибка при регистрации:", error.response);
-      if (error.response) {
-        console.error("Ошибка от сервера:", error.response.data);
-        console.error("Статус ошибки:", error.response.status);
-        alert(
-          error.response.data.message ||
-            "Ошибка при регистрации. Попробуйте позже.",
-        );
-      } else {
-        console.error("Неизвестная ошибка:", error);
-        alert("Неизвестная ошибка при регистрации.");
-      }
     }
   };
 
