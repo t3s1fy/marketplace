@@ -12,6 +12,7 @@ import { values } from "mobx";
 import axios from "axios";
 import { observer } from "mobx-react-lite";
 import { Context } from "../index";
+import { login, registrationConfirm } from "../api/api";
 
 const ConfirmEmail = observer(() => {
   const { user } = useContext(Context);
@@ -25,32 +26,23 @@ const ConfirmEmail = observer(() => {
   const navigate = useNavigate(); // Хук для навигации после успешного подтверждения
 
   const handleSubmit = async () => {
-    if (code.inputValid) {
-      setLoading(true);
-      setError(""); // Очищаем ошибки перед отправкой запроса
-
-      try {
-        const response = await axios.post(
-          "https://6fdc-94-140-149-103.ngrok-free.app/api/user/registration-confirm", // URL на сервер
-          { email: email, confirmation_code: code.value }, // Отправляем код из инпута
-          {
-            headers: {
-              "Content-Type": "application/json", // Указываем тип данных
-            },
-          },
-        );
-
-        if (response.status === 200) {
-          // Если код подтверждения верен, перенаправляем пользователя на страницу входа
-          navigate(SHOP_ROUTE);
-          user.setUser(user);
-          user.setIsAuth(true);
-        }
-      } catch (err) {
-        setError("Ошибка при подтверждении кода. Попробуйте еще раз.");
-      } finally {
-        setLoading(false); // Останавливаем индикатор загрузки
+    setLoading(true);
+    setError("");
+    try {
+      let data;
+      data = await registrationConfirm(email, code.value);
+      if (data.status === 200) {
+        const userData = data.data;
+        user.setUser(userData);
+        user.setIsAuth(true);
+        navigate(SHOP_ROUTE);
+      } else {
+        alert("Неверный код подтверждения.");
       }
+    } catch (error) {
+      setError("Ошибка при подтверждении кода. Попробуйте еще раз.");
+    } finally {
+      setLoading(false); // Останавливаем индикатор загрузки
     }
   };
   return (

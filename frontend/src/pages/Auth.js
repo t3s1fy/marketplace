@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Checkbox } from "../components/checkbox/Checkbox";
 import { useInput, useValidation } from "../components/validation/validation";
@@ -11,18 +11,22 @@ import {
   LOGIN_ROUTE,
   REGISTRATION_ROUTE,
   CONFIRM_EMAIL_ROUTE,
+  SHOP_ROUTE,
 } from "../utils/consts";
 
 import axios from "axios";
-
 import styles from "../components/checkbox/Checkbox.module.css";
-import api from "../api/api";
+import { login, registration } from "../api/api";
+import { observer } from "mobx-react-lite";
+import { Context } from "../index";
 
-const Auth = () => {
-  //Для валидации
+const Auth = observer(() => {
+  //Переменные с параметрами валидации форм "Вход" и "Регистрация"
   const email = useInput("", { isEmpty: true, minLength: 3, isEmail: true });
   const password = useInput("", { isEmpty: true, minLength: 8, maxLength: 20 });
   const confirmPassword = useInput("", { isMatch: true }, password.value);
+
+  const { user } = useContext(Context);
 
   const [passwordsMatch, setPasswordsMatch] = useState(false);
   // Проверка на совпадение паролей
@@ -54,40 +58,38 @@ const Auth = () => {
     setShowPassword2(!showPassword2);
   };
 
-  // Обработчик для кнопки регистрации
-  const handleRegisterClick = async () => {
-    if (
-      rulesChecked &&
-      email.inputValid &&
-      password.inputValid &&
-      passwordsMatch
-    ) {
-      try {
-        const userData = {
-          email: email.value,
-          password: password.value,
-        };
+  // Обработчик для кнопки авторизации/регистрации
+  const authClick = async () => {
+    try {
+      let data;
+      if (isLogin) {
+        data = await login(email.value, password.value);
+        if (data.status === 200) {
+          const userData = data.data;
+          user.setUser(userData);
+          user.setIsAuth(true);
+          navigate(SHOP_ROUTE);
+        } else {
+          alert("Неверные данные для входа.");
+        }
+      } else {
+        data = await registration(email.value, password.value);
 
-        // Отправляем POST запрос на сервер Django через axios
-        const response = await axios.post(
-          "https://6fdc-94-140-149-103.ngrok-free.app/api/user/registration", // Замените на ваш ngrok URL для API
-          userData,
-          {
-            headers: {
-              "Content-Type": "application/json", // Отправляем данные как JSON
-            },
-          },
-        );
-
-        console.log("Регистрация прошла успешно:", response.data);
-        // Можно перейти на страницу подтверждения email
         navigate(CONFIRM_EMAIL_ROUTE, { state: { email: email.value } });
-      } catch (error) {
-        console.error("Ошибка при регистрации:", error);
-        alert("Ошибка при регистрации. Попробуйте позже.");
       }
-    } else {
-      alert("Пожалуйста, убедитесь, что все поля заполнены корректно.");
+    } catch (error) {
+      console.error("Ошибка при регистрации:", error.response);
+      if (error.response) {
+        console.error("Ошибка от сервера:", error.response.data);
+        console.error("Статус ошибки:", error.response.status);
+        alert(
+          error.response.data.message ||
+            "Ошибка при регистрации. Попробуйте позже.",
+        );
+      } else {
+        console.error("Неизвестная ошибка:", error);
+        alert("Неизвестная ошибка при регистрации.");
+      }
     }
   };
 
@@ -282,6 +284,7 @@ const Auth = () => {
           {isLogin ? (
             <button
               disabled={!email.inputValid || !password.inputValid}
+              onClick={authClick}
               className="login-btn"
             >
               Войти
@@ -295,7 +298,7 @@ const Auth = () => {
                 !password.inputValid ||
                 !passwordsMatch
               }
-              onClick={handleRegisterClick}
+              onClick={authClick}
             >
               Регистрация
             </button>
@@ -327,6 +330,6 @@ const Auth = () => {
       </div>
     </div>
   );
-};
+});
 
 export default Auth;
