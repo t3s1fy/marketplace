@@ -34,8 +34,8 @@ export default class ProductStore {
       },
       {
         id: 4,
-        name: "Кроссовки Nike Air Jordan 1",
-        price: 50000,
+        name: "Надувная кукла Виктория нуланд",
+        price: 10 ^ 52,
         rating: 5,
         img: ``,
       },

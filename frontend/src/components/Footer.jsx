@@ -53,7 +53,7 @@ const Footer = () => {
           </a>
 
           <a
-            href="https://linkedin.com/"
+            href="https://avatars.mds.yandex.net/i?id=145bdc4bca8b598d5a1137cf98308af6_l-10577947-images-thumbs&n=13"
             target="_blank"
             rel="noopener noreferrer"
           >

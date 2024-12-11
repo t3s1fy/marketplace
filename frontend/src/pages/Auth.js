@@ -156,7 +156,7 @@ const Auth = observer(() => {
                     placeholder=""
                   />
                   <div className="forgot-password">
-                    <Link to={FORGOT_PASSWORD_ROUTE}>Не помню пароль</Link>
+                    <Link to={FORGOT_PASSWORD_ROUTE}>не помню пароль</Link>
                     <div>
                       {password.isDirty && password.isEmpty && (
                         <p className="valid-error">Поле не может быть пустым</p>
