@@ -6,6 +6,8 @@ User = get_user_model()
 
 
 class UserSerializer(serializers.ModelSerializer):
+    """Сериалайзер для модели пользователя."""
+
     class Meta:
         model = User
         fields = ["id", "email", "password", "role"]
@@ -14,6 +16,15 @@ class UserSerializer(serializers.ModelSerializer):
         }
 
     def create(self, validated_data):
+        """
+        Создание пользователя с хэшированным паролем.
+
+        Args:
+            validated_data (dict): Данные, валидированные сериалайзером.
+
+        Returns:
+            User: Созданный пользователь.
+        """
         password = validated_data.pop("password")
         user = User.objects.create(**validated_data, is_active=False)
         user.set_password(password)
@@ -22,37 +33,65 @@ class UserSerializer(serializers.ModelSerializer):
 
 
 class ConfirmRegistrationSerializer(serializers.Serializer):
+    """Сериалайзер для подтверждения регистрации."""
     email = serializers.EmailField()
     confirmation_code = serializers.CharField(max_length=6)
 
 
 class LoginSerializer(serializers.Serializer):
+    """Сериалайзер для входа пользователя."""
     email = serializers.EmailField()
     password = serializers.CharField()
 
 
 class PasswordResetRequestSerializer(serializers.Serializer):
+    """Сериалайзер для запроса сброса пароля."""
     email = serializers.EmailField(required=True)
 
 
 class PasswordResetConfirmSerializer(serializers.Serializer):
+    """Сериалайзер для подтверждения сброса пароля."""
     email = serializers.EmailField(required=True)
-    code = serializers.CharField(required=True)
     new_password = serializers.CharField(write_only=True, required=True, min_length=8)
 
 
+class PasswordResetVerifyCodeSerializer(serializers.Serializer):
+    code = serializers.CharField(max_length=6)
+
+
 class ProductSerializer(serializers.ModelSerializer):
+    """Сериалайзер для модели товара."""
+
     class Meta:
         model = Product
         fields = ['id', 'name', 'description', 'price', 'is_available', 'photo', 'seller']
 
     def create(self, validated_data):
+        """
+        Создание нового товара.
+
+        Args:
+            validated_data (dict): Данные, валидированные сериалайзером.
+
+        Returns:
+            Product: Созданный товар.
+        """
         user = self.context['request'].user
         if user.role not in ['admin', 'seller']:
             raise serializers.ValidationError("Недостаточно прав для создания товара.")
         return super().create(validated_data)
 
     def update(self, instance, validated_data):
+        """
+        Обновление товара.
+
+        Args:
+            instance (Product): Существующий товар.
+            validated_data (dict): Новые данные.
+
+        Returns:
+            Product: Обновленный товар.
+        """
         user = self.context['request'].user
         if not instance.can_be_edited_by(user):
             raise serializers.ValidationError("Недостаточно прав для редактирования товара.")
@@ -60,6 +99,7 @@ class ProductSerializer(serializers.ModelSerializer):
 
 
 class CartItemSerializer(serializers.ModelSerializer):
+    """Сериалайзер для элемента корзины."""
     product_name = serializers.CharField(source='product.name', read_only=True)
 
     class Meta:
@@ -68,9 +108,21 @@ class CartItemSerializer(serializers.ModelSerializer):
 
 
 class CartSerializer(serializers.ModelSerializer):
+    """Сериалайзер для корзины."""
     items = CartItemSerializer(many=True, read_only=True)
     total_price = serializers.ReadOnlyField()
 
     class Meta:
         model = Cart
         fields = ['id', 'user', 'items', 'total_price']
+
+
+class ResendConfirmationCodeSerializer(serializers.Serializer):
+    """Сериалайзер для повторной отправки кода подтверждения."""
+    email = serializers.EmailField()
+    action_type = serializers.ChoiceField(choices=['register', 'reset_password'])
+
+
+class RefreshTokenSerializer(serializers.Serializer):
+    """Сериалайзер для обновления JWT-токенов."""
+    refresh = serializers.CharField()
