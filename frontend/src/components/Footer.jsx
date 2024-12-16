@@ -8,13 +8,51 @@ import facebook_icon from "../assets/icons/facebook_icon.svg";
 import twitter_icon from "../assets/icons/twitter_icon.svg";
 import dribble_icon from "../assets/icons/dribbble_icon.svg";
 import linkedin_icon from "../assets/icons/linkedin_icon.svg";
-import { Link } from "react-router-dom";
+import logo from "../assets/icons/marketpalceLogo.png";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { observer } from "mobx-react-lite";
+import {
+  CONFIRM_EMAIL_ROUTE,
+  FORGOT_PASSWORD_ROUTE,
+  FORGOT_PASSWORD_STEP_THREE_ROUTE,
+  FORGOT_PASSWORD_STEP_TWO_ROUTE,
+  LOGIN_ROUTE,
+  PAGE_NOT_FOUND_ROUTE,
+  REGISTRATION_ROUTE,
+  SHOP_ROUTE,
+} from "../utils/consts";
 
 const Footer = () => {
   const { user } = useContext(Context);
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  // Список исключённых маршрутов
+  const excludedRoutes = [
+    LOGIN_ROUTE,
+    REGISTRATION_ROUTE,
+    FORGOT_PASSWORD_ROUTE,
+    PAGE_NOT_FOUND_ROUTE,
+    FORGOT_PASSWORD_STEP_TWO_ROUTE,
+    FORGOT_PASSWORD_STEP_THREE_ROUTE,
+    CONFIRM_EMAIL_ROUTE,
+  ];
+
+  // Проверяем, находится ли текущий маршрут в списке исключений
+  const isExcludedRoute = excludedRoutes.includes(location.pathname);
+
   return (
     <footer className={styles.footer}>
       <div className={styles.footerContent}>
+        {!isExcludedRoute && (
+          <div className={styles.dynamicIcon}>
+            <img
+              onClick={() => navigate(SHOP_ROUTE)}
+              src={logo}
+              alt="Site icon"
+            />
+          </div>
+        )}
         <div className={styles.footerIcons}>
           <a
             href="https://instagram.com"

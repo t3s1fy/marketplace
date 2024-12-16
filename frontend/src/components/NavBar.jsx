@@ -173,7 +173,7 @@ const NavBar = observer(() => {
                 <div className={styles.menuList}>
                   <p className={styles.textAuth}>
                     Войдите или зарегистрируйтесь, чтобы использовать полный
-                    функционал маркетплейса.
+                    функционал на маркетплейсе.
                   </p>
                   <button onClick={menuLinkToLog} className={styles.authBtn}>
                     Войти
