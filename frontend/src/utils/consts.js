@@ -13,6 +13,7 @@ export const PAGE_NOT_FOUND_ROUTE = "/PageNotFound"; //404 ошибка
 export const PRODUCT_ROUTE = "/product"; //Страница товара
 export const MAKING_ORDER_ROUTE = "/order"; //Страница оформления заказа
 export const PROFILE_ROUTE = "/profile"; //Страница профиля
+export const SELLER_PROFILE_ROUTE = "/profile/seller-profile"; //Профиль продавца
 export const BASKET_ROUTE = "/basket"; //Страница корзины
 export const WISHLIST_ROUTE = "/wishlist"; //Страница избранных товаров
 export const FORGOT_PASSWORD_STEP_TWO_ROUTE = "/forgot-password/enter-code";

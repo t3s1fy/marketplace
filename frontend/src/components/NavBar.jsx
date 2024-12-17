@@ -11,7 +11,7 @@ import more_icon from "../assets/icons/more_icon.svg";
 import profile_icon from "../assets/icons/profile_icon.svg";
 import settings_icon from "../assets/icons/settings_icon.svg";
 
-import { NavLink, useNavigate } from "react-router-dom";
+import { Link, useLocation, NavLink, useNavigate } from "react-router-dom";
 import {
   BASKET_ROUTE,
   CONFIRM_EMAIL_ROUTE,
@@ -68,7 +68,7 @@ const NavBar = observer(() => {
     navigate(REGISTRATION_ROUTE);
     setTimeout(() => setOpen(false), 50);
   };
-
+  console.log("Is Authenticated:", user.isAuth);
   return (
     <header>
       <div className={styles.navbarTop}>
@@ -113,19 +113,19 @@ const NavBar = observer(() => {
                   <div className={styles.alertBody}></div>
                 </div>
               </nav>
-              <NavLink to={BASKET_ROUTE}>
+              <Link to={BASKET_ROUTE}>
                 <img src={basket_icon} alt="basket" />
-              </NavLink>
-              <NavLink to={WISHLIST_ROUTE}>
+              </Link>
+              <Link to={WISHLIST_ROUTE}>
                 <img src={heart_icon} alt="Wishlist" />
-              </NavLink>
+              </Link>
               {}
-              <NavLink to={PROFILE_ROUTE}>
+              <Link to={user.isAuth ? PROFILE_ROUTE : LOGIN_ROUTE}>
                 <img src={profile_icon} alt="Profile" />
-              </NavLink>
-              <NavLink to={SETTINGS_ROUTE}>
+              </Link>
+              <Link to={SETTINGS_ROUTE}>
                 <img src={settings_icon} alt="Settings" />
-              </NavLink>
+              </Link>
               <button className={styles.iconButton}>
                 <img src={more_icon} alt="more" />
               </button>

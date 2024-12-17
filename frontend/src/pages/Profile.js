@@ -15,9 +15,15 @@ import packageIcon from "../assets/profile_assets/packageIcon.svg";
 import starIcon from "../assets/profile_assets/startIcon.svg";
 import liner from "../assets/profile_assets/beatifulLine.png";
 import { Context } from "../index";
-import { BASKET_ROUTE, SETTINGS_ROUTE, WISHLIST_ROUTE } from "../utils/consts";
+import {
+  BASKET_ROUTE,
+  SELLER_PROFILE_ROUTE,
+  SETTINGS_ROUTE,
+  WISHLIST_ROUTE,
+} from "../utils/consts";
+import { observer } from "mobx-react-lite";
 
-const Profile = () => {
+const Profile = observer(() => {
   const location = useLocation();
   const { user } = useContext(Context);
   const navigate = useNavigate();
@@ -30,8 +36,8 @@ const Profile = () => {
             Изменить профиль
           </Link>
           <div className={style.infoBlock}>
-            <div className={style.imgUser}>ZV</div>
-            <span className={style.emailUser}>vladimir.putin@mail.ru</span>
+            <div className={style.imgUser}>0_0</div>
+            <span className={style.emailUser}>pupkin@gmail.com</span>
           </div>
           <hr className={style.line}></hr>
           <p className={style.welcomeText}>
@@ -119,7 +125,16 @@ const Profile = () => {
         </div>
         <img className={style.pictureTwo} src={pictureTwo} alt="picture" />
       </div>
-      <button className={style.regBtn}>Зарегистрироваться</button>
+      {user.isSeller ? (
+        <button
+          onClick={() => navigate(SELLER_PROFILE_ROUTE)}
+          className={style.regBtn}
+        >
+          Войти в кабинет
+        </button>
+      ) : (
+        <button className={style.regBtn}>Зарегистрироваться</button>
+      )}
       <img className={style.linerBeaty} src={liner} alt="liner" />
       <div className={style.productView}>
         <p>Вы смотрели</p>
@@ -127,6 +142,6 @@ const Profile = () => {
       </div>
     </div>
   );
-};
+});
 
 export default Profile;

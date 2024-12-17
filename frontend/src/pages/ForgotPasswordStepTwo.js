@@ -1,5 +1,5 @@
-import React from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useContext, useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import styles from "../styles/ForgotPasswordStepTwo.module.css";
 import {
   FAQ_ROUTE,
@@ -10,14 +10,49 @@ import {
 } from "../utils/consts";
 import { useInput } from "../components/validation/validation";
 import { values } from "mobx";
+import { Context } from "../index";
+import { resendConfirmationCode, verifyCode } from "../api/api";
 
 const ForgotPasswordStepTwo = () => {
   const code = useInput("", { isEmpty: true, minLength: 6 });
 
+  const { user } = useContext(Context);
+  const { state } = useLocation(); // Получаем состояние, переданное через navigate
+  const email = state?.email; // Извлекаем email из состояния
+  console.log(state?.email);
+  const [error, setError] = useState(""); // Состояние для ошибок
+
   const navigate = useNavigate();
 
-  const handleNextClick = () => {
-    navigate(FORGOT_PASSWORD_STEP_THREE_ROUTE);
+  const sendConfirmationCode = async () => {
+    try {
+      let data;
+      const action_type = "reset_password";
+      data = await resendConfirmationCode(email, action_type);
+      if (data.status === 200) {
+        console.log("Код отправлен");
+      } else {
+        alert("Не удалось отправить код.");
+      }
+    } catch (error) {
+      setError("Ошибка при отправки кода подтверждения. Попробуйте еще раз.");
+    }
+  };
+
+  const handleNextClick = async () => {
+    try {
+      let data;
+      data = await verifyCode(email, code.value);
+      if (data.status === 200) {
+        navigate(FORGOT_PASSWORD_STEP_THREE_ROUTE, {
+          state: { email: email },
+        });
+      } else {
+        alert("Неверный email адрес.");
+      }
+    } catch (error) {
+      setError("Ошибка при отправки кода подтверждения. Попробуйте еще раз.");
+    }
   };
 
   return (
@@ -46,9 +81,12 @@ const ForgotPasswordStepTwo = () => {
               placeholder=""
             />
             <div className={styles.validBlock}>
-              <Link className={styles.sendCodeAgain} to="#">
+              <span
+                className={styles.sendCodeAgain}
+                onClick={sendConfirmationCode}
+              >
                 отправить новый код
-              </Link>
+              </span>
               <div>
                 {code.isDirty && code.isEmpty && (
                   <p className={styles.validError}>Поле не может быть пустым</p>

@@ -19,7 +19,8 @@ const App = observer(() => {
         user.setUser(userData);
       }
     }
-  }, [user]);
+  }, []);
+
   return (
     <BrowserRouter>
       <div className="wrapper">

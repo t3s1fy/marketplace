@@ -3,9 +3,11 @@ import { makeAutoObservable } from "mobx";
 export default class UserStore {
   constructor() {
     this._isAuth = true;
-    // this._isAuth = localStorage.getItem("accessToken");
+    // const token = localStorage.getItem("accessToken");
+    // this._isAuth = !!token;
+    this._isSeller = true;
     this._isAdmin = false;
-    this._isSeller = false;
+
     this._user = {};
     makeAutoObservable(this);
   }

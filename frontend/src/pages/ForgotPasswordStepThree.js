@@ -1,13 +1,21 @@
-import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useContext, useEffect, useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import styles from "../styles/ForgotPasswordStepThree.module.css";
 import eye_icon from "../assets/icons/eye_icon.svg";
 
 import { useInput } from "../components/validation/validation";
 import { values } from "mobx";
-import { FAQ_ROUTE, SHOP_ROUTE } from "../utils/consts";
+import { FAQ_ROUTE, LOGIN_ROUTE, SHOP_ROUTE } from "../utils/consts";
+import { Context } from "../index";
+import { confirmNewPassword, resendConfirmationCode } from "../api/api";
 
 const ForgotPasswordStepThree = () => {
+  const { user } = useContext(Context);
+  const { state } = useLocation(); // Получаем состояние, переданное через navigate
+  const email = state?.email; // Извлекаем email из состояния
+  console.log(state?.email);
+  const [error, setError] = useState("");
+
   const password = useInput("", { isEmpty: true, minLength: 8, maxLength: 20 });
   const confirmPassword = useInput("", { isMatch: true }, password.value);
 
@@ -34,8 +42,18 @@ const ForgotPasswordStepThree = () => {
     setShowPassword2(!showPassword2);
   };
 
-  const handleGoHomeClick = () => {
-    navigate(SHOP_ROUTE);
+  const handleGoHomeClick = async () => {
+    try {
+      let data;
+      data = await confirmNewPassword(email, password.value);
+      if (data.status === 200) {
+        navigate(LOGIN_ROUTE);
+      } else {
+        alert("ОшибОчка.");
+      }
+    } catch (error) {
+      setError("Ошибка при вводе нового пароля. Попробуйте еще раз.");
+    }
   };
   return (
     <div className={styles.confirmEmailPage}>

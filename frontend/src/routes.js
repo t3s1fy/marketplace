@@ -1,6 +1,7 @@
 import Admin from "./pages/Admin";
 import Seller from "./pages/Seller";
 import MakingOrder from "./pages/MakingOrder";
+import SellerProfile from "./pages/SellerProfile";
 import Profile from "./pages/Profile";
 import Wishlist from "./pages/Wishlist";
 import Auth from "./pages/Auth";
@@ -30,6 +31,7 @@ import {
   PAGE_NOT_FOUND_ROUTE,
   PRODUCT_ROUTE,
   PROFILE_ROUTE,
+  SELLER_PROFILE_ROUTE,
   REGISTRATION_ROUTE,
   SELLER_ROUTE,
   SETTINGS_ROUTE,
@@ -48,12 +50,20 @@ export const adminRoutes = [
     path: SELLER_ROUTE,
     Component: Seller,
   },
+  {
+    path: SELLER_PROFILE_ROUTE,
+    Component: SellerProfile,
+  },
 ];
 
 export const sellerRoutes = [
   {
     path: SELLER_ROUTE,
-    component: Seller,
+    Component: Seller,
+  },
+  {
+    path: SELLER_PROFILE_ROUTE,
+    Component: SellerProfile,
   },
 ];
 

@@ -26,15 +26,9 @@ const AppRouter = () => {
       {publicRoutes.map(({ path, Component }) => (
         <Route key={path} path={path} element={<Component />} exact />
       ))}
-      {(!user.isAuth || !user.isSeller || !user.isAdmin) &&
-        authRoutes.map(({ path, Component }) => (
-          <Route
-            key={path}
-            path={path}
-            element={<Navigate to={LOGIN_ROUTE} />}
-            exact
-          />
-        ))}
+      {!user.isAuth && (
+        <Route path="*" element={<Navigate to={LOGIN_ROUTE} />} />
+      )}
 
       <Route path="*" element={<Navigate to={PAGE_NOT_FOUND_ROUTE} />} />
     </Routes>

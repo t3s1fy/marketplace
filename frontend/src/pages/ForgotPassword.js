@@ -1,21 +1,41 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import { useInput } from "../components/validation/validation";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import styles from "../styles/ForgotPassword.module.css";
 import {
+  CONFIRM_EMAIL_ROUTE,
   FAQ_ROUTE,
   FORGOT_PASSWORD_STEP_TWO_ROUTE,
   LOGIN_ROUTE,
   REGISTRATION_ROUTE,
+  SHOP_ROUTE,
 } from "../utils/consts";
-console.log(styles);
+import { Context } from "../index";
+import { login, passwordReset, registration } from "../api/api";
+
 const ForgotPassword = () => {
   const email = useInput("", { isEmpty: true, minLength: 3, isEmail: true });
 
+  const { user } = useContext(Context);
+  const { state } = useLocation(); // Получаем состояние, переданное через navigate
   const navigate = useNavigate();
 
-  const handleNextClick = () => {
-    navigate(FORGOT_PASSWORD_STEP_TWO_ROUTE);
+  const [error, setError] = useState(""); // Состояние для ошибок
+
+  const handleNextClick = async () => {
+    try {
+      let data;
+      data = await passwordReset(email.value);
+      if (data.status === 200) {
+        navigate(FORGOT_PASSWORD_STEP_TWO_ROUTE, {
+          state: { email: email.value },
+        });
+      } else {
+        alert("Неверный email адрес.");
+      }
+    } catch (error) {
+      setError("Ошибка при отправки кода подтверждения. Попробуйте еще раз.");
+    }
   };
 
   return (
