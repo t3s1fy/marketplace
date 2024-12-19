@@ -1,4 +1,5 @@
 export const ADMIN_ROUTE = "/admin"; //Странца админа
+export const ADMIN_PANEL_MAIN_ROUTE = "/admin/main"; //Странца админа
 export const SELLER_ROUTE = "/seller"; //страница продовца
 export const LOGIN_ROUTE = "/login"; //Страница логина
 export const REGISTRATION_ROUTE = "/registration"; //Страница регистрации

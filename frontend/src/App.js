@@ -1,11 +1,32 @@
 import React, { useContext, useEffect, useState } from "react";
 import "./styles/index.css";
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
 import AppRouter from "./components/AppRouter";
 import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
 import { observer } from "mobx-react-lite";
 import { Context } from "./index";
+import { adminRoutes } from "./routes";
+import NavBarAdmin from "./components/NavBarAdmin";
+import SideBar from "./components/SideBar"; // Импорт массива adminRoutes
+
+const AppContent = observer(() => {
+  const location = useLocation(); // useLocation доступен внутри BrowserRouter
+
+  // Проверяем, является ли текущий путь админским
+  const isAdminRoute = adminRoutes.some(
+    (route) => route.path === location.pathname,
+  );
+
+  return (
+    <div className="wrapper">
+      {!isAdminRoute ? <NavBar /> : <NavBarAdmin />}
+      {!isAdminRoute ? null : <SideBar />}
+      <AppRouter />
+      {!isAdminRoute && <Footer />}
+    </div>
+  );
+});
 
 const App = observer(() => {
   const { user } = useContext(Context);
@@ -23,11 +44,10 @@ const App = observer(() => {
 
   return (
     <BrowserRouter>
-      <div className="wrapper">
-        <NavBar />
-        <AppRouter />
-        <Footer />
-      </div>
+      <Routes>
+        <Route path="*" element={<AppContent />} />{" "}
+        {/* AppContent внутри Router */}
+      </Routes>
     </BrowserRouter>
   );
 });

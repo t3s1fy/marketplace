@@ -19,6 +19,7 @@ import ForgotPasswordStepTwo from "./pages/ForgotPasswordStepTwo";
 import ForgotPasswordStepThree from "./pages/ForgotPasswordStepThree";
 
 import {
+  ADMIN_PANEL_MAIN_ROUTE,
   ADMIN_ROUTE,
   BASKET_ROUTE,
   CONFIRM_EMAIL_ROUTE,
@@ -40,6 +41,7 @@ import {
   FORGOT_PASSWORD_STEP_TWO_ROUTE,
   FORGOT_PASSWORD_STEP_THREE_ROUTE,
 } from "./utils/consts";
+import AdminPanelMain from "./pages/AdminPanelMain";
 
 export const adminRoutes = [
   {
@@ -47,12 +49,8 @@ export const adminRoutes = [
     Component: Admin,
   },
   {
-    path: SELLER_ROUTE,
-    Component: Seller,
-  },
-  {
-    path: SELLER_PROFILE_ROUTE,
-    Component: SellerProfile,
+    path: ADMIN_PANEL_MAIN_ROUTE,
+    Component: AdminPanelMain,
   },
 ];
 

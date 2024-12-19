@@ -6,7 +6,7 @@ export default class UserStore {
     // const token = localStorage.getItem("accessToken");
     // this._isAuth = !!token;
     this._isSeller = true;
-    this._isAdmin = false;
+    this._isAdmin = true;
 
     this._user = {};
     makeAutoObservable(this);
