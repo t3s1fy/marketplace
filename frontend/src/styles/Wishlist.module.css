@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Public+Sans:ital,wght@0,100..900;1,100..900&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap');
 
-.shopMainPage {
+.WishlistPage {
   flex-grow: 1;
   display: flex;
   flex-direction: column;
@@ -10,35 +10,36 @@
   height: 100%;
   background-color: transparent;
   margin: 0;
-  box-sizing: border-box;
   padding: 0 0 63px 0;
   box-shadow:
     0 4px 4px -1px rgba(12, 12, 13, 0.1),
     0 4px 4px -1px rgba(12, 12, 13, 0.05);
 }
 
-.currentPromotion {
-  margin-top: 66px;
-  margin-bottom: 30px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 1810px;
-  height: 360px;
-  background-color: #EAE0D6;
-  border-radius: 10px;
-  text-decoration: none;
-  font-size: 60px;
-  font-family: "IBM Plex Sans", sans-serif;
-  color: black;
+.WishlistTitle {
+  margin: 40px 0 39px 46.5px;
+  align-self: start;
+  font-family: 'IBM Plex Mono', monospace;
+  font-weight: 400;
+  font-size: 40px;
+  line-height: 52px;
+  color: #5E3023;
 }
-
 .productContainer {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   gap: 30px;
+}
+
+.WishListBlock {
+
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: 30px;
+  justify-content: center;
 }
 .productBlock {
   width: 1810px;
@@ -57,6 +58,14 @@
   gap: 23px;
 }
 
+.WishListBlock .titleContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 23px;
+  margin-left: 46.5px;
+}
 .titleContainer p {
   font-family: "IBM Plex Mono", monospace;
   font-weight: 400;

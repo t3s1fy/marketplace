@@ -1,0 +1,10 @@
+.typesList {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: row;
+  row-gap: 30px;
+  column-gap: 20px;
+}
+

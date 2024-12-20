@@ -1,0 +1,62 @@
+.productList {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: row;
+  row-gap: 30px;
+  column-gap: 20px;
+}
+
+.wishlistNotFound {
+  margin: 0;
+  width: 1810px;
+  height: 335px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 31px 0 29px 0;
+  box-sizing: border-box;
+  border-radius: 20px;
+  background: #D9D9D91A;
+}
+
+.titleText {
+  font-family: "IBM Plex Mono", monospace;
+  font-weight: 400;
+  font-size: 36px;
+  line-height: 46.8px;
+  text-align: center;
+  color: #5E3023;
+}
+
+.textError {
+  margin-top: 34px;
+  margin-bottom: 50px;
+  font-family: "IBM Plex Mono", monospace;
+  width: 792px;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 31.2px;
+  text-align: center;
+  color: #00000080;
+}
+
+.nextStepBtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 473px;
+  height: 82px;
+  border-radius: 20px;
+  background-color: #EAE0D6;
+  font-family: "IBM Plex Mono", monospace;
+  font-weight: 400;
+  font-size: 36px;
+  line-height: 46.8px;
+  text-align: center;
+  color: #5E3023;
+  text-decoration: none;
+
+}

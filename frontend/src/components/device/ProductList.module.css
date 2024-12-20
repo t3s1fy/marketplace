@@ -1,0 +1,19 @@
+.productList {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: row;
+  row-gap: 30px;
+  column-gap: 20px;
+}
+
+.productListBigger {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: row;
+  row-gap: 30px;
+  column-gap: 15px;
+}

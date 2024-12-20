@@ -87,7 +87,7 @@ const NavBar = observer(() => {
             <img src={logo} alt="Логотип" />
           </NavLink>
         </div>
-        {user.isAuth || user.isSeller || user.isAdmin ? (
+        {user.isAuth ? (
           <>
             <div className={styles.searchBox}>
               <input type="text" placeholder="Поиск..." />
