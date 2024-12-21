@@ -40,6 +40,7 @@ export default class ProductStore {
         rating: 5,
         discount: 20,
         img: `https://avatars.mds.yandex.net/i?id=462f5e52e81b45e7006bff7d7320d63850138d666f8ad63a-13239233-images-thumbs&n=13`,
+        count: 10,
       },
       {
         id: 2,
@@ -48,14 +49,16 @@ export default class ProductStore {
         rating: 5,
         discount: 1,
         img: `https://avatars.mds.yandex.net/i?id=462f5e52e81b45e7006bff7d7320d63850138d666f8ad63a-13239233-images-thumbs&n=13`,
+        count: 40,
       },
       {
         id: 3,
         name: "Кроссовки Nike Air Jordan 1",
         price: 5000,
         discount: 10,
-        rating: 5,
+        rating: 4.5,
         img: `https://avatars.mds.yandex.net/i?id=462f5e52e81b45e7006bff7d7320d63850138d666f8ad63a-13239233-images-thumbs&n=13`,
+        count: 0,
       },
       {
         id: 4,
@@ -64,6 +67,7 @@ export default class ProductStore {
         discount: 10,
         rating: 5,
         img: `https://avatars.mds.yandex.net/i?id=462f5e52e81b45e7006bff7d7320d63850138d666f8ad63a-13239233-images-thumbs&n=13`,
+        count: 100,
       },
       {
         id: 5,
@@ -72,6 +76,7 @@ export default class ProductStore {
         discount: 1,
         rating: 5,
         img: `https://avatars.mds.yandex.net/i?id=462f5e52e81b45e7006bff7d7320d63850138d666f8ad63a-13239233-images-thumbs&n=13`,
+        count: 15,
       },
       {
         id: 6,
@@ -80,14 +85,16 @@ export default class ProductStore {
         discount: 0,
         rating: 5,
         img: `https://avatars.mds.yandex.net/i?id=462f5e52e81b45e7006bff7d7320d63850138d666f8ad63a-13239233-images-thumbs&n=13`,
+        count: 5,
       },
       {
         id: 7,
         name: "Надувная кукла Виктория нуланд",
         price: 1000,
         discount: 1,
-        rating: 5,
+        rating: 4.5,
         img: `https://avatars.mds.yandex.net/i?id=462f5e52e81b45e7006bff7d7320d63850138d666f8ad63a-13239233-images-thumbs&n=13`,
+        count: 1,
       },
       {
         id: 8,
@@ -96,6 +103,7 @@ export default class ProductStore {
         discount: 1,
         rating: 5,
         img: `https://avatars.mds.yandex.net/i?id=462f5e52e81b45e7006bff7d7320d63850138d666f8ad63a-13239233-images-thumbs&n=13`,
+        count: 100,
       },
       {
         id: 9,
@@ -104,6 +112,7 @@ export default class ProductStore {
         discount: 1,
         rating: 5,
         img: `https://avatars.mds.yandex.net/i?id=462f5e52e81b45e7006bff7d7320d63850138d666f8ad63a-13239233-images-thumbs&n=13`,
+        count: 10,
       },
       {
         id: 10,
@@ -112,6 +121,7 @@ export default class ProductStore {
         discount: 1,
         rating: 5,
         img: `https://avatars.mds.yandex.net/i?id=462f5e52e81b45e7006bff7d7320d63850138d666f8ad63a-13239233-images-thumbs&n=13`,
+        count: 10,
       },
       {
         id: 11,
@@ -120,6 +130,7 @@ export default class ProductStore {
         discount: 1,
         rating: 5,
         img: `https://avatars.mds.yandex.net/i?id=462f5e52e81b45e7006bff7d7320d63850138d666f8ad63a-13239233-images-thumbs&n=13`,
+        count: 10,
       },
       {
         id: 12,
@@ -128,6 +139,7 @@ export default class ProductStore {
         discount: 1,
         rating: 5,
         img: `https://avatars.mds.yandex.net/i?id=462f5e52e81b45e7006bff7d7320d63850138d666f8ad63a-13239233-images-thumbs&n=13`,
+        count: 10,
       },
     ];
     const savedFavorites = localStorage.getItem("favorites");
