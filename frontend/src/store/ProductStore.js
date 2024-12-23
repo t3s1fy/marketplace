@@ -38,7 +38,7 @@ export default class ProductStore {
         name: "Кроссовки Nike Air Jordan 1",
         price: 228,
         rating: 5,
-        discount: 20,
+        discount: 0,
         img: `https://avatars.mds.yandex.net/i?id=462f5e52e81b45e7006bff7d7320d63850138d666f8ad63a-13239233-images-thumbs&n=13`,
         count: 10,
       },
@@ -144,12 +144,20 @@ export default class ProductStore {
     ];
     const savedFavorites = localStorage.getItem("favorites");
     this._favorites = savedFavorites ? JSON.parse(savedFavorites) : [];
+
+    const savedBasket = localStorage.getItem("basket");
+    this._basket = savedBasket ? JSON.parse(savedBasket) : [];
     makeAutoObservable(this);
   }
 
   // Метод для сохранения избранных товаров в localStorage
   saveFavoritesToLocalStorage() {
     localStorage.setItem("favorites", JSON.stringify(this._favorites));
+  }
+
+  // Метод для сохранения товаров добавленных в корзину в localStorage
+  saveBasketToLocalStorage() {
+    localStorage.setItem("basket", JSON.stringify(this._basket));
   }
 
   // Методы для работы с избранным
@@ -162,12 +170,40 @@ export default class ProductStore {
     this.saveFavoritesToLocalStorage(); // После изменения сохраняем в localStorage
   }
 
+  // // Методы для работы с корзиной
+  // toggleBasket(productId) {
+  //   if (this._basket.includes(productId)) {
+  //     this._basket = this._basket.filter((id) => id !== productId);
+  //   } else {
+  //     this._basket.push(productId);
+  //   }
+  //   this.saveBasketToLocalStorage(); // После изменения сохраняем в localStorage
+  // }
+
+  removeFromBasket(productId) {
+    this._basket = this._basket.filter((id) => id !== productId);
+    this.saveBasketToLocalStorage();
+  }
+
+  addToBasket(productId) {
+    this._basket.push(productId);
+    this.saveBasketToLocalStorage();
+  }
+
   isFavorite(productId) {
     return this._favorites.includes(productId);
   }
 
+  isBasket(productId) {
+    return this._basket.includes(productId);
+  }
+
   setFavorites(favorites) {
     this._favorites = favorites;
+  }
+
+  setBasket(basket) {
+    this._basket = basket;
   }
 
   setTypes(types) {
@@ -184,6 +220,10 @@ export default class ProductStore {
 
   get favorites() {
     return this._favorites;
+  }
+
+  get basket() {
+    return this._basket;
   }
 
   get types() {

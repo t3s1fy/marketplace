@@ -24,6 +24,11 @@ const ProductPage = observer(() => {
     return <div className={styles.productPage}>Товар не найден</div>;
   }
 
+  const handleAddToCart = () => {
+    item.addToBasket(product.id);
+    alert("Товар добавлен в корзину!");
+  };
+
   const discountedPrice =
     product.price - (product.price * product.discount) / 100;
 
@@ -157,7 +162,10 @@ const ProductPage = observer(() => {
             </div>
           </div>
           <div className={styles.addToCart}>
-            <button className={styles.addToCartButton}>
+            <button
+              className={styles.addToCartButton}
+              onClick={handleAddToCart}
+            >
               Добавить в корзину
             </button>
             <div className={styles.addToWishlistButton}>

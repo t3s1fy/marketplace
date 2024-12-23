@@ -1,0 +1,71 @@
+
+.basketPage {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  background-color: transparent;
+  margin: 0;
+  padding: 0 0 63px 0;
+  box-shadow:
+    0 4px 4px -1px rgba(12, 12, 13, 0.1),
+    0 4px 4px -1px rgba(12, 12, 13, 0.05);
+}
+
+.basketPage .basketTitle {
+  margin: 40px 0 13px 46.5px;
+  align-self: start;
+  font-family: 'IBM Plex Mono', monospace;
+  font-weight: 400;
+  font-size: 40px;
+  line-height: 52px;
+  color: #5E3023;
+}
+
+.basketPage .mainContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.mainContainer .basketContainer {
+  display: flex;
+}
+
+.mainContainer .productContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+}
+
+.productBlock {
+  width: 1810px;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: 30px;
+  justify-content: center;
+}
+
+.titleContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 23px;
+}
+
+.titleContainer p {
+  font-family: "IBM Plex Mono", monospace;
+  font-weight: 400;
+  font-size: 32px;
+  line-height: 42px;
+  color: #5E3023;
+}

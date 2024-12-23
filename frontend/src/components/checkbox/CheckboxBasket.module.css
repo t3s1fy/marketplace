@@ -1,0 +1,70 @@
+@import url('https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+.checkboxWrapper {
+  display: block;
+  position: relative;
+  width: 18.75px;
+  padding: 0;
+}
+.checkboxElement {
+  cursor: pointer;
+  margin-left:0;
+  appearance: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 2px;
+  width: 18.75px;
+  height: 18.75px;
+  border: 2px solid #5E3023;
+
+}
+
+.checkboxElement:checked {
+  background-color: #5E3023;
+}
+
+.checkboxElement:checked:before {
+  content: "";
+  display: block;
+  position: absolute;
+  left: 4px;
+  right: 3px;
+  width: 3px;
+  height: 5px;
+  bottom: 4px;
+  border: 2px solid transparent;
+  border-bottom-color: white;
+  border-right-color: white;
+  transform-origin: 50% 50% ;
+  transform: rotate(40deg);
+}
+
+.checkboxWrapper p {
+  font-weight: 400;
+  margin-left: 28px;
+  font-family: 'Barlow', sans-serif ;
+  line-height: 15px;
+  text-align: left;
+  width: 255px;
+  font-size: 12px;
+}
+.checkboxWrapper a {
+  text-decoration: none;
+  color: #5E3023;
+  cursor: pointer;
+  font-weight: 400;
+  font-family: 'Barlow', sans-serif ;
+  line-height: 15px;
+  font-size: 12px;
+}
+
+.linkRules {
+  text-decoration: none;
+  color: #5E3023;
+  cursor: pointer;
+  font-weight: 400;
+  font-family: 'Barlow', sans-serif ;
+  line-height: 15px;
+  font-size: 12px;
+}

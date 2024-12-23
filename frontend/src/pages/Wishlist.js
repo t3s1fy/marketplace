@@ -2,8 +2,9 @@ import React from "react";
 import styles from "../styles/Wishlist.module.css";
 import ProductList from "../components/device/ProductList";
 import WishlistList from "../components/device/WishlistList";
+import { observer } from "mobx-react-lite";
 
-const Wishlist = () => {
+const Wishlist = observer(() => {
   return (
     <div className={styles.WishlistPage}>
       <p className={styles.WishlistTitle}>Избранное</p>
@@ -39,6 +40,6 @@ const Wishlist = () => {
       </div>
     </div>
   );
-};
+});
 
 export default Wishlist;
