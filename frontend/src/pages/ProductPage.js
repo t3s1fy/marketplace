@@ -75,7 +75,9 @@ const ProductPage = observer(() => {
             <div className={styles.productPictureMini}></div>
             <div className={styles.productPictureMini}></div>
           </div>
-          <div className={styles.productPicture}></div>
+          <div className={styles.productPicture}>
+            <img src={product.img} alt="картинка" />
+          </div>
         </div>
         <div className={styles.descriptionContainer}>
           <p className={styles.nameProduct}>{product.name}</p>

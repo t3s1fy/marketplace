@@ -3,7 +3,11 @@ import { observer } from "mobx-react-lite";
 import { Context } from "../../index";
 import styles from "./BasketList.module.css";
 import { Link, useNavigate } from "react-router-dom";
-import { LOGIN_ROUTE, SHOP_ROUTE } from "../../utils/consts";
+import {
+  LOGIN_ROUTE,
+  MAKING_ORDER_ROUTE,
+  SHOP_ROUTE,
+} from "../../utils/consts";
 import BasketItem from "./BasketItem";
 import checkbox_icon from "../../assets/icons/checkbox_icon.svg";
 
@@ -82,6 +86,28 @@ const BasketList = observer(({ maxItems }) => {
     { totalPrice: 0, totalDiscount: 0 },
   );
 
+  const handleNavigateToOrder = () => {
+    const selectedProducts = displayedItems
+      .filter((product) => selectedItems[product.id]?.isSelected)
+      .map((product) => ({
+        id: product.id,
+        name: product.name,
+        price: product.price,
+        img: product.img,
+        quantity: selectedItems[product.id]?.quantity || 1,
+        discount: product.discount,
+      }));
+
+    navigate(MAKING_ORDER_ROUTE, {
+      state: {
+        selectedProducts,
+        totalCount,
+        totalPrice,
+        totalDiscount,
+      },
+    });
+  };
+
   return (
     <div>
       {displayedItems.length > 0 ? (
@@ -113,7 +139,12 @@ const BasketList = observer(({ maxItems }) => {
             </div>
           </div>
           <div className={styles.orderBlock}>
-            <button className={styles.linkToOrder}>Перейти к оформлению</button>
+            <button
+              className={styles.linkToOrder}
+              onClick={handleNavigateToOrder}
+            >
+              Перейти к оформлению
+            </button>
             <p className={styles.faqOrder}>
               Доступные способы и время доставки можно выбрать при оформлении
               заказа
