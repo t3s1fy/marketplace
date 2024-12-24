@@ -26,7 +26,10 @@ const BasketList = observer(({ maxItems }) => {
   const handleSelectAll = () => {
     const newSelectedItems = {};
     displayedItems.forEach((product) => {
-      newSelectedItems[product.id] = !isAllSelected;
+      newSelectedItems[product.id] = {
+        isSelected: !isAllSelected,
+        quantity: selectedItems[product.id]?.quantity || 1, // сохраняем количество
+      };
     });
     setSelectedItems(newSelectedItems);
     setIsAllSelected(!isAllSelected); // Меняем флаг "Выбрать все"
@@ -36,14 +39,48 @@ const BasketList = observer(({ maxItems }) => {
   const handleCheckboxChange = (productId) => {
     setSelectedItems((prevState) => ({
       ...prevState,
-      [productId]: !prevState[productId],
+      [productId]: {
+        ...prevState[productId],
+        isSelected: !prevState[productId]?.isSelected,
+      },
     }));
   };
 
-  // Подсчитываем количество товаров
-  const totalCount = Object.values(selectedItems).filter(
-    (isSelected) => isSelected,
-  ).length;
+  // Обработчик изменения количества товара
+  const handleQuantityChange = (productId, quantity) => {
+    setSelectedItems((prevState) => ({
+      ...prevState,
+      [productId]: {
+        ...prevState[productId],
+        quantity,
+      },
+    }));
+  };
+
+  // Подсчет общего количества товаров
+  const totalCount = Object.entries(selectedItems).reduce(
+    (sum, [id, { isSelected, quantity }]) =>
+      isSelected ? sum + quantity : sum,
+    0,
+  );
+
+  // Подсчет общей стоимости и суммы скидки только для выбранных товаров
+  const { totalPrice, totalDiscount } = displayedItems.reduce(
+    (totals, product) => {
+      const selectedItem = selectedItems[product.id];
+      if (selectedItem?.isSelected) {
+        const quantity = selectedItem.quantity || 1;
+        const itemTotalPrice = product.price * quantity;
+        const itemDiscount =
+          ((product.price * product.discount) / 100) * quantity;
+
+        totals.totalPrice += itemTotalPrice;
+        totals.totalDiscount += itemDiscount;
+      }
+      return totals;
+    },
+    { totalPrice: 0, totalDiscount: 0 },
+  );
 
   return (
     <div>
@@ -59,8 +96,18 @@ const BasketList = observer(({ maxItems }) => {
                 <BasketItem
                   key={product.id}
                   item={product}
-                  isChecked={selectedItems[product.id] || false}
+                  isChecked={selectedItems[product.id]?.isSelected || false}
+                  quantity={selectedItems[product.id]?.quantity || 1}
                   onCheckboxChange={handleCheckboxChange}
+                  onQuantityChange={(productId, quantity) =>
+                    setSelectedItems((prevState) => ({
+                      ...prevState,
+                      [productId]: {
+                        ...prevState[productId],
+                        quantity,
+                      },
+                    }))
+                  }
                 />
               ))}
             </div>
@@ -80,11 +127,11 @@ const BasketList = observer(({ maxItems }) => {
               </div>
               <div className={styles.textBLock}>
                 <span className={styles.text}>Товары ({totalCount})</span>
-                <span className={styles.textValueSum}>1793₽</span>
+                <span className={styles.textValueSum}>{totalPrice}₽</span>
               </div>
               <div className={styles.textBLock}>
                 <span className={styles.text}>Скидка</span>
-                <span className={styles.textValueSale}>–1109₽</span>
+                <span className={styles.textValueSale}>–{totalDiscount}₽</span>
               </div>
               <div className={styles.textBLock}>
                 <span className={styles.text}>Стоимость доставки</span>
@@ -93,7 +140,9 @@ const BasketList = observer(({ maxItems }) => {
               <hr className={styles.line} />
               <div className={styles.textBLock}>
                 <span className={styles.boldText}>Итоговая сумма</span>
-                <span className={styles.textValueTotalSum}>684₽</span>
+                <span className={styles.textValueTotalSum}>
+                  {totalPrice - totalDiscount}₽
+                </span>
               </div>
             </div>
           </div>
