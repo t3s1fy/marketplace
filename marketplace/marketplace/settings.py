@@ -17,6 +17,9 @@ from django.conf.global_settings import AUTH_USER_MODEL, EMAIL_BACKEND
 from dotenv import load_dotenv
 import os
 
+from drf_spectacular.settings import SpectacularSettings
+#from rest_framework_simplejwt.authentication import JWTAuthentication
+
 load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -52,11 +55,17 @@ EMAIL_ADMIN = EMAIL_HOST_USER
 
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": (
-        "rest_framework_simplejwt.authentication.JWTAuthentication",
+        "backend_api.middleware.JWTAuthFromCookies",
+        "rest_framework.authentication.SessionAuthentication",
     ),
     "DEFAULT_PERMISSION_CLASSES": [
         "rest_framework.permissions.IsAuthenticated",
     ],
+    "DEFAULT_SCHEMA_CLASSES": 'drf_spectacular.openapi.AutoSchema',
+}
+
+SPECTACULAR_SETTINGS = {
+    "Title": 'marketplace',
 }
 
 SIMPLE_JWT = {
@@ -73,8 +82,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'corsheaders',
-    'backend_api',
+    'backend_api.apps.BackendApiConfig',
     'rest_framework',
+    'drf_yasg',
 ]
 
 MIDDLEWARE = [
@@ -85,12 +95,12 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'corsheaders.middleware.CorsMiddleware'
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 CORS_ALLOWED_ORIGINS = [
     'http://localhost:3000',
-    'https://91ab-94-31-185-35.ngrok-free.app'
+    'https://c1af-94-31-185-35.ngrok-free.app '
 ]
 CORS_ALLOWS_CREDENTIALS = True
 
@@ -126,6 +136,17 @@ DATABASES = {
         'PASSWORD': 'BFR931D2LC',
         'HOST': 'localhost',
         'PORT': '5432',
+    }
+}
+
+
+SWAGGER_SETTINGS = {
+    'SECURITY_DEFINITIONS': {
+        'Bearer': {
+            'type': 'apiKey',
+            'name': 'Authorization',
+            'in': 'header'
+        }
     }
 }
 

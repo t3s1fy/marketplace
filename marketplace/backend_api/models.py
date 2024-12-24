@@ -57,6 +57,14 @@ class ConfirmationCode(models.Model):
         return f"Код подтверждения для {self.user.email}: {self.code}"
 
 
+class Category(models.Model):
+    id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=255, unique=True, verbose_name="Название категории")
+
+    def __str__(self):
+        return self.name
+
+
 class Product(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=255, verbose_name="Название")
@@ -75,12 +83,19 @@ class Product(models.Model):
         related_name="products",
         verbose_name="Продавец",
     )
+    categories = models.ManyToManyField(Category, related_name="products", verbose_name="Категории")
 
     def can_be_edited_by(self, user):
-        return user.role in ['admin', 'seller'] and (user.role == 'admin' or self.seller == user)
+        """Проверка, может ли пользователь редактировать товар."""
+        return user.is_superuser or (user.role == 'seller' and self.seller == user)
 
     def can_be_deleted_by(self, user):
-        return user.role == 'admin'
+        """Проверка, может ли пользователь удалять товар."""
+        return user.is_superuser or (user.role == 'seller' and self.seller == user)
+
+    def can_be_created_by(self, user):
+        """Проверка, может ли пользователь создавать товар."""
+        return user.is_superuser or user.role == 'seller'
 
     def __str__(self):
         return f"{self.name} - {self.seller.email}"

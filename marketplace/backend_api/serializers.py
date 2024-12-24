@@ -4,7 +4,7 @@ from .models import Product, CartItem, Cart, ConfirmationCode
 
 User = get_user_model()
 
-
+#Пользователь
 class UserSerializer(serializers.ModelSerializer):
     """Сериалайзер для модели пользователя."""
 
@@ -32,18 +32,14 @@ class UserSerializer(serializers.ModelSerializer):
         return user
 
 
+#Регистрация
 class ConfirmRegistrationSerializer(serializers.Serializer):
     """Сериалайзер для подтверждения регистрации."""
     email = serializers.EmailField()
     confirmation_code = serializers.CharField(max_length=6)
 
 
-class LoginSerializer(serializers.Serializer):
-    """Сериалайзер для входа пользователя."""
-    email = serializers.EmailField()
-    password = serializers.CharField()
-
-
+#Восстановление пароля
 class PasswordResetRequestSerializer(serializers.Serializer):
     """Сериалайзер для запроса сброса пароля."""
     email = serializers.EmailField(required=True)
@@ -56,15 +52,25 @@ class PasswordResetConfirmSerializer(serializers.Serializer):
 
 
 class PasswordResetVerifyCodeSerializer(serializers.Serializer):
+    email = serializers.EmailField(required=True)
     code = serializers.CharField(max_length=6)
 
 
+#Вход
+class LoginSerializer(serializers.Serializer):
+    """Сериалайзер для входа пользователя."""
+    email = serializers.EmailField()
+    password = serializers.CharField()
+
+
+#Товар
 class ProductSerializer(serializers.ModelSerializer):
     """Сериалайзер для модели товара."""
 
     class Meta:
         model = Product
         fields = ['id', 'name', 'description', 'price', 'is_available', 'photo', 'seller']
+        read_only_fields = ['id', 'seller']
 
     def create(self, validated_data):
         """
@@ -123,6 +129,9 @@ class ResendConfirmationCodeSerializer(serializers.Serializer):
     action_type = serializers.ChoiceField(choices=['register', 'reset_password'])
 
 
-class RefreshTokenSerializer(serializers.Serializer):
-    """Сериалайзер для обновления JWT-токенов."""
-    refresh = serializers.CharField()
+class TokenValidationSerializer(serializers.Serializer):
+    """
+    Сериалайзер для проверки валидности токена.
+    """
+    token = serializers.CharField(write_only=True)
+    message = serializers.CharField(read_only=True)

@@ -1,5 +1,17 @@
 from django.contrib import admin
-from .models import Product, Cart, CartItem
+from .models import Product, Cart, CartItem, Category
+
+
+@admin.register(Category)
+class CategoryAdmin(admin.ModelAdmin):
+    list_display = ('id', 'name', 'product_count')
+    search_fields = ('name',)
+    ordering = ('-id',)
+
+    def product_count(self, obj):
+        return obj.products.count()
+
+    product_count.short_description = "Количество продуктов"
 
 
 @admin.register(Product)
