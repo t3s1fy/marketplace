@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import styles from "../styles/ProductPage.module.css";
 import { observer } from "mobx-react-lite";
 import arrowBtn from "../assets/icons/arrowBtn.svg";
@@ -20,13 +20,33 @@ const ProductPage = observer(() => {
 
   const product = item.items.find((product) => product.id === parseInt(id));
 
+  const [mainImage, setMainImage] = useState(product.img);
+
+  const [zoomPosition, setZoomPosition] = useState({ x: 0, y: 0 });
+  const [isZoomActive, setIsZoomActive] = useState(false);
+
   if (!product) {
     return <div className={styles.productPage}>Товар не найден</div>;
   }
 
+  const handleMouseMove = (e) => {
+    const { left, top, width, height } =
+      e.currentTarget.getBoundingClientRect();
+    const x = ((e.clientX - left) / width) * 100; // Процент по X
+    const y = ((e.clientY - top) / height) * 100; // Процент по X
+    setZoomPosition({ x, y });
+  };
+
+  const handleMouseZoomEnter = () => {
+    setIsZoomActive(true);
+  };
+
+  const handleMouseZoomLeave = () => {
+    setIsZoomActive(false);
+  };
+
   const handleAddToCart = () => {
     item.addToBasket(product.id);
-    alert("Товар добавлен в корзину!");
   };
 
   const discountedPrice =
@@ -34,6 +54,9 @@ const ProductPage = observer(() => {
 
   const differencePrice = product.price - discountedPrice;
 
+  const handleMouseEnter = (image) => {
+    setMainImage(image);
+  };
   // Логика доступности товара
   let availability;
   if (product.count === 0) {
@@ -70,13 +93,64 @@ const ProductPage = observer(() => {
       <div className={styles.productContainer}>
         <div className={styles.pictureContainer}>
           <div className={styles.pictureBlock}>
-            <div className={styles.productPictureMini}></div>
-            <div className={styles.productPictureMini}></div>
-            <div className={styles.productPictureMini}></div>
-            <div className={styles.productPictureMini}></div>
+            <div className={styles.productPictureMini}>
+              <img
+                src={product.img}
+                alt="картинка"
+                onMouseEnter={() => handleMouseEnter(product.img)}
+              />
+            </div>
+            <div className={styles.productPictureMini}>
+              <img
+                src="https://avatars.mds.yandex.net/i?id=7aef89e819bd5790a829e9a58d4e5e82_l-12922404-images-thumbs&n=13"
+                alt=""
+                onMouseEnter={() =>
+                  handleMouseEnter(
+                    "https://avatars.mds.yandex.net/i?id=7aef89e819bd5790a829e9a58d4e5e82_l-12922404-images-thumbs&n=13",
+                  )
+                }
+              />
+            </div>
+            <div className={styles.productPictureMini}>
+              <img
+                src="https://i.pinimg.com/originals/81/7b/58/817b5854efcedcfcbd4a7dad6d25b7ce.jpg"
+                alt=""
+                onMouseEnter={() =>
+                  handleMouseEnter(
+                    "https://i.pinimg.com/originals/81/7b/58/817b5854efcedcfcbd4a7dad6d25b7ce.jpg",
+                  )
+                }
+              />
+            </div>
+            <div className={styles.productPictureMini}>
+              <img
+                src="https://api.energocontract.ru/upload/medialibrary/261/BOP2.png"
+                alt=""
+                onMouseEnter={() =>
+                  handleMouseEnter(
+                    "https://api.energocontract.ru/upload/medialibrary/261/BOP2.png",
+                  )
+                }
+              />
+            </div>
           </div>
-          <div className={styles.productPicture}>
-            <img src={product.img} alt="картинка" />
+          <div
+            className={styles.productPicture}
+            onMouseMove={handleMouseMove}
+            onMouseEnter={handleMouseZoomEnter}
+            onMouseLeave={handleMouseZoomLeave}
+          >
+            <img src={mainImage} alt="картинка" />
+            {/* Зум картинки */}
+            {isZoomActive && (
+              <div
+                className={styles.zoom}
+                style={{
+                  backgroundImage: `url(${mainImage})`,
+                  backgroundPosition: `${zoomPosition.x}% ${zoomPosition.y}% `,
+                }}
+              ></div>
+            )}
           </div>
         </div>
         <div className={styles.descriptionContainer}>

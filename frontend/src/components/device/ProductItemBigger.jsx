@@ -4,6 +4,8 @@ import HeartButton from "../heart_button/HeartButton";
 import { useNavigate } from "react-router-dom";
 import { PRODUCT_ROUTE } from "../../utils/consts";
 import HeartButtonBigger from "../heart_button/HeartButtonBigger";
+import star from "../../assets/icons/productItemStar.svg";
+import feedback from "../../assets/icons/productItemFeedback.svg";
 
 const ProductItemBigger = ({ item }) => {
   // цена с учетом скидки, если она есть
@@ -38,6 +40,16 @@ const ProductItemBigger = ({ item }) => {
           )}
         </div>
         <div className={styles.nameElem}>{item.name}</div>
+        <div className={styles.productInfoBlock}>
+          <div className={styles.infoText}>
+            <img src={star} alt="star" />
+            <span>{item.rating}</span>
+          </div>
+          <div className={styles.infoText}>
+            <img src={feedback} alt="feedback" />
+            <span>{item.feedback}</span>
+          </div>
+        </div>
       </div>
     </div>
   );

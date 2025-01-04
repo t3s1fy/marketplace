@@ -1,4 +1,4 @@
-import React, { useContext, useRef, useState } from "react";
+import React, { useContext, useRef, useState, useEffect } from "react";
 import styles from "../styles/NavBar.module.css";
 import { Context } from "../index";
 import { UseClickOutside } from "./hooks/useClickOutside";
@@ -13,6 +13,8 @@ import settings_icon from "../assets/icons/settings_icon.svg";
 
 import { Link, useLocation, NavLink, useNavigate } from "react-router-dom";
 import {
+  ADMIN_PANEL_MAIN_ROUTE,
+  ADMIN_ROUTE,
   BASKET_ROUTE,
   CONFIRM_EMAIL_ROUTE,
   CONTACTS_ROUTE,
@@ -28,6 +30,34 @@ import {
 import { observer } from "mobx-react-lite";
 
 const NavBar = observer(() => {
+  const [isBottomFixed, setBottomFixed] = useState(false);
+  const [prevScrollPos, setPrevScrollPos] = useState(0);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollPos = window.scrollY;
+
+      setIsScrolled(currentScrollPos > 0);
+
+      if (currentScrollPos > prevScrollPos) {
+        // Скролл вниз
+        setBottomFixed(true);
+      } else if (currentScrollPos < 60) {
+        // Возврат в исходное состояние при выполнении условия
+        setBottomFixed(false);
+      }
+
+      setPrevScrollPos(currentScrollPos);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [prevScrollPos]);
+
   //меню профиля
   const [isOpen, setOpen] = useState(false);
   const [isOpenAl, setOpenAl] = useState(false);
@@ -69,10 +99,19 @@ const NavBar = observer(() => {
     setTimeout(() => setOpen(false), 50);
   };
   console.log("Is Authenticated:", user.isAuth);
+
   return (
     <header>
       <div className={styles.navbarTop}>
         <div className={styles.navbarTopRight}>
+          {user.isAdmin ? (
+            <NavLink
+              to={ADMIN_PANEL_MAIN_ROUTE}
+              className={styles.announcementText}
+            >
+              Админ-панель
+            </NavLink>
+          ) : null}
           <NavLink to={CONTACTS_ROUTE} className={styles.announcementText}>
             Контакты
           </NavLink>
@@ -81,12 +120,18 @@ const NavBar = observer(() => {
           </NavLink>
         </div>
       </div>
-      <div className={styles.navbarBottom}>
+      <div
+        className={`${styles.navbarBottom} ${isBottomFixed ? styles.fixed : ""}`}
+      >
         <div className={styles.logo}>
           <NavLink to={SHOP_ROUTE}>
             <img src={logo} alt="Логотип" />
           </NavLink>
         </div>
+        <button className={styles.catalogBtn}>
+          <img src={more_icon} alt="more" />
+          <span>Каталог</span>
+        </button>
         {user.isAuth ? (
           <>
             <div className={styles.searchBox}>
@@ -105,7 +150,7 @@ const NavBar = observer(() => {
                 <img src={alert_icon} alt="alert" />
               </button>
               <nav
-                className={`${styles.alertMenu} ${isOpenAl ? styles.active : ""}`}
+                className={`${styles.alertMenu} ${isOpenAl ? styles.active : ""} ${isScrolled ? styles.scroll : ""}`}
                 ref={menuRefAl}
               >
                 <div className={styles.alertList}>
@@ -113,22 +158,15 @@ const NavBar = observer(() => {
                   <div className={styles.alertBody}></div>
                 </div>
               </nav>
+              <Link to={user.isAuth ? PROFILE_ROUTE : LOGIN_ROUTE}>
+                <img src={profile_icon} alt="Profile" />
+              </Link>
               <Link to={BASKET_ROUTE}>
                 <img src={basket_icon} alt="basket" />
               </Link>
               <Link to={WISHLIST_ROUTE}>
                 <img src={heart_icon} alt="Wishlist" />
               </Link>
-              {}
-              <Link to={user.isAuth ? PROFILE_ROUTE : LOGIN_ROUTE}>
-                <img src={profile_icon} alt="Profile" />
-              </Link>
-              <Link to={SETTINGS_ROUTE}>
-                <img src={settings_icon} alt="Settings" />
-              </Link>
-              <button className={styles.iconButton}>
-                <img src={more_icon} alt="more" />
-              </button>
             </div>
           </>
         ) : (
@@ -148,15 +186,30 @@ const NavBar = observer(() => {
               </button>
             </div>
             <div className={styles.iconsNotLogin}>
-              <button className={styles.iconButton}>
+              <button
+                className={styles.iconButton}
+                onClick={() => setOpenAl(!isOpenAl)}
+                ref={buttonRefAl}
+              >
                 <img src={alert_icon} alt="alert" />
               </button>
-              <NavLink to={BASKET_ROUTE}>
-                <img src={basket_icon} alt="basket" />
-              </NavLink>
-              <NavLink to={WISHLIST_ROUTE}>
-                <img src={heart_icon} alt="Wishlist" />
-              </NavLink>
+              <nav
+                className={`${styles.alertMenu} ${isOpenAl ? styles.active : ""} ${isScrolled ? styles.scroll : ""}`}
+                ref={menuRefAl}
+              >
+                <div className={styles.alertList}>
+                  <p className={styles.alertText}>Уведомления</p>
+                  <div className={styles.alertBody}>
+                    <div className={styles.authAlert}>
+                      <p>
+                        Войдите или зарегистрируйтесь, чтобы получать и
+                        просматривать уведомления.
+                      </p>
+                      <Link to={LOGIN_ROUTE}>подробнее</Link>
+                    </div>
+                  </div>
+                </div>
+              </nav>
               <button
                 className={styles.iconButton}
                 onClick={() => setOpen(!isOpen)}
@@ -164,10 +217,9 @@ const NavBar = observer(() => {
               >
                 <img src={profile_icon} alt="Profile" />
               </button>
-
               {/* ВСПЛЫВАЮЩЕЕ МЕНЮ*/}
               <nav
-                className={`${styles.menu} ${isOpen ? styles.active : ""}`}
+                className={`${styles.menu} ${isOpen ? styles.active : ""} ${isScrolled ? styles.scroll : ""}`}
                 ref={menuRef}
               >
                 <div className={styles.menuList}>
@@ -183,12 +235,12 @@ const NavBar = observer(() => {
                   </button>
                 </div>
               </nav>
-              <NavLink to={SETTINGS_ROUTE}>
-                <img src={settings_icon} alt="Settings" />
+              <NavLink to={BASKET_ROUTE}>
+                <img src={basket_icon} alt="basket" />
               </NavLink>
-              <button className={styles.iconButton}>
-                <img src={more_icon} alt="more" />
-              </button>
+              <NavLink to={WISHLIST_ROUTE}>
+                <img src={heart_icon} alt="Wishlist" />
+              </NavLink>
             </div>
           </>
         )}
