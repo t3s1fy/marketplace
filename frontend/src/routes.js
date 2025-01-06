@@ -17,6 +17,8 @@ import Basket from "./pages/Basket";
 import ConfirmEmail from "./pages/ConfirmEmail";
 import ForgotPasswordStepTwo from "./pages/ForgotPasswordStepTwo";
 import ForgotPasswordStepThree from "./pages/ForgotPasswordStepThree";
+import AdminPanelMain from "./pages/AdminPanelMain";
+import ChangeProfile from "./pages/ChangeProfile";
 
 import {
   ADMIN_PANEL_MAIN_ROUTE,
@@ -40,8 +42,8 @@ import {
   WISHLIST_ROUTE,
   FORGOT_PASSWORD_STEP_TWO_ROUTE,
   FORGOT_PASSWORD_STEP_THREE_ROUTE,
+  CHANGE_PROFILE_ROUTE,
 } from "./utils/consts";
-import AdminPanelMain from "./pages/AdminPanelMain";
 
 export const adminRoutes = [
   {
@@ -66,6 +68,10 @@ export const sellerRoutes = [
 ];
 
 export const authRoutes = [
+  {
+    path: CHANGE_PROFILE_ROUTE,
+    Component: ChangeProfile,
+  },
   {
     path: BASKET_ROUTE,
     Component: Basket,

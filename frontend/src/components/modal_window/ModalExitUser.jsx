@@ -2,12 +2,39 @@ import React, { useContext } from "react";
 import styles from "./ModalExitUser.module.css";
 import cross from "./assets/cross.svg";
 import { Context } from "../../index";
-import { LOGIN_ROUTE } from "../../utils/consts";
+import {
+  CHANGE_PROFILE_ROUTE,
+  LOGIN_ROUTE,
+  PROFILE_ROUTE,
+} from "../../utils/consts";
 import { useNavigate } from "react-router-dom";
 
-const ModalExitUser = ({ active, setActive, title, subtitle, confirm }) => {
+const ModalExitUser = ({
+  active,
+  setActive,
+  title,
+  subtitle,
+  confirm,
+  action,
+  onConfirm,
+}) => {
   const { user } = useContext(Context);
   const navigate = useNavigate();
+
+  const checkAction = (action) => {
+    if (action === "deleteAvatar") {
+      return () => {
+        onConfirm();
+        setActive(false);
+      };
+    } else if (action === "exit") {
+      return () => {
+        user.setIsAuth(false);
+        setActive(false);
+        navigate(LOGIN_ROUTE);
+      };
+    }
+  };
 
   return (
     <div
@@ -31,14 +58,7 @@ const ModalExitUser = ({ active, setActive, title, subtitle, confirm }) => {
           <p className={styles.title}>{title}</p>
           <p className={styles.subtitle}>{subtitle}</p>
           <div className={styles.btnContainer}>
-            <button
-              className={styles.exit}
-              onClick={() => {
-                user.setIsAuth(false);
-                setActive(false);
-                navigate(LOGIN_ROUTE);
-              }}
-            >
+            <button className={styles.exit} onClick={checkAction(action)}>
               {confirm}
             </button>
             <button className={styles.state} onClick={() => setActive(false)}>

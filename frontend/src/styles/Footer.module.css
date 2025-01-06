@@ -27,6 +27,7 @@
 }
 
 .dynamicIcon img {
+  margin-top: 20px;
   cursor: pointer;
   width: 100px;
   height: 95px;

@@ -19,6 +19,8 @@ import headerImageSmall from "../assets/profile_assets/headerImageSmall.png";
 import { Context } from "../index";
 import {
   BASKET_ROUTE,
+  CHANGE_PROFILE_ROUTE,
+  HELPER_ROUTE,
   LOGIN_ROUTE,
   SELLER_PROFILE_ROUTE,
   SETTINGS_ROUTE,
@@ -63,13 +65,16 @@ const Profile = observer(() => {
           </div>
           <div className={style.profileBlock}>
             <div
-              onClick={() => navigate(SETTINGS_ROUTE)}
+              onClick={() => navigate(CHANGE_PROFILE_ROUTE)}
               className={style.profileBtn}
             >
               <img src={settingsLogo} alt="settings" />
               <p>Управление профилем</p>
             </div>
-            <div onClick={() => navigate(null)} className={style.profileBtn}>
+            <div
+              onClick={() => navigate(HELPER_ROUTE)}
+              className={style.profileBtn}
+            >
               <img src={helperLogo} alt="helper" />
               <p>Сервис и помощь</p>
             </div>
@@ -212,6 +217,7 @@ const Profile = observer(() => {
           "заново вводить логин (почту) и пароль"
         }
         confirm={"Да, выйти"}
+        action={"exit"}
       ></ModalExitUser>
     </div>
   );
