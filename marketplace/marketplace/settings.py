@@ -16,8 +16,11 @@ from datetime import timedelta
 from django.conf.global_settings import AUTH_USER_MODEL, EMAIL_BACKEND
 from dotenv import load_dotenv
 import os
+import cloudinary_storage
 
 from drf_spectacular.settings import SpectacularSettings
+
+
 #from rest_framework_simplejwt.authentication import JWTAuthentication
 
 load_dotenv()
@@ -37,10 +40,17 @@ DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
 
-AUTH_USER_MODEL = "backend_api.User"
+AUTH_USER_MODEL = "user.User"
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': 'dwrdyhld5',
+    'API_KEY': '266342292749567',
+    'API_SECRET': 'fxJ7nRLYV0mflh8BHyXmr7buiEY',
+}
+
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
 #Настройки smtp для отправки кода на почту
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
@@ -55,7 +65,7 @@ EMAIL_ADMIN = EMAIL_HOST_USER
 
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": (
-        "backend_api.middleware.JWTAuthFromCookies",
+        "marketplace.middleware.JWTAuthFromCookies",
         "rest_framework.authentication.SessionAuthentication",
     ),
     "DEFAULT_PERMISSION_CLASSES": [
@@ -82,9 +92,16 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'corsheaders',
-    'backend_api.apps.BackendApiConfig',
+    'user.apps.UserConfig',
+    'product.apps.ProductConfig',
+    'cart.apps.CartConfig',
+    'wishlist.apps.WishlistConfig',
+    'order.apps.OrderConfig',
     'rest_framework',
+    'rest_framework_simplejwt',
     'drf_yasg',
+    'cloudinary',
+    'cloudinary_storage',
 ]
 
 MIDDLEWARE = [

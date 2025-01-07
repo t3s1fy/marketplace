@@ -1,34 +1,30 @@
-from os import access
-
 import jwt
 from django.core.cache import cache
 from django.core.mail import send_mail
 from django.contrib.auth import get_user_model, authenticate
-from django.shortcuts import get_object_or_404
 from rest_framework import generics, status
 from rest_framework.decorators import authentication_classes
 from rest_framework.exceptions import AuthenticationFailed
-from rest_framework.permissions import IsAuthenticated, AllowAny, IsAdminUser, IsAuthenticatedOrReadOnly
+from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.response import Response
-from rest_framework.authentication import SessionAuthentication, get_authorization_header
+from rest_framework.authentication import get_authorization_header
 from rest_framework.views import APIView
 from rest_framework_simplejwt.tokens import RefreshToken
-from rest_framework_simplejwt.authentication import JWTAuthentication
 
 from marketplace import settings
 from marketplace.settings import DEFAULT_FROM_EMAIL
-from .middleware import JWTAuthFromCookies
+from marketplace.middleware import JWTAuthFromCookies
 from .serializers import (
     UserSerializer,
     ConfirmRegistrationSerializer,
     PasswordResetRequestSerializer,
     PasswordResetConfirmSerializer,
-    LoginSerializer, CartSerializer, ResendConfirmationCodeSerializer, PasswordResetVerifyCodeSerializer,
-    ProductSerializer, CartItemSerializer, TokenValidationSerializer
+    LoginSerializer, ResendConfirmationCodeSerializer, PasswordResetVerifyCodeSerializer,
+    TokenValidationSerializer
 )
-from .models import ConfirmationCode, Product, Cart, CartItem
+from .models import ConfirmationCode
 import random
-from .permissions import IsSuperAdmin, IsSuperAdminOrSeller
+from marketplace.permissions import IsSuperAdmin
 
 User = get_user_model()
 
@@ -348,117 +344,6 @@ class PasswordResetVerifyCodeView(generics.CreateAPIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-#Товар
-@authentication_classes([JWTAuthFromCookies])
-class CreateProductView(generics.CreateAPIView):
-    permission_classes = [IsSuperAdminOrSeller]
-    serializer_class = ProductSerializer
-
-    def post(self, request):
-        user = request.user
-        if user is None:
-            return Response({"error": "Пользователь не аутентифицирован."}, status=status.HTTP_401_UNAUTHORIZED)
-
-        if not (user.is_superuser or user.role == 'seller'):
-            return Response({"error": "У вас недостаточно прав для создания товара."}, status=status.HTTP_403_FORBIDDEN)
-
-        serializer = self.serializer_class(data=request.data)
-        if serializer.is_valid():
-            product = serializer.save(seller=user)
-            return Response(ProductSerializer(product).data, status=status.HTTP_201_CREATED)
-
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-
-
-class UpdateProductView(generics.UpdateAPIView):
-    """
-    Редактирование товара. Доступно только для суперпользователей и продавцов (владельцев товара).
-    """
-    permission_classes = [IsSuperAdminOrSeller]
-    serializer_class = ProductSerializer
-    http_method_names = ['put']
-
-    def put(self, request, pk):
-        try:
-            product = Product.objects.get(pk=pk)
-        except Product.DoesNotExist:
-            return Response({"error": "Товар не найден."}, status=status.HTTP_404_NOT_FOUND)
-
-        if not product.can_be_edited_by(request.user):
-            return Response({"error": "У вас недостаточно прав для редактирования этого товара."}, status=status.HTTP_403_FORBIDDEN)
-
-        serializer = self.serializer_class(product, data=request.data, partial=True)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_200_OK)
-
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-
-class DeleteProductView(generics.DestroyAPIView):
-    permission_classes = [IsSuperAdminOrSeller]
-    def delete(self, request, pk):
-        try:
-            product = Product.objects.get(pk=pk)
-            if not product.can_be_deleted_by(request.user):
-                return Response({"error": "Недостаточно прав для удаления товара."}, status=403)
-            product.delete()
-            return Response({"success": "Товар успешно удален."})
-        except Product.DoesNotExist:
-            return Response({"error": "Товар не найден."}, status=404)
-
-
-#Корзина
-class CartView(generics.CreateAPIView):
-    """
-    Представление корзины товаров
-    """
-    serializer_class = CartSerializer
-    permission_classes = [IsAuthenticated]
-
-    def get(self, request):
-        cart, _ = Cart.objects.get_or_create(user=request.user)
-        serializer = self.serializer_class(cart)
-        return Response(serializer.data)
-
-
-class AddToCartView(generics.CreateAPIView):
-    """
-    Представление для добавления товара в корзину
-    """
-    serializer_class = CartItemSerializer
-    permission_classes = [IsAuthenticated]
-
-    def post(self, request, product_id):
-        cart, _ = Cart.objects.get_or_create(user=request.user)
-        product = get_object_or_404(Product, id=product_id)
-        cart_item, created = CartItem.objects.get_or_create(cart=cart, product=product)
-        cart_item.quantity += 1
-        cart_item.save()
-
-        serializer = self.get_serializer(cart_item)
-
-        return Response(serializer.data, status=status.HTTP_200_OK)
-
-
-class RemoveFromCartView(generics.DestroyAPIView):
-    """
-    Представление для удаления элемента корзины
-    """
-    serializer_class = CartItemSerializer
-    permission_classes = [IsAuthenticated]
-
-    def delete(self, request, item_id):
-        cart_item = get_object_or_404(CartItem, id=item_id, cart__user=request.user)
-        serializer = self.get_serializer(cart_item)
-        cart_item.delete()
-        return Response({
-            'message': 'Product removed from cart',
-            'removed_item': serializer.data
-        }, status=status.HTTP_200_OK)
-
-
 #Токен
 class IsValidToken(generics.GenericAPIView):
     """
@@ -485,3 +370,18 @@ class IsValidToken(generics.GenericAPIView):
         serializer.is_valid(raise_exception=True)
 
         return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+#Пользователь
+@authentication_classes([JWTAuthFromCookies])
+class UserListView(generics.ListAPIView):
+    permission_classes = [IsSuperAdmin]
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
+
+@authentication_classes([JWTAuthFromCookies])
+class UserUpdateView(generics.UpdateAPIView):
+    permission_classes = [IsSuperAdmin]
+    queryset = User.objects.all()
+    serializer_class = UserSerializer

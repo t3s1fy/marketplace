@@ -14,14 +14,14 @@ class JWTAuthFromCookies(BaseAuthentication):
         # Извлечение токена из cookies
         access_token = request.COOKIES.get('access')
         if not access_token:
-            logger.info("No access token found in cookies")  # Лог вместо print
+            logger.info("No access token found in cookies")
             return None
 
         try:
             # Проверка валидности токена
             validated_token = AccessToken(access_token)
         except Exception as e:
-            logger.warning(f"Invalid token: {str(e)}")  # Логируем предупреждение
+            logger.warning(f"Invalid token: {str(e)}")
             raise AuthenticationFailed("Invalid or expired token")
 
         # Проверяем наличие user_id в payload токена
