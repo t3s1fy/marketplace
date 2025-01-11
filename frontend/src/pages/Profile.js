@@ -20,6 +20,7 @@ import { Context } from "../index";
 import {
   BASKET_ROUTE,
   CHANGE_PROFILE_ROUTE,
+  FEEDBACK_ROUTE,
   HELPER_ROUTE,
   LOGIN_ROUTE,
   SELLER_PROFILE_ROUTE,
@@ -30,6 +31,7 @@ import { observer } from "mobx-react-lite";
 import ProductList from "../components/device/ProductList";
 import ModalExitUser from "../components/modal_window/ModalExitUser";
 import styles from "../components/modal_window/ModalExitUser.module.css";
+import ProfileContainer from "../components/profile_container/ProfileContainer";
 
 const Profile = observer(() => {
   const location = useLocation();
@@ -55,39 +57,7 @@ const Profile = observer(() => {
   return (
     <div className={style.profilePage}>
       <div className={style.mainContainer}>
-        <div className={style.profileContainer}>
-          <div className={style.profileHeader}>
-            <img src={headerImage} alt="headerImage" />
-            <div className={style.infoBlock}>
-              <div className={style.imgUser}>0_0</div>
-              <span className={style.emailUser}>vladimir.putin@mail.ru</span>
-            </div>
-          </div>
-          <div className={style.profileBlock}>
-            <div
-              onClick={() => navigate(CHANGE_PROFILE_ROUTE)}
-              className={style.profileBtn}
-            >
-              <img src={settingsLogo} alt="settings" />
-              <p>Управление профилем</p>
-            </div>
-            <div
-              onClick={() => navigate(HELPER_ROUTE)}
-              className={style.profileBtn}
-            >
-              <img src={helperLogo} alt="helper" />
-              <p>Сервис и помощь</p>
-            </div>
-            <div
-              onClick={() => setModalActive(true)}
-              className={style.profileBtn}
-            >
-              <img src={shazamLogo} alt="shazam" />
-              <p>Выйти из аккаунта</p>
-            </div>
-          </div>
-        </div>
-
+        <ProfileContainer state={modalActive} setState={setModalActive} />
         <div className={style.btnBlock}>
           <div
             onClick={() => navigate(WISHLIST_ROUTE)}
@@ -129,7 +99,10 @@ const Profile = observer(() => {
             </div>
           </div>
 
-          <div onClick={() => navigate(null)} className={style.btnElem}>
+          <div
+            onClick={() => navigate(FEEDBACK_ROUTE)}
+            className={style.btnElem}
+          >
             <img src={headerImageSmall} alt="header" />
             <div className={style.btnMainBlock}>
               <div className={style.btnTextBlock}>

@@ -17,6 +17,7 @@ const ChangeProfile = observer(() => {
 
   const [avatar, setAvatar] = useState(null);
   const [modalActive, setModalActive] = useState(false);
+  const [passwordModalActive, setPasswordModalActive] = useState(false);
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];
@@ -123,7 +124,10 @@ const ChangeProfile = observer(() => {
                 >{`Введите ваш новый пароль повторно.`}</p>
               </div>
 
-              <button className={styles.saveChangePassword}>
+              <button
+                className={styles.saveChangePassword}
+                onClick={() => setPasswordModalActive(true)}
+              >
                 Сменить пароль
               </button>
             </div>
@@ -201,7 +205,21 @@ const ChangeProfile = observer(() => {
       <ModalExitUser
         active={modalActive}
         setActive={setModalActive}
+        second={false}
         title={"Вы точно хотите\nудалить текущую фотографию?"}
+        subtitle={"после подтверждения фотография\n" + "исчезнет"}
+        confirm={"Да, удалить"}
+        action={"deleteAvatar"}
+        onConfirm={handleDeleteAvatar}
+      ></ModalExitUser>
+      <ModalExitUser
+        active={passwordModalActive}
+        setActive={setPasswordModalActive}
+        second={true}
+        title={
+          "Введите код подтверждения, который придёт\n" +
+          "на ваш электронный адрес в течение пяти минут!"
+        }
         subtitle={"после подтверждения фотография\n" + "исчезнет"}
         confirm={"Да, удалить"}
         action={"deleteAvatar"}

@@ -16,7 +16,6 @@
 
 .modal.active {
   opacity: 1;
-
   pointer-events: all;
 }
 
@@ -72,6 +71,10 @@
   white-space: pre-wrap
 }
 
+.title.top {
+  margin-top: 20px;
+}
+
 .subtitle {
   margin-top: 10px;
   margin-bottom: 15px;
@@ -107,6 +110,10 @@
   color: #5E3023;
 }
 
+.exit.bottom {
+  margin-top: 26px;
+}
+
 .state {
   cursor: pointer;
   width: 282px;
@@ -120,4 +127,34 @@
   line-height: 31.2px;
   text-align: center;
   color: #5E3023;
+}
+
+.inputBlock {
+  outline: none;
+  cursor: text;
+  box-sizing: border-box;
+  padding-left: 14px;
+  display: flex;
+  align-items: center;
+  margin-top: 26px;
+  width: 508px;
+  height: 50px;
+  border-radius: 10px;
+  border: 0.5px solid rgba(218, 180, 157, 1);
+  background-color: #FFFFFF;
+  font-family: "IBM Plex Sans", sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 21.1px;
+  text-align: left;
+  color: rgba(94, 48, 35, 1);
+  transition: 0.3s all;
+}
+
+.inputBlock:hover {
+  border: 0.5px solid rgba(218, 180, 157, 1);
+}
+
+.inputBlock:focus {
+  border: 0.5px solid rgba(94, 48, 35, 1);
 }

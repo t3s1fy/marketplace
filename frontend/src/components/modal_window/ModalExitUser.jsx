@@ -12,6 +12,7 @@ import { useNavigate } from "react-router-dom";
 const ModalExitUser = ({
   active,
   setActive,
+  second,
   title,
   subtitle,
   confirm,
@@ -32,6 +33,10 @@ const ModalExitUser = ({
         user.setIsAuth(false);
         setActive(false);
         navigate(LOGIN_ROUTE);
+      };
+    } else if (action === "change-password") {
+      return () => {
+        setActive(false);
       };
     }
   };
@@ -55,16 +60,31 @@ const ModalExitUser = ({
           <button className={styles.crossBtn} onClick={() => setActive(false)}>
             <img src={cross} alt="Cross" />
           </button>
-          <p className={styles.title}>{title}</p>
-          <p className={styles.subtitle}>{subtitle}</p>
-          <div className={styles.btnContainer}>
-            <button className={styles.exit} onClick={checkAction(action)}>
-              {confirm}
-            </button>
-            <button className={styles.state} onClick={() => setActive(false)}>
-              Нет, подождите!
-            </button>
-          </div>
+          {!second ? (
+            <>
+              <p className={styles.title}>{title}</p>
+              <p className={styles.subtitle}>{subtitle}</p>
+              <div className={styles.btnContainer}>
+                <button className={styles.exit} onClick={checkAction(action)}>
+                  {confirm}
+                </button>
+                <button
+                  className={styles.state}
+                  onClick={() => setActive(false)}
+                >
+                  Нет, подождите!
+                </button>
+              </div>
+            </>
+          ) : (
+            <>
+              <p className={`${styles.title} ${styles.top}`}>{title}</p>
+              <input type="code" className={styles.inputBlock} />
+              <button className={`${styles.exit} ${styles.bottom}`}>
+                Подвтердить
+              </button>
+            </>
+          )}
         </div>
       </div>
     </div>

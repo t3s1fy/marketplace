@@ -43,7 +43,12 @@ import {
   FORGOT_PASSWORD_STEP_TWO_ROUTE,
   FORGOT_PASSWORD_STEP_THREE_ROUTE,
   CHANGE_PROFILE_ROUTE,
+  FEEDBACK_ROUTE,
+  CREATE_FEEDBACK_ROUTE,
+  EDIT_FEEDBACK_ROUTE,
 } from "./utils/consts";
+import Feedback from "./pages/Feedback";
+import EditFeedback from "./pages/EditFeedback";
 
 export const adminRoutes = [
   {
@@ -68,6 +73,14 @@ export const sellerRoutes = [
 ];
 
 export const authRoutes = [
+  {
+    path: EDIT_FEEDBACK_ROUTE + "/:id",
+    Component: EditFeedback,
+  },
+  {
+    path: FEEDBACK_ROUTE,
+    Component: Feedback,
+  },
   {
     path: CHANGE_PROFILE_ROUTE,
     Component: ChangeProfile,

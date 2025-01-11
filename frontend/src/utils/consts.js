@@ -20,3 +20,5 @@ export const BASKET_ROUTE = "/basket"; //Страница корзины
 export const WISHLIST_ROUTE = "/wishlist"; //Страница избранных товаров
 export const FORGOT_PASSWORD_STEP_TWO_ROUTE = "/forgot-password/enter-code";
 export const FORGOT_PASSWORD_STEP_THREE_ROUTE = "/forgot-password/set-password";
+export const FEEDBACK_ROUTE = "/profile/feedback"; // Страница с отзывами
+export const EDIT_FEEDBACK_ROUTE = "/profile/feedback/edit"; // Страница отправки/редактирования отызва

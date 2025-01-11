@@ -1,4 +1,5 @@
-import { makeAutoObservable } from "mobx";
+import { makeAutoObservable, runInAction } from "mobx";
+import feedback from "../pages/Feedback";
 
 export default class ProductStore {
   constructor() {
@@ -65,7 +66,7 @@ export default class ProductStore {
       },
       {
         id: 4,
-        name: "Надувная кукла Виктория нуланд",
+        name: "Надувная кукла Артур Сулейменов",
         price: 1000,
         discount: 10,
         rating: 5,
@@ -154,11 +155,45 @@ export default class ProductStore {
         feedback: 0,
       },
     ];
+    this._feedback = [
+      {
+        id: 1,
+        status: "Опубликован",
+        rating: 2.6,
+        date: "13 декабря 2023",
+        content: "АХУЕТЬ СПАСИБО ПАПАША",
+        productId: 1,
+        anonymous: false,
+        images: [],
+      },
+      {
+        id: 2,
+        status: "На модерации",
+        rating: 3,
+        date: "13 декабря 2023",
+        content: "АХУЕТЬ СПАСИБО ПАПАША",
+        productId: 2,
+        anonymous: false,
+        images: [],
+      },
+      {
+        id: 3,
+        status: "Опубликован",
+        rating: 5,
+        date: "13 декабря 2023",
+        content: "АХУЕТЬ СПАСИБО ПАПАША",
+        productId: 3,
+        anonymous: false,
+        images: [],
+      },
+    ];
+
     const savedFavorites = localStorage.getItem("favorites");
     this._favorites = savedFavorites ? JSON.parse(savedFavorites) : [];
 
     const savedBasket = localStorage.getItem("basket");
     this._basket = savedBasket ? JSON.parse(savedBasket) : [];
+
     makeAutoObservable(this);
   }
 
@@ -182,16 +217,6 @@ export default class ProductStore {
     this.saveFavoritesToLocalStorage(); // После изменения сохраняем в localStorage
   }
 
-  // // Методы для работы с корзиной
-  // toggleBasket(productId) {
-  //   if (this._basket.includes(productId)) {
-  //     this._basket = this._basket.filter((id) => id !== productId);
-  //   } else {
-  //     this._basket.push(productId);
-  //   }
-  //   this.saveBasketToLocalStorage(); // После изменения сохраняем в localStorage
-  // }
-
   removeFromBasket(productId) {
     this._basket = this._basket.filter((id) => id !== productId);
     this.saveBasketToLocalStorage();
@@ -200,6 +225,29 @@ export default class ProductStore {
   addToBasket(productId) {
     this._basket.push(productId);
     this.saveBasketToLocalStorage();
+  }
+
+  getFeedbackById(feedbackId) {
+    return this._feedback.find((feedback) => feedback.id === feedbackId);
+  }
+
+  addFeedback(feedback) {
+    this._feedback.push(feedback);
+  }
+
+  removeFeedback(feedbackId) {
+    runInAction(() => {
+      this._feedback = this._feedback.filter(
+        (feedback) => feedback.id !== feedbackId,
+      );
+      localStorage.setItem("feedback", JSON.stringify(this._feedback)); // Обновляем localStorage
+    });
+  }
+
+  getFeedbackByProductId(productId) {
+    return this._feedback.filter(
+      (feedback) => feedback.productId === productId,
+    );
   }
 
   isFavorite(productId) {
@@ -216,6 +264,11 @@ export default class ProductStore {
 
   setBasket(basket) {
     this._basket = basket;
+  }
+
+  setFeedback(feedback) {
+    this._feedback = feedback;
+    localStorage.setItem("feedback", JSON.stringify(this._feedback));
   }
 
   setTypes(types) {
@@ -236,6 +289,10 @@ export default class ProductStore {
 
   get basket() {
     return this._basket;
+  }
+
+  get feedback() {
+    return this._feedback;
   }
 
   get types() {

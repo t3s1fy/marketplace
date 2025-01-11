@@ -1,0 +1,133 @@
+.card {
+  width: 1175px;
+  height: 151px;
+  border-radius: 20px;
+  background-color: rgba(243, 233, 221, 1);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  box-sizing: border-box;
+  gap: 15px;
+  padding: 15px 15px 20px 15px;
+}
+
+.btnContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 1145px;
+}
+
+.status {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 151px;
+  height: 31px;
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 1);
+  font-family: 'IBM Plex Sans',sans-serif;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 23.4px;
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.block {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.deleteBtn {
+  cursor: pointer;
+  border: none;
+  outline: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 129px;
+  height: 31px;
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 1);
+  font-family: 'IBM Plex Sans',sans-serif;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 23.4px;
+  color: rgba(255, 0, 4, 0.8);
+}
+
+.editBtn {
+  cursor: pointer;
+  border: none;
+  outline: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 168px;
+  height: 31px;
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 1);
+  font-family: 'IBM Plex Sans',sans-serif;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 23.4px;
+  color: rgba(0, 0, 0, 1);
+}
+
+.infoContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 10px;
+}
+
+.productImg {
+  width: 70px;
+  height: 70px;
+  object-fit: cover;
+  border-radius: 20px;
+  border: 2px solid rgba(255, 255, 255, 1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.descriptionBlock {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 7px;
+}
+
+.feedbackInfo {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 15px;
+}
+
+.date {
+  font-family: 'IBM Plex Sans',sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 26px;
+  text-align: left;
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.productName {
+  font-family: 'IBM Plex Sans',sans-serif;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 26px;
+  text-align: left;
+  color: rgba(0, 0, 0, 1);
+}

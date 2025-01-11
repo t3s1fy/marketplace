@@ -1,0 +1,108 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap');
+
+
+.feedbackPage {
+  flex-grow: 1;
+  flex-direction: column;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  background-color: #eae0d6;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 40px 0 40px 0;
+  box-shadow:
+    0 4px 4px -1px rgba(12, 12, 13, 0.1),
+    0 4px 4px -1px rgba(12, 12, 13, 0.05);
+}
+
+.mainContainer {
+  width: 1854px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 30px;
+}
+
+.feedbackContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 5px;
+}
+
+.headerFeedback {
+  border-radius: 10px 10px 0 0;
+  width: 1215px;
+  height: 84px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.headerInfoBlock {
+  box-sizing: border-box;
+  padding-left: 20px;
+  padding-right: 20px;
+  width: 1215px;
+  height: 74px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #ffffff;
+}
+
+.headerTitle {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2px;
+}
+
+.headerTitle span {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-style: normal;
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 32px;
+  text-align: left;
+  color: #5E3023;
+}
+
+.headerInfoBlock button {
+  cursor: pointer;
+  border: none;
+  outline: none;
+  width: 322px;
+  height: 50px;
+  border-radius: 10px;
+  background-color: #dab49d;
+  font-family: "IBM Plex Sans", sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 26px;
+  text-align: center;
+  color: #5e3023;
+}
+
+.mainFeedback {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 18px;
+  box-sizing: border-box;
+  padding: 20px;
+  width: 1215px;
+  min-height: 882px;
+  height: fit-content;
+  border-radius: 0 0 10px 10px;
+  background-color: #FFFFFF;
+}

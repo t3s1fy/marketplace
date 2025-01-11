@@ -1,0 +1,27 @@
+.starList {
+  display: flex;
+  flex-direction: row;
+  gap: 2.73px;
+}
+
+.starList.bigger {
+  gap: 5.44px ;
+}
+
+.starBlock {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.star {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+}
+
+.star.bigger {
+  width: fit-content;
+  height: fit-content;
+  object-fit: contain;
+}
