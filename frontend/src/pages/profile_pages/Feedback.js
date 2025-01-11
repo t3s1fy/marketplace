@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import styles from "../styles/Feedback.module.css";
+import styles from "../../styles/Feedback.module.css";
 import { useNavigate } from "react-router-dom";
-import ProfileContainer from "../components/profile_container/ProfileContainer";
-import ModalExitUser from "../components/modal_window/ModalExitUser";
-import line from "../assets/feedback_page_icons/feedback_header_image.png";
-import logo from "../assets/feedback_page_icons/feedback_icon.svg";
-import { PROFILE_ROUTE } from "../utils/consts";
-import FeedbackList from "../components/feedback_elements/FeedbackList";
+import ProfileContainer from "../../components/profile_container/ProfileContainer";
+import ModalExitUser from "../../components/modal_window/ModalExitUser";
+import line from "../../assets/feedback_page_icons/feedback_header_image.png";
+import logo from "../../assets/feedback_page_icons/feedback_icon.svg";
+import { PROFILE_ROUTE } from "../../utils/consts";
+import FeedbackList from "../../components/feedback_elements/FeedbackList";
 
 const Feedback = () => {
   const navigate = useNavigate();
@@ -24,7 +24,7 @@ const Feedback = () => {
                 <img src={logo} alt="logo" />
                 <span>Мои отзывы</span>
               </div>
-              <button onClick={() => navigate(PROFILE_ROUTE)}>
+              <button onClick={() => navigate(-1)}>
                 Вернуться в личный кабинет
               </button>
             </div>

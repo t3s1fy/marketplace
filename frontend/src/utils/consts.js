@@ -22,3 +22,9 @@ export const FORGOT_PASSWORD_STEP_TWO_ROUTE = "/forgot-password/enter-code";
 export const FORGOT_PASSWORD_STEP_THREE_ROUTE = "/forgot-password/set-password";
 export const FEEDBACK_ROUTE = "/profile/feedback"; // Страница с отзывами
 export const EDIT_FEEDBACK_ROUTE = "/profile/feedback/edit"; // Страница отправки/редактирования отызва
+export const DELIVERY_ROUTE = "/profile/delivery-list"; // Страница со всеми доставками
+export const PURCHARES_ROUTE = "/profile/purchases-list"; // Страница со всеми покупками
+export const SELLER_AUTH_ONE_ROUTE = "/profile/seller-registration"; // Страница регистрации продовца
+export const SELLER_AUTH_TWO_ROUTE = "/profile/seller-registration/set-email"; // Страница ввода почты продовца
+export const SELLER_AUTH_THREE_ROUTE =
+  "/profile/seller-registration/set-email/confirm-email"; // Страница подтверждения почты продовца

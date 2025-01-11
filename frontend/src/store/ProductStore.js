@@ -1,5 +1,5 @@
 import { makeAutoObservable, runInAction } from "mobx";
-import feedback from "../pages/Feedback";
+import feedback from "../pages/profile_pages/Feedback";
 
 export default class ProductStore {
   constructor() {
@@ -187,6 +187,84 @@ export default class ProductStore {
         images: [],
       },
     ];
+    this._delivery = [
+      {
+        id: 1,
+        status: "Доставляется",
+        date: "14 декабря 2023",
+        productId: 1,
+      },
+      {
+        id: 2,
+        status: "Ожидает получения",
+        date: "13 декабря 2023",
+        productId: 2,
+      },
+      {
+        id: 3,
+        status: "Доставляется",
+        date: "13 декабря 2023",
+        productId: 3,
+      },
+    ];
+    this._purchare = [
+      {
+        id: 1,
+        status: "Получено",
+        date: "14 декабря 2023",
+        productId: 1,
+        purchareStatus: "К оплате",
+      },
+      {
+        id: 2,
+        status: "Получено",
+        date: "13 декабря 2023",
+        productId: 2,
+        purchareStatus: "Оплачено",
+      },
+      {
+        id: 3,
+        status: "Получено",
+        date: "13 декабря 2024",
+        productId: 3,
+        purchareStatus: "К оплате",
+      },
+    ];
+    this._alert = [
+      {
+        id: 1,
+        title: "Пришёл заказ! Заберите в ПВЗ до n числа.",
+        date: "27.11.2024",
+        time: "11:11",
+        content:
+          "Дон ли, Волга ли течёт — котомку на плечо\n" +
+          "Боль в груди — там тайничок, открытый фомкой, не ключом\n" +
+          "Сколько миль ещё? Перелет короткий был не в счёт\n" +
+          "Долгий пыльный чёс, фургон набит коробками с мерчём",
+      },
+      {
+        id: 2,
+        title: "Пришёл заказ! Заберите в ПВЗ до n числа.",
+        date: "27.11.2024",
+        time: "11:11",
+        content:
+          "Дон ли, Волга ли течёт — котомку на плечо\n" +
+          "Боль в груди — там тайничок, открытый фомкой, не ключом\n" +
+          "Сколько миль ещё? Перелет короткий был не в счёт\n" +
+          "Долгий пыльный чёс, фургон набит коробками с мерчём",
+      },
+      {
+        id: 3,
+        title: "Пришёл заказ! Заберите в ПВЗ до n числа.",
+        date: "27.11.2024",
+        time: "11:11",
+        content:
+          "Дон ли, Волга ли течёт — котомку на плечо\n" +
+          "Боль в груди — там тайничок, открытый фомкой, не ключом\n" +
+          "Сколько миль ещё? Перелет короткий был не в счёт\n" +
+          "Долгий пыльный чёс, фургон набит коробками с мерчём",
+      },
+    ];
 
     const savedFavorites = localStorage.getItem("favorites");
     this._favorites = savedFavorites ? JSON.parse(savedFavorites) : [];
@@ -231,8 +309,28 @@ export default class ProductStore {
     return this._feedback.find((feedback) => feedback.id === feedbackId);
   }
 
+  getDeliveryById(deliveryId) {
+    return this._delivery.find((delivery) => delivery.id === deliveryId);
+  }
+
+  getPurchareById(purchareId) {
+    return this._purchare.find((purchare) => purchare.id === purchareId);
+  }
+
   addFeedback(feedback) {
     this._feedback.push(feedback);
+  }
+
+  addAlert(alert) {
+    this._alert.push(alert);
+  }
+
+  addDelivery(delivery) {
+    this._delivery.push(delivery);
+  }
+
+  addPurchare(purchare) {
+    this._purchare.push(purchare);
   }
 
   removeFeedback(feedbackId) {
@@ -244,9 +342,28 @@ export default class ProductStore {
     });
   }
 
+  removeAlert(alertId) {
+    runInAction(() => {
+      this._alert = this._alert.filter((alert) => alert.id !== alertId);
+      localStorage.setItem("alert", JSON.stringify(this._alert)); // Обновляем localStorage
+    });
+  }
+
   getFeedbackByProductId(productId) {
     return this._feedback.filter(
       (feedback) => feedback.productId === productId,
+    );
+  }
+
+  getDeliveryByProductId(productId) {
+    return this._delivery.filter(
+      (delivery) => delivery.productId === productId,
+    );
+  }
+
+  getPurchareByProductId(purchareId) {
+    return this._purchare.filter(
+      (purchare) => purchare.productId === purchareId,
     );
   }
 
@@ -262,6 +379,10 @@ export default class ProductStore {
     this._favorites = favorites;
   }
 
+  setAlert(alert) {
+    this._alert = alert;
+  }
+
   setBasket(basket) {
     this._basket = basket;
   }
@@ -269,6 +390,16 @@ export default class ProductStore {
   setFeedback(feedback) {
     this._feedback = feedback;
     localStorage.setItem("feedback", JSON.stringify(this._feedback));
+  }
+
+  setDelivery(delivery) {
+    this._delivery = delivery;
+    localStorage.setItem("delivery", JSON.stringify(this._delivery));
+  }
+
+  setPurchare(purchare) {
+    this._purchare = purchare;
+    localStorage.setItem("purchare", JSON.stringify(this._purchare));
   }
 
   setTypes(types) {
@@ -287,12 +418,24 @@ export default class ProductStore {
     return this._favorites;
   }
 
+  get alert() {
+    return this._alert;
+  }
+
   get basket() {
     return this._basket;
   }
 
   get feedback() {
     return this._feedback;
+  }
+
+  get delivery() {
+    return this._delivery;
+  }
+
+  get purchare() {
+    return this._purchare;
   }
 
   get types() {

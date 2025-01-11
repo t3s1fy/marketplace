@@ -1,7 +1,7 @@
 import React from "react";
-import styles from "./Checkbox.module.css";
+import styles from "./CheckBoxTwo.module.css";
 
-export const Checkbox = ({ isChecked, onChange, children }) => {
+const CheckBoxTwo = ({ isChecked, onChange }) => {
   return (
     <label className={styles.checkboxWrapper}>
       <input
@@ -10,7 +10,8 @@ export const Checkbox = ({ isChecked, onChange, children }) => {
         onChange={() => onChange((prev) => !prev)}
         className={styles.checkboxElement}
       />
-      <p className={styles.text}>{children}</p>
     </label>
   );
 };
+
+export default CheckBoxTwo;

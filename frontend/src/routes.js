@@ -18,7 +18,7 @@ import ConfirmEmail from "./pages/ConfirmEmail";
 import ForgotPasswordStepTwo from "./pages/ForgotPasswordStepTwo";
 import ForgotPasswordStepThree from "./pages/ForgotPasswordStepThree";
 import AdminPanelMain from "./pages/AdminPanelMain";
-import ChangeProfile from "./pages/ChangeProfile";
+import ChangeProfile from "./pages/profile_pages/ChangeProfile";
 
 import {
   ADMIN_PANEL_MAIN_ROUTE,
@@ -46,9 +46,19 @@ import {
   FEEDBACK_ROUTE,
   CREATE_FEEDBACK_ROUTE,
   EDIT_FEEDBACK_ROUTE,
+  DELIVERY_ROUTE,
+  PURCHARES_ROUTE,
+  SELLER_AUTH_ONE_ROUTE,
+  SELLER_AUTH_TWO_ROUTE,
+  SELLER_AUTH_THREE_ROUTE,
 } from "./utils/consts";
-import Feedback from "./pages/Feedback";
+import Feedback from "./pages/profile_pages/Feedback";
 import EditFeedback from "./pages/EditFeedback";
+import Delivery from "./pages/profile_pages/Delivery";
+import Purchares from "./pages/profile_pages/Purchares";
+import SellerAuthOne from "./pages/profile_pages/seller_registration/SellerAuthOne";
+import SellerAuthTwo from "./pages/profile_pages/seller_registration/SellerAuthTwo";
+import SellerAuthThree from "./pages/profile_pages/seller_registration/SellerAuthThree";
 
 export const adminRoutes = [
   {
@@ -73,6 +83,26 @@ export const sellerRoutes = [
 ];
 
 export const authRoutes = [
+  {
+    path: SELLER_AUTH_ONE_ROUTE,
+    Component: SellerAuthOne,
+  },
+  {
+    path: SELLER_AUTH_TWO_ROUTE,
+    Component: SellerAuthTwo,
+  },
+  {
+    path: SELLER_AUTH_THREE_ROUTE,
+    Component: SellerAuthThree,
+  },
+  {
+    path: PURCHARES_ROUTE,
+    Component: Purchares,
+  },
+  {
+    path: DELIVERY_ROUTE,
+    Component: Delivery,
+  },
   {
     path: EDIT_FEEDBACK_ROUTE + "/:id",
     Component: EditFeedback,

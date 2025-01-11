@@ -20,9 +20,12 @@ import { Context } from "../index";
 import {
   BASKET_ROUTE,
   CHANGE_PROFILE_ROUTE,
+  DELIVERY_ROUTE,
   FEEDBACK_ROUTE,
   HELPER_ROUTE,
   LOGIN_ROUTE,
+  PURCHARES_ROUTE,
+  SELLER_AUTH_ONE_ROUTE,
   SELLER_PROFILE_ROUTE,
   SETTINGS_ROUTE,
   WISHLIST_ROUTE,
@@ -32,6 +35,7 @@ import ProductList from "../components/device/ProductList";
 import ModalExitUser from "../components/modal_window/ModalExitUser";
 import styles from "../components/modal_window/ModalExitUser.module.css";
 import ProfileContainer from "../components/profile_container/ProfileContainer";
+import ModalAlert from "../components/modal_window/ModalAlert";
 
 const Profile = observer(() => {
   const location = useLocation();
@@ -39,6 +43,7 @@ const Profile = observer(() => {
   const { item } = useContext(Context);
   const navigate = useNavigate();
   const [modalActive, setModalActive] = useState(false);
+  const [alertActive, setAlertActive] = useState(false);
 
   const getCorrectForm = (length) => {
     if (length % 10 === 1 && length % 100 !== 11) {
@@ -88,7 +93,10 @@ const Profile = observer(() => {
             </div>
           </div>
 
-          <div onClick={() => navigate(null)} className={style.btnElem}>
+          <div
+            onClick={() => navigate(PURCHARES_ROUTE)}
+            className={style.btnElem}
+          >
             <img src={headerImageSmall} alt="header" />
             <div className={style.btnMainBlock}>
               <div className={style.btnTextBlock}>
@@ -107,13 +115,16 @@ const Profile = observer(() => {
             <div className={style.btnMainBlock}>
               <div className={style.btnTextBlock}>
                 <p className={style.btnTitle}>Мои отзывы</p>
-                <p className={style.btnSubtitle}>n товаров ждут оценки</p>
+                <p className={style.btnSubtitle}>смотреть</p>
               </div>
               <img src={feedbackIcon} alt="feedback" />
             </div>
           </div>
 
-          <div onClick={() => navigate(null)} className={style.btnElem}>
+          <div
+            onClick={() => navigate(DELIVERY_ROUTE)}
+            className={style.btnElem}
+          >
             <img src={headerImageSmall} alt="header" />
             <div className={style.btnMainBlock}>
               <div className={style.btnTextBlock}>
@@ -124,7 +135,7 @@ const Profile = observer(() => {
             </div>
           </div>
 
-          <div onClick={() => navigate(null)} className={style.btnElem}>
+          <div onClick={() => setAlertActive(true)} className={style.btnElem}>
             <img src={headerImageSmall} alt="header" />
             <div className={style.btnMainBlock}>
               <div className={style.btnTextBlock}>
@@ -166,7 +177,12 @@ const Profile = observer(() => {
             Войти в кабинет
           </button>
         ) : (
-          <button className={style.regBtn}>Зарегистрироваться</button>
+          <button
+            onClick={() => navigate(SELLER_AUTH_ONE_ROUTE)}
+            className={style.regBtn}
+          >
+            Зарегистрироваться
+          </button>
         )}
         <img className={style.linerBeaty} src={liner} alt="liner" />
       </div>
@@ -192,6 +208,10 @@ const Profile = observer(() => {
         confirm={"Да, выйти"}
         action={"exit"}
       ></ModalExitUser>
+      <ModalAlert
+        alertActive={alertActive}
+        setAlertActive={setAlertActive}
+      ></ModalAlert>
     </div>
   );
 });

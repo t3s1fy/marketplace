@@ -18,7 +18,7 @@ const Helper = () => {
               <img src={logo} alt="logo" />
               <span>Сервис и помощь</span>
             </div>
-            <button onClick={() => navigate(PROFILE_ROUTE)}>
+            <button onClick={() => navigate(-1)}>
               Вернуться в личный кабинет
             </button>
           </div>

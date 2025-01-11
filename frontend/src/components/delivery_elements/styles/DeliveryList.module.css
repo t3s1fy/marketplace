@@ -1,0 +1,17 @@
+.noDelivery {
+  margin-top: 10px;
+  font-family: 'IBM Plex Sans',sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 32px;
+  text-align: center;
+  color: rgba(94, 48, 35, 0.8);
+}
+
+.deliveryList {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 10px;
+}

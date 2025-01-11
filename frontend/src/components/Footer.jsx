@@ -19,6 +19,9 @@ import {
   LOGIN_ROUTE,
   PAGE_NOT_FOUND_ROUTE,
   REGISTRATION_ROUTE,
+  SELLER_AUTH_ONE_ROUTE,
+  SELLER_AUTH_THREE_ROUTE,
+  SELLER_AUTH_TWO_ROUTE,
   SHOP_ROUTE,
 } from "../utils/consts";
 
@@ -29,6 +32,9 @@ const Footer = () => {
 
   // Список исключённых маршрутов
   const excludedRoutes = [
+    SELLER_AUTH_TWO_ROUTE,
+    SELLER_AUTH_THREE_ROUTE,
+    SELLER_AUTH_ONE_ROUTE,
     LOGIN_ROUTE,
     REGISTRATION_ROUTE,
     FORGOT_PASSWORD_ROUTE,

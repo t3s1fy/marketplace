@@ -1,15 +1,15 @@
 import React, { useState } from "react";
 
-import line from "../assets/icons/headerImageBigger.png";
-import logo from "../assets/icons/changeProfileIcon.svg";
-import pen from "../assets/icons/changeProfilePen.svg";
-import basket from "../assets/icons/changeProfileBasket.svg";
-import styles from "../styles/ChangeProfile.module.css";
+import line from "../../assets/icons/headerImageBigger.png";
+import logo from "../../assets/icons/changeProfileIcon.svg";
+import pen from "../../assets/icons/changeProfilePen.svg";
+import basket from "../../assets/icons/changeProfileBasket.svg";
+import styles from "../../styles/ChangeProfile.module.css";
 
 import { observer } from "mobx-react-lite";
 import { useLocation, useNavigate } from "react-router-dom";
-import { PROFILE_ROUTE } from "../utils/consts";
-import ModalExitUser from "../components/modal_window/ModalExitUser";
+import { PROFILE_ROUTE } from "../../utils/consts";
+import ModalExitUser from "../../components/modal_window/ModalExitUser";
 
 const ChangeProfile = observer(() => {
   const navigate = useNavigate();
@@ -44,7 +44,7 @@ const ChangeProfile = observer(() => {
               <img src={logo} alt="logo" />
               <span>Управление профилем</span>
             </div>
-            <button onClick={() => navigate(PROFILE_ROUTE)}>
+            <button onClick={() => navigate(-1)}>
               Вернуться в личный кабинет
             </button>
           </div>

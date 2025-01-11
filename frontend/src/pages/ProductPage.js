@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import styles from "../styles/ProductPage.module.css";
 import { observer } from "mobx-react-lite";
 import arrowBtn from "../assets/icons/arrowBtn.svg";
@@ -67,11 +67,22 @@ const ProductPage = observer(() => {
     availability = "Есть";
   }
 
+  useEffect(() => {
+    // Прокручиваем страницу вверх при монтировании компонента
+    window.scrollTo(0, 0);
+
+    // Если компонент обновляется, например, при изменении зависимостей, также прокручиваем вверх
+    // Это необходимо только в случае, если компонент может обновляться без полного монтирования
+    return () => {
+      window.scrollTo(0, 0);
+    };
+  }, []);
+
   return (
     <div className={styles.productPage}>
       <div className={styles.headerBlock}>
         <div className={styles.titleBlock}>
-          <Link to={SHOP_ROUTE} className={styles.arrowBtn}>
+          <Link to={-1} className={styles.arrowBtn}>
             <img src={arrowBtn} alt="arrow" />
           </Link>
           <p className={styles.title}>
