@@ -1,6 +1,5 @@
 from django.contrib.auth import get_user_model
 from rest_framework import serializers
-from .models import Product, CartItem, Cart, ConfirmationCode
 
 User = get_user_model()
 
@@ -61,66 +60,6 @@ class LoginSerializer(serializers.Serializer):
     """Сериалайзер для входа пользователя."""
     email = serializers.EmailField()
     password = serializers.CharField()
-
-
-#Товар
-class ProductSerializer(serializers.ModelSerializer):
-    """Сериалайзер для модели товара."""
-
-    class Meta:
-        model = Product
-        fields = ['id', 'name', 'description', 'price', 'is_available', 'photo', 'seller']
-        read_only_fields = ['id', 'seller']
-
-    def create(self, validated_data):
-        """
-        Создание нового товара.
-
-        Args:
-            validated_data (dict): Данные, валидированные сериалайзером.
-
-        Returns:
-            Product: Созданный товар.
-        """
-        user = self.context['request'].user
-        if user.role not in ['admin', 'seller']:
-            raise serializers.ValidationError("Недостаточно прав для создания товара.")
-        return super().create(validated_data)
-
-    def update(self, instance, validated_data):
-        """
-        Обновление товара.
-
-        Args:
-            instance (Product): Существующий товар.
-            validated_data (dict): Новые данные.
-
-        Returns:
-            Product: Обновленный товар.
-        """
-        user = self.context['request'].user
-        if not instance.can_be_edited_by(user):
-            raise serializers.ValidationError("Недостаточно прав для редактирования товара.")
-        return super().update(instance, validated_data)
-
-
-class CartItemSerializer(serializers.ModelSerializer):
-    """Сериалайзер для элемента корзины."""
-    product_name = serializers.CharField(source='product.name', read_only=True)
-
-    class Meta:
-        model = CartItem
-        fields = ['id', 'product', 'product_name', 'quantity', 'total_price']
-
-
-class CartSerializer(serializers.ModelSerializer):
-    """Сериалайзер для корзины."""
-    items = CartItemSerializer(many=True, read_only=True)
-    total_price = serializers.ReadOnlyField()
-
-    class Meta:
-        model = Cart
-        fields = ['id', 'user', 'items', 'total_price']
 
 
 class ResendConfirmationCodeSerializer(serializers.Serializer):
