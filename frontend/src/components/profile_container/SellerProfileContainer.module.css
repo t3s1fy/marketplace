@@ -1,0 +1,116 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 5px;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.headerBlock {
+  box-sizing: border-box;
+  padding-left: 20px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  width: 401px;
+  height: 74px;
+  background-color: rgba(255, 255, 255, 1);
+  gap: 6px;
+}
+
+.userImage {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background-color: rgba(223, 189, 169, 1);
+  font-family: 'Poppins',sans-serif;
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 32px;
+  text-align: center;
+  color: rgba(0, 0, 0, 1);
+}
+
+.email {
+  font-family:'IBM Plex Sans',sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 32px;
+  text-align: left;
+  color: rgba(0, 0, 0, 1);
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 15px;
+  width: 401px;
+  height: 420px;
+  border-radius: 0 0 10px 10px;
+  background-color: rgba(255, 255, 255, 1);
+  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+  box-sizing: border-box;
+  padding: 20px;
+}
+
+.btnBlock {
+  cursor: pointer;
+  width: 361px;
+  height: 64px;
+  border-radius: 10px;
+  box-sizing: border-box;
+  padding-left: 23px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 18px;
+  transition: 0.3s;
+}
+
+.btnBlock:hover {
+  background: linear-gradient(90deg, #F3E9DD 0%, #FFFFFF 100%);
+}
+
+.btnBlock:active {
+  background: #DFBDA9;
+}
+
+.btnBlock.active {
+  background: #DFBDA9;
+}
+
+.imageBlock {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 30px;
+  height: 30px;
+}
+
+.nameBtn {
+  font-family: 'IBM Plex Sans',sans-serif;
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 32px;
+  text-align: left;
+  color: rgba(94, 48, 35, 1);
+  transition: 0.3s;
+}
+
+.btnBlock.active .nameBtn {
+  font-weight: 500;
+}

@@ -26,5 +26,7 @@ export const DELIVERY_ROUTE = "/profile/delivery-list"; // Страница со
 export const PURCHARES_ROUTE = "/profile/purchases-list"; // Страница со всеми покупками
 export const SELLER_AUTH_ONE_ROUTE = "/profile/seller-registration"; // Страница регистрации продовца
 export const SELLER_AUTH_TWO_ROUTE = "/profile/seller-registration/set-email"; // Страница ввода почты продовца
-export const SELLER_AUTH_THREE_ROUTE =
-  "/profile/seller-registration/set-email/confirm-email"; // Страница подтверждения почты продовца
+export const SELLER_PROFILE_ORDERS_ROUTE = "/profile/seller-profile/orders"; // Страница заказов в профиле продовца
+export const SELLER_PROFILE_PRODUCTS_ROUTE = "/profile/seller-profile/products"; // Страница товаров в профиле продовца
+export const SELLER_PROFILE_MESSAGE_ROUTE = "/profile/seller-profile/message"; // Страница сообщений в профиле продовца
+export const SELLER_PROFILE_SETTINGS_ROUTE = "/profile/seller-profile/settings"; // Страница настроек в профиле продовца

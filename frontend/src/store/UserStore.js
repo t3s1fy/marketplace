@@ -5,7 +5,7 @@ export default class UserStore {
     this._isAuth = true;
     // const token = localStorage.getItem("accessToken");
     // this._isAuth = !!token;
-    this._isSeller = false;
+    this._isSeller = true;
     this._isAdmin = true;
 
     this._user = {};

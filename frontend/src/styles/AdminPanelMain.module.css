@@ -1,0 +1,159 @@
+.adminMainPage {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  margin: 0;
+  box-sizing: border-box;
+  padding: 0;
+  box-shadow:
+    0 4px 4px -1px rgba(12, 12, 13, 0.1),
+    0 4px 4px -1px rgba(12, 12, 13, 0.05);
+}
+
+.page {
+  box-sizing: border-box;
+  padding-right: 30px;
+  width: 100%;
+  height: calc(100vh - 200px);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  justify-content: flex-start;
+}
+
+.container {
+  box-sizing: border-box;
+  padding-top: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  width: 1525px;
+  height: 847px;
+  gap: 20px;
+  background-color: #f6ede3;
+}
+
+.headerBlock {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  position: relative;
+  height: fit-content;
+  width: fit-content;
+}
+
+.headerTitle {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  box-sizing: border-box;
+  padding-left: 20px;
+  padding-right: 20px;
+  position: absolute;
+  left: 20px;
+  height: 63px;
+  width: fit-content;
+  border-radius: 20px;
+  background-color: white;
+}
+
+.headerTitle p {
+  font-family: "Poppins", sans-serif;
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 32px;
+  text-align: left;
+  color: #5e3023;
+}
+
+.headerTitle p span {
+  color: black;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  box-sizing: border-box;
+  padding: 33px 25px 122px 25px;
+  gap: 50px;
+  width: 1485px;
+  height: 674px;
+  border-radius: 20px;
+  background-color: white;
+  box-shadow:
+    0 16px 32px -4px rgba(12, 12, 13, 0.1),
+    0 4px 4px -4px rgba(12, 12, 13, 0.05);
+}
+
+.btnBlock {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 80px;
+}
+
+.btnBlock button {
+  border: none;
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
+  box-sizing: border-box;
+  padding-left: 25px;
+  width: 425px;
+  height: 87px;
+  border-radius: 20px;
+  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+  background-color: rgba(246, 237, 227, 1);
+}
+
+.btn {
+  font-family: 'IBM Plex Sans',sans-serif;
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 32px;
+  text-align: left;
+  color: rgba(94, 48, 35, 1);
+}
+
+.btn.active {
+  background-color:  rgba(94, 48, 50, 0.2);
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25) inset;
+}
+
+.infoBLock {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 25px;
+}
+
+.infoElemLeft {
+  width: 705px;
+  height: 382px;
+  border-radius: 20px;
+  background-color: rgba(246, 237, 227, 1);
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.infoElemRight {
+  width: 705px;
+  height: 382px;
+  border-radius: 20px;
+  background-color: rgba(255, 255, 255, 1);
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}

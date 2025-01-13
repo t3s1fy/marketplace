@@ -8,7 +8,8 @@ import { observer } from "mobx-react-lite";
 import { Context } from "./index";
 import { adminRoutes } from "./routes";
 import NavBarAdmin from "./components/NavBarAdmin";
-import SideBar from "./components/SideBar"; // Импорт массива adminRoutes
+import SideBar from "./components/SideBar";
+import MiniNavBar from "./components/MiniNavBar"; // Импорт массива adminRoutes
 
 const AppContent = observer(() => {
   const location = useLocation(); // useLocation доступен внутри BrowserRouter
@@ -21,8 +22,7 @@ const AppContent = observer(() => {
   return (
     <div className="wrapper">
       {!isAdminRoute ? <NavBar /> : <NavBarAdmin />}
-      {!isAdminRoute ? null : <SideBar />}
-      <AppRouter />
+      <AppRouter></AppRouter>
       {!isAdminRoute && <Footer />}
     </div>
   );

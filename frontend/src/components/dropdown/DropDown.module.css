@@ -1,0 +1,150 @@
+.dropdown {
+  position: relative;
+  display: flex;
+  width: 165px;
+  height: 43px;
+}
+
+.dropdownLabel {
+  width: 165px;
+  height: 43px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  padding: 0 10px 0 10px;
+  border: 1px solid rgba(94, 48, 35, 0.5);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 1);
+  cursor: pointer;
+  text-align: center;
+}
+
+.filter {
+  position: absolute;
+  left: 10px;
+}
+
+.filter.select {
+  display: none;
+}
+
+.title {
+  font-family: 'IBM Plex Sans',sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 23.4px;
+  text-align: left;
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.title.select {
+  position: absolute;
+  left: 14px;
+  color: rgba(94, 48, 35, 1);
+}
+
+.dropdownLabel .arrow {
+  position: absolute;
+  right: 10px;
+  transition: 0.3s;
+}
+
+.dropdownLabel .arrow.open {
+  transform: rotate(180deg);
+}
+
+.dropdownMenuDay {
+  position: absolute;
+  top: calc(100% + 2px);
+  left: 0;
+  width: 165px;
+  height: 165px;
+  overflow-y: hidden;
+  overflow-x: hidden;
+  background: white;
+  border: 1px solid rgba(94, 48, 35, 0.5);
+  border-radius: 10px;
+  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+  z-index: 100;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr); /* 6 элементов в строке */
+  gap: 3px;
+  box-sizing: border-box;
+  padding: 4px;
+}
+
+.dropdownMenu {
+  position: absolute;
+  top: calc(100% + 2px);
+  left: 0;
+  width: 165px;
+  height: fit-content;
+  max-height: 372px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid rgba(94, 48, 35, 0.5);
+  border-radius: 10px;
+  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+.dropdownMenu::-webkit-scrollbar {
+  display: none;
+}
+
+.dropdownItemDay {
+  font-family: 'IBM Plex Sans',sans-serif;
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 22.1px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 23px;
+  height: 23px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.dropdownItem {
+  box-sizing: border-box;
+  padding-left: 14px;
+  font-family: 'IBM Plex Sans',sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 23.4px;
+  text-align: left;
+  color: rgba(94, 48, 35, 1);
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 165px;
+  height: 31px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.dropdownItemDay:hover {
+  background: rgba(223, 189, 169, 0.5);
+}
+
+.dropdownItem:hover {
+  background: rgba(223, 189, 169, 0.5);
+}
+
+.dropdownItemDay:active {
+  background: rgba(223, 189, 169, 1);
+}
+
+.dropdownItem:active {
+  background: rgba(223, 189, 169, 1);
+}

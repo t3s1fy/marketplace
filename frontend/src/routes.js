@@ -44,13 +44,15 @@ import {
   FORGOT_PASSWORD_STEP_THREE_ROUTE,
   CHANGE_PROFILE_ROUTE,
   FEEDBACK_ROUTE,
-  CREATE_FEEDBACK_ROUTE,
   EDIT_FEEDBACK_ROUTE,
   DELIVERY_ROUTE,
   PURCHARES_ROUTE,
   SELLER_AUTH_ONE_ROUTE,
   SELLER_AUTH_TWO_ROUTE,
-  SELLER_AUTH_THREE_ROUTE,
+  SELLER_PROFILE_MESSAGE_ROUTE,
+  SELLER_PROFILE_SETTINGS_ROUTE,
+  SELLER_PROFILE_PRODUCTS_ROUTE,
+  SELLER_PROFILE_ORDERS_ROUTE,
 } from "./utils/consts";
 import Feedback from "./pages/profile_pages/Feedback";
 import EditFeedback from "./pages/EditFeedback";
@@ -58,7 +60,10 @@ import Delivery from "./pages/profile_pages/Delivery";
 import Purchares from "./pages/profile_pages/Purchares";
 import SellerAuthOne from "./pages/profile_pages/seller_registration/SellerAuthOne";
 import SellerAuthTwo from "./pages/profile_pages/seller_registration/SellerAuthTwo";
-import SellerAuthThree from "./pages/profile_pages/seller_registration/SellerAuthThree";
+import SellerProfileMessages from "./pages/seller_profile_pages/SellerProfileMessages";
+import SellerProfileSettings from "./pages/seller_profile_pages/SellerProfileSettings";
+import SellerProfileProducts from "./pages/seller_profile_pages/SellerProfileProducts";
+import SellerProfileOrders from "./pages/seller_profile_pages/SellerProfileOrders";
 
 export const adminRoutes = [
   {
@@ -80,6 +85,22 @@ export const sellerRoutes = [
     path: SELLER_PROFILE_ROUTE,
     Component: SellerProfile,
   },
+  {
+    path: SELLER_PROFILE_MESSAGE_ROUTE,
+    Component: SellerProfileMessages,
+  },
+  {
+    path: SELLER_PROFILE_SETTINGS_ROUTE,
+    Component: SellerProfileSettings,
+  },
+  {
+    path: SELLER_PROFILE_PRODUCTS_ROUTE,
+    Component: SellerProfileProducts,
+  },
+  {
+    path: SELLER_PROFILE_ORDERS_ROUTE,
+    Component: SellerProfileOrders,
+  },
 ];
 
 export const authRoutes = [
@@ -90,10 +111,6 @@ export const authRoutes = [
   {
     path: SELLER_AUTH_TWO_ROUTE,
     Component: SellerAuthTwo,
-  },
-  {
-    path: SELLER_AUTH_THREE_ROUTE,
-    Component: SellerAuthThree,
   },
   {
     path: PURCHARES_ROUTE,

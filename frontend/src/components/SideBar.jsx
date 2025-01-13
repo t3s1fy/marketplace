@@ -54,206 +54,214 @@ const SideBar = () => {
   }, []);
 
   return (
-    <div className={`${styles.sidebar} ${isActive ? styles.active : ""}`}>
-      <div className={styles.menuBtn} onClick={handleMenuToggle}>
-        <CaretLeft className={styles.i}></CaretLeft>
-      </div>
-      <div className={styles.head}>
-        {isActive ? (
-          <House className={styles.mainLogo}></House>
-        ) : (
-          <p>Главная</p>
-        )}
-      </div>
-      <div className={styles.nav}>
-        <div className={styles.menu}>
-          <p className={styles.title}>СИСТЕМА</p>
-          <ul>
-            <li
-              className={activeIndex === 0 ? styles.active : ""}
-              onClick={() => {
-                handleMenuClick(0);
-                setOpenSubmenus([]);
-              }}
-            >
-              <Link to="#">
-                <img className={styles.icon} src={blocks} alt="blocks" />
-                <span className={styles.text}>Блоки</span>
-              </Link>
-            </li>
-          </ul>
-          <p className={styles.title}>ЭЛЕМЕНТЫ</p>
-          <ul>
-            <li
-              className={activeIndex === 1 ? styles.active : ""}
-              onClick={() => {
-                handleMenuClick(1);
-                toggleSubmenu(1);
-              }}
-            >
-              <Link to="#">
-                <img className={styles.icon} src={categories} alt="blocks" />
-                <span className={styles.text}>Категории</span>
-                <CaretDown className={styles.arrow} color="black" />
-              </Link>
-              <ul
-                className={`${styles.subMenu} ${
-                  openSubmenus.includes(1) ? styles.open : styles.close
-                }`}
+    <div className={styles.absoluteBlock}>
+      <div className={`${styles.sidebar} ${isActive ? styles.active : ""}`}>
+        <div className={styles.menuBtn} onClick={handleMenuToggle}>
+          <CaretLeft className={styles.i}></CaretLeft>
+        </div>
+        <div
+          className={`${styles.head} ${activeIndex === 15 ? styles.active : ""}`}
+          onClick={() => {
+            handleMenuClick(15);
+            setOpenSubmenus([]);
+          }}
+        >
+          {isActive ? (
+            <House className={styles.mainLogo}></House>
+          ) : (
+            <p>Главная</p>
+          )}
+        </div>
+        <div className={styles.nav}>
+          <div className={styles.menu}>
+            <p className={styles.title}>СИСТЕМА</p>
+            <ul>
+              <li
+                className={activeIndex === 0 ? styles.active : ""}
+                onClick={() => {
+                  handleMenuClick(0);
+                  setOpenSubmenus([]);
+                }}
               >
-                <li
-                  className={activeIndex === 2 ? styles.active : ""}
-                  onClick={() => {
-                    handleMenuClick(2);
-                  }}
-                >
-                  <Link to="#">
-                    <span className={styles.text}>Категории</span>
-                  </Link>
-                </li>
-                <li
-                  className={activeIndex === 3 ? styles.active : ""}
-                  onClick={() => {
-                    handleMenuClick(3);
-                  }}
-                >
-                  <Link to="#">
-                    <span className={styles.text}>Подкатегории</span>
-                  </Link>
-                </li>
-              </ul>
-            </li>
-            <li
-              className={activeIndex === 4 ? styles.active : ""}
-              onClick={() => {
-                handleMenuClick(4);
-                setOpenSubmenus([]);
-              }}
-            >
-              <Link to="#">
-                <img className={styles.icon} src={products} alt="blocks" />
-                <span className={styles.text}>Продукты</span>
-              </Link>
-            </li>
-            <li
-              className={activeIndex === 5 ? styles.active : ""}
-              onClick={() => {
-                handleMenuClick(5);
-                setOpenSubmenus([]);
-              }}
-            >
-              <Link to="#">
-                <img className={styles.icon} src={orders} alt="blocks" />
-                <span className={styles.text}>Заказы</span>
-              </Link>
-            </li>
-          </ul>
-          <p className={styles.title}>ТОРГОВЛЯ</p>
-          <ul>
-            <li
-              className={activeIndex === 6 ? styles.active : ""}
-              onClick={() => {
-                handleMenuClick(6);
-                setOpenSubmenus([]);
-              }}
-            >
-              <Link to="#">
-                <img className={styles.icon} src={users} alt="blocks" />
-                <span className={styles.text}>Все пользователи</span>
-              </Link>
-            </li>
-            <li
-              className={activeIndex === 7 ? styles.active : ""}
-              onClick={() => {
-                handleMenuClick(7);
-                setOpenSubmenus([]);
-              }}
-            >
-              <Link to="#">
-                <img className={styles.icon} src={buyers} alt="blocks" />
-                <span className={styles.text}>Покупатели</span>
-              </Link>
-            </li>
-            <li
-              className={activeIndex === 8 ? styles.active : ""}
-              onClick={() => {
-                handleMenuClick(8);
-                setOpenSubmenus([]);
-              }}
-            >
-              <Link to="#">
-                <img className={styles.icon} src={sellers} alt="blocks" />
-                <span className={styles.text}>Продавцы</span>
-              </Link>
-            </li>
-            <li
-              className={activeIndex === 9 ? styles.active : ""}
-              onClick={() => {
-                handleMenuClick(9);
-                setOpenSubmenus([]);
-              }}
-            >
-              <Link to="#">
-                <img className={styles.icon} src={products} alt="blocks" />
-                <span className={styles.text}>Магазины</span>
-              </Link>
-            </li>
-            <li
-              className={activeIndex === 10 ? styles.active : ""}
-              onClick={() => {
-                handleMenuClick(10);
-                toggleSubmenu(10);
-              }}
-            >
-              <Link to="#">
-                <img className={styles.icon} src={other} alt="blocks" />
-                <span className={styles.text}>Другое</span>
-                <CaretDown className={styles.arrow} color="black" />
-              </Link>
-              <ul
-                className={`${styles.subMenu} ${
-                  openSubmenus.includes(10) ? styles.open : styles.close
-                }`}
+                <Link to="#">
+                  <img className={styles.icon} src={blocks} alt="blocks" />
+                  <span className={styles.text}>Блоки</span>
+                </Link>
+              </li>
+            </ul>
+            <p className={styles.title}>ЭЛЕМЕНТЫ</p>
+            <ul>
+              <li
+                className={activeIndex === 1 ? styles.active : ""}
+                onClick={() => {
+                  handleMenuClick(1);
+                  toggleSubmenu(1);
+                }}
               >
-                <li
-                  className={activeIndex === 11 ? styles.active : ""}
-                  onClick={() => handleMenuClick(11)}
+                <Link to="#">
+                  <img className={styles.icon} src={categories} alt="blocks" />
+                  <span className={styles.text}>Категории</span>
+                  <CaretDown className={styles.arrow} color="black" />
+                </Link>
+                <ul
+                  className={`${styles.subMenu} ${
+                    openSubmenus.includes(1) ? styles.open : styles.close
+                  }`}
                 >
-                  <Link to="#">
-                    <span className={styles.text}>Доход</span>
-                  </Link>
-                </li>
-                <li
-                  className={activeIndex === 12 ? styles.active : ""}
-                  onClick={() => handleMenuClick(12)}
+                  <li
+                    className={activeIndex === 2 ? styles.active : ""}
+                    onClick={() => {
+                      handleMenuClick(2);
+                    }}
+                  >
+                    <Link to="#">
+                      <span className={styles.text}>Категории</span>
+                    </Link>
+                  </li>
+                  <li
+                    className={activeIndex === 3 ? styles.active : ""}
+                    onClick={() => {
+                      handleMenuClick(3);
+                    }}
+                  >
+                    <Link to="#">
+                      <span className={styles.text}>Подкатегории</span>
+                    </Link>
+                  </li>
+                </ul>
+              </li>
+              <li
+                className={activeIndex === 4 ? styles.active : ""}
+                onClick={() => {
+                  handleMenuClick(4);
+                  setOpenSubmenus([]);
+                }}
+              >
+                <Link to="#">
+                  <img className={styles.icon} src={products} alt="blocks" />
+                  <span className={styles.text}>Продукты</span>
+                </Link>
+              </li>
+              <li
+                className={activeIndex === 5 ? styles.active : ""}
+                onClick={() => {
+                  handleMenuClick(5);
+                  setOpenSubmenus([]);
+                }}
+              >
+                <Link to="#">
+                  <img className={styles.icon} src={orders} alt="blocks" />
+                  <span className={styles.text}>Заказы</span>
+                </Link>
+              </li>
+            </ul>
+            <p className={styles.title}>ТОРГОВЛЯ</p>
+            <ul>
+              <li
+                className={activeIndex === 6 ? styles.active : ""}
+                onClick={() => {
+                  handleMenuClick(6);
+                  setOpenSubmenus([]);
+                }}
+              >
+                <Link to="#">
+                  <img className={styles.icon} src={users} alt="blocks" />
+                  <span className={styles.text}>Все пользователи</span>
+                </Link>
+              </li>
+              <li
+                className={activeIndex === 7 ? styles.active : ""}
+                onClick={() => {
+                  handleMenuClick(7);
+                  setOpenSubmenus([]);
+                }}
+              >
+                <Link to="#">
+                  <img className={styles.icon} src={buyers} alt="blocks" />
+                  <span className={styles.text}>Покупатели</span>
+                </Link>
+              </li>
+              <li
+                className={activeIndex === 8 ? styles.active : ""}
+                onClick={() => {
+                  handleMenuClick(8);
+                  setOpenSubmenus([]);
+                }}
+              >
+                <Link to="#">
+                  <img className={styles.icon} src={sellers} alt="blocks" />
+                  <span className={styles.text}>Продавцы</span>
+                </Link>
+              </li>
+              <li
+                className={activeIndex === 9 ? styles.active : ""}
+                onClick={() => {
+                  handleMenuClick(9);
+                  setOpenSubmenus([]);
+                }}
+              >
+                <Link to="#">
+                  <img className={styles.icon} src={products} alt="blocks" />
+                  <span className={styles.text}>Магазины</span>
+                </Link>
+              </li>
+              <li
+                className={activeIndex === 10 ? styles.active : ""}
+                onClick={() => {
+                  handleMenuClick(10);
+                  toggleSubmenu(10);
+                }}
+              >
+                <Link to="#">
+                  <img className={styles.icon} src={other} alt="blocks" />
+                  <span className={styles.text}>Другое</span>
+                  <CaretDown className={styles.arrow} color="black" />
+                </Link>
+                <ul
+                  className={`${styles.subMenu} ${
+                    openSubmenus.includes(10) ? styles.open : styles.close
+                  }`}
                 >
-                  <Link to="#">
-                    <span className={styles.text}>Выплаты</span>
-                  </Link>
-                </li>
-                <li
-                  className={activeIndex === 13 ? styles.active : ""}
-                  onClick={() => handleMenuClick(13)}
-                >
-                  <Link to="#">
-                    <span className={styles.text}>Отзывы</span>
-                  </Link>
-                </li>
-              </ul>
-            </li>
-            <li
-              className={activeIndex === 14 ? styles.active : ""}
-              onClick={() => {
-                handleMenuClick(14);
-                setOpenSubmenus([]);
-              }}
-            >
-              <Link to="#">
-                <img className={styles.icon} src={exit} alt="blocks" />
-                <span className={styles.text}>Выйти из аккаунта</span>
-              </Link>
-            </li>
-          </ul>
+                  <li
+                    className={activeIndex === 11 ? styles.active : ""}
+                    onClick={() => handleMenuClick(11)}
+                  >
+                    <Link to="#">
+                      <span className={styles.text}>Доход</span>
+                    </Link>
+                  </li>
+                  <li
+                    className={activeIndex === 12 ? styles.active : ""}
+                    onClick={() => handleMenuClick(12)}
+                  >
+                    <Link to="#">
+                      <span className={styles.text}>Выплаты</span>
+                    </Link>
+                  </li>
+                  <li
+                    className={activeIndex === 13 ? styles.active : ""}
+                    onClick={() => handleMenuClick(13)}
+                  >
+                    <Link to="#">
+                      <span className={styles.text}>Отзывы</span>
+                    </Link>
+                  </li>
+                </ul>
+              </li>
+              <li
+                className={activeIndex === 14 ? styles.active : ""}
+                onClick={() => {
+                  handleMenuClick(14);
+                  setOpenSubmenus([]);
+                }}
+              >
+                <Link to="#">
+                  <img className={styles.icon} src={exit} alt="blocks" />
+                  <span className={styles.text}>Выйти из аккаунта</span>
+                </Link>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>

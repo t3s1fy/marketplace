@@ -1,75 +1,49 @@
 import React, { useContext } from "react";
-import style from "../styles/SellerProfile.module.css";
+import s from "../styles/SellerProfile.module.css";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import cardLogo from "../assets/profile_assets/cardLogo.svg";
-import { SETTINGS_ROUTE } from "../utils/consts";
-import settingsLogo from "../assets/profile_assets/settingsLogo.svg";
-import helperLogo from "../assets/profile_assets/helperLogo.svg";
-import shazamLogo from "../assets/profile_assets/shazamLogo.svg";
 import { Context } from "../index";
-import pictureOne from "../assets/seller_profile_assets/pictureThree.png";
+import SellerProfileContainer from "../components/profile_container/SellerProfileContainer";
+import line from "../assets/seller_profile_assets/line_image.png";
 
 const SellerProfile = () => {
   const location = useLocation();
   const { user } = useContext(Context);
-  const navigate = useNavigate();
+
   return (
-    <div className={style.profilePage}>
-      <div className={style.mainContainer}>
-        <div className={style.profileBlock}>
-          <Link className={style.editProfileText} to="">
-            Изменить профиль
-          </Link>
-          <div className={style.infoBlock}>
-            <div className={style.imgUser}>0_0</div>
-            <span className={style.emailUser}>pupkin@gmail.com</span>
-          </div>
-          <hr className={style.line}></hr>
-          <p className={style.welcomeText}>
-            Добро пожаловать в личный кабинет!
-          </p>
-          <div className={style.profileBtnBlock}>
-            <div onClick={() => navigate(null)} className={style.profileBtn}>
-              <img src={cardLogo} alt="card" />
-              <p>Способы оплаты</p>
+    <div className={s.profilePage}>
+      <SellerProfileContainer />
+      <div className={s.container}>
+        <img src={line} alt="line" />
+        <div className={s.main}>
+          <div className={s.leftMain}>
+            <div className={s.miniBlock}>
+              <div className={s.miniBlockHeader}>
+                <p>Текущий баланс</p>
+              </div>
             </div>
-            <div
-              onClick={() => navigate(SETTINGS_ROUTE)}
-              className={style.profileBtn}
-            >
-              <img src={settingsLogo} alt="settings" />
-              <p>Настройки</p>
+            <div className={s.miniBlock}>
+              <div className={s.miniBlockHeader}>
+                <p>Доход</p>
+              </div>
             </div>
-            <div onClick={() => navigate(null)} className={style.profileBtn}>
-              <img src={helperLogo} alt="helper" />
-              <p>Сервис и помощь</p>
-            </div>
-            <div onClick={() => navigate(null)} className={style.profileBtn}>
-              <img src={shazamLogo} alt="shazam" />
-              <p>Выйти из аккаунта</p>
+            <div className={s.miniBlock}>
+              <div className={s.miniBlockHeader}>
+                <p>Чистый доход (без процента)</p>
+              </div>
             </div>
           </div>
-        </div>
-        <div className={style.fillProfileBlock}>
-          <div className={style.fillProfileElem}>
-            <img
-              className={style.pictureOne}
-              src={pictureOne}
-              alt="beatiful picture"
-            />
-            <div className={style.textBlock}>
-              <p className={style.titleTextBlock}>Заполните профиль</p>
-              <p className={style.subtitleTextBlock}>
-                Осталось совсем немного!
-              </p>
+          <div className={s.rightMain}>
+            <div className={s.bigBlock}>
+              <div className={s.bigBlockHeader}>
+                <p>Продажи</p>
+              </div>
             </div>
-            <hr className={style.lineInFillProfileElem}></hr>
-            <div className={style.stepBlock}>
-              <p className={style.titleStepBlock}>ШАГ</p>
-              <p className={style.subtitleStepBlock}>1/4</p>
+            <div className={s.bigBlock}>
+              <div className={s.bigBlockHeader}>
+                <p>Недавние заказы</p>
+              </div>
             </div>
           </div>
-          <div className={style.fillProfileElem}></div>
         </div>
       </div>
     </div>

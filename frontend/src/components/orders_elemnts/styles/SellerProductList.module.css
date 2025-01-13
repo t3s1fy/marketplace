@@ -1,0 +1,30 @@
+.noOrders {
+  box-sizing: border-box;
+  padding-top: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.title {
+  font-family: 'IBM Plex Sans',sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 32px;
+  text-align: center;
+  color: #5E3023CC;
+}
+
+.orderList {
+  overflow-Y: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.orderList::-webkit-scrollbar {
+  display: none;
+  }

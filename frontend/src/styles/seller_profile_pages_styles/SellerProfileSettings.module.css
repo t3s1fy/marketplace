@@ -1,0 +1,205 @@
+.profilePage {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: row;
+  align-items:flex-start;
+  justify-content: flex-start;
+  gap: 25px;
+  width: 100%;
+  height: 100%;
+  background-color: #eae0d6;
+  margin: 0;
+  box-sizing: border-box;
+  padding: 34px 33px 40px 33px;
+  box-shadow:
+    0 4px 4px -1px rgba(12, 12, 13, 0.1),
+    0 4px 4px -1px rgba(12, 12, 13, 0.05);
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  box-sizing: border-box;
+  padding: 20px;
+  width: 1428px;
+  height: 499px;
+  border-radius: 0 0 10px 10px;
+  background-color: rgba(255, 255, 255, 1);
+  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+}
+
+.mainMain {
+  width: 1388px;
+  height: 459px;
+  border-radius: 10px;
+  border: 1px solid #DAB49D;
+  background-color: #F0E1D8;
+  box-sizing: border-box;
+  padding: 0 20px 20px 20px;
+  gap: 20.62px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.mainHeader {
+  width: 1386px;
+  height: 68.38px;
+  border-radius: 10px 10px 0 0;
+  border-bottom: 1px solid #DAB49D;
+  background-color: white;
+  box-sizing: border-box;
+  padding-left: 19px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.mainHeader p {
+  font-family: 'IBM Plex Sans',sans-serif;
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 32px;
+  text-align: left;
+  color: #5E3023;
+}
+
+.settingsBlock {
+  box-sizing: border-box;
+  padding: 10px 20px 16px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: 1348px;
+  height: 350px;
+  border-radius: 10px;
+  gap: 11.17px;
+  background-color: white;
+  border: 1px solid #5E302380;
+  box-shadow: 0px 4px 4px 0px #00000040;
+}
+
+.titleBlock {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 9.88px;
+}
+
+.title {
+  font-family: 'IBM Plex Sans',sans-serif;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 32px;
+  text-align: left;
+  color: #5E3023;
+}
+
+.subTitle {
+  font-family: 'IBM Plex Sans',sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 23.4px;
+  text-align: left;
+  text-underline-position: from-font;
+  text-decoration-skip-ink: none;
+  color: #00000080;
+}
+
+.mainBlock {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 108px;
+}
+
+.leftBlock {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 17px;
+}
+
+.rightBlock {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 38px;
+}
+
+.inputBlock {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.inputTitle {
+  font-family: 'IBM Plex Sans',sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 23.4px;
+  text-align: left;
+  color: #5e3023;
+}
+
+.inputTitle span {
+  color: #808080;
+}
+
+.inputTitle span span {
+  color: #ff3336;
+}
+
+.inputPlace {
+  outline: none;
+  width: 600px;
+  height: 50px;
+  border-radius: 10px;
+  border: 1px solid #DAB49D;
+  padding: 14px;
+  font-family: 'Roboto Mono',monospace;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 21.1px;
+  text-align: left;
+  color: #5e3023;
+  transition: 0.3s;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.inputPlace:focus {
+  border: 0.5px solid #5E3023;
+}
+
+.inputSubTitle {
+  font-family: 'IBM Plex Sans',sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 20.8px;
+  text-align: left;
+  text-underline-position: from-font;
+  text-decoration-skip-ink: none;
+  color: #00000080;
+}

@@ -1,0 +1,213 @@
+.profilePage {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: row;
+  align-items:flex-start;
+  justify-content: flex-start;
+  gap: 25px;
+  width: 100%;
+  height: 100%;
+  background-color: #eae0d6;
+  margin: 0;
+  box-sizing: border-box;
+  padding: 34px 33px 40px 33px;
+  box-shadow:
+    0 4px 4px -1px rgba(12, 12, 13, 0.1),
+    0 4px 4px -1px rgba(12, 12, 13, 0.05);
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  box-sizing: border-box;
+  padding: 20px;
+  width: 1428px;
+  height: 1118px;
+  border-radius: 0 0 10px 10px;
+  background-color: rgba(255, 255, 255, 1);
+  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+}
+
+.mainHeader {
+  width: 1388px;
+  height: 69px;
+  border-radius: 10px 10px 0 0;
+  border: 1px solid rgba(218, 180, 157, 1);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  box-sizing: border-box;
+  padding-left: 20px;
+}
+
+.mainHeader p {
+  font-family: 'IBM Plex Sans',sans-serif;
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 32px;
+  text-align: left;
+  color: rgba(94, 48, 35, 1);
+}
+
+.mainMain {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.leftBlock {
+  position: relative;
+  box-sizing: border-box;
+  padding: 10px 10px 0 10px;
+  width: 445px;
+  height: 1009px;
+  border-radius: 0 0 0 10px;
+  border-left: 1px solid rgba(218, 180, 157, 1);
+  border-bottom: 1px solid rgba(218, 180, 157, 1);
+  border-right: 1px solid rgba(218, 180, 157, 1);
+  border-top: none;
+  background-color: rgba(240, 225, 216, 1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.rightBlock {
+  position: relative;
+  box-sizing: border-box;
+  padding: 0 20px 0 20px;
+  display: flex;
+  width: 943px;
+  height: 1009px;
+  border-radius: 0 0 10px 0;
+  border-right: 1px solid rgba(218, 180, 157, 1);
+  border-bottom: 1px solid rgba(218, 180, 157, 1);
+}
+
+.searchBox {
+  box-sizing: border-box;
+  padding-left: 12px;
+  gap: 12px;
+  width: 425px;
+  height: 55px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  background-color: #FFFFFF;
+  border: 1px solid #DAB49D;
+  border-radius: 20px;
+  transition: border-color 0.2s ease-in-out;
+}
+
+.searchBox:focus-within {
+  border-color: #5E3023; /* цвет рамки, когда фокус внутри контейнера */
+}
+
+.searchBox input {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  color: #5E3023;
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 16px;
+  width: 350px;
+  transition: color 0.2s ease-in-out;
+}
+
+.searchBox input::placeholder {
+  color: #5E3023;
+  transition: color 0.2s ease-in-out;
+}
+
+.searchBox input:focus::placeholder {
+  color: #cfc1bd;
+}
+
+.searchBox button {
+  background-color: transparent;
+  height: 24px;
+  width: 24px;
+  outline: none;
+  cursor: pointer;
+  border: none;
+}
+
+.changeMesasge {
+  border-top: 1px solid #DAB49D;
+  border-right: 1px solid #DAB49D;
+  width: 444px;
+  height: 77px;
+  border-radius: 0 0 0 10px;
+  background-color: rgba(255, 255, 255, 1);
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+  padding-left: 26px;
+  padding-right: 26px;
+}
+
+.changeMesasgeTitle {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 10.75px;
+}
+
+.changeMesasgeTitle p {
+  font-family: 'IBM Plex Sans',sans-serif;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 23.4px;
+  text-align: left;
+  color: rgba(94, 48, 35, 1);
+}
+
+.toggleBtn {
+  outline: none;
+  border: none;
+  cursor: pointer;
+  width: 40px;
+  height: 24px;
+  border-radius: 12px;
+  background-color: rgba(141, 141, 141, 1);
+  transition: background-color 0.2s;
+  position: relative;
+}
+
+.toggleBtn .thumb {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 1);
+  transform: translateX(0);
+  transition: left 0.2s ease;
+  position: absolute;
+  left: 3px;
+  top: 3px;
+}
+
+.toggleBtn.toggled {
+  background-color: rgba(94, 48, 35, 1);
+}
+
+.toggleBtn.toggled .thumb {
+  left: 19px;
+}

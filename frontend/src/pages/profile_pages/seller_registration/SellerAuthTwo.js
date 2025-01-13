@@ -1,7 +1,10 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import s from "../../../styles/profile_pages_styles/seller_registration_styles/SellerAuthTwo.module.css";
-import { SELLER_AUTH_THREE_ROUTE } from "../../../utils/consts";
+import {
+  SELLER_AUTH_THREE_ROUTE,
+  SELLER_PROFILE_ROUTE,
+} from "../../../utils/consts";
 
 const SellerAuthTwo = () => {
   const navigate = useNavigate();
@@ -32,9 +35,7 @@ const SellerAuthTwo = () => {
         <hr className={s.bottomLine} />
         <div className={s.containerFooter}>
           <button onClick={() => navigate(-1)}>Назад</button>
-          <button onClick={() => navigate(SELLER_AUTH_THREE_ROUTE)}>
-            Далее
-          </button>
+          <button onClick={() => navigate(SELLER_PROFILE_ROUTE)}>Далее</button>
         </div>
       </div>
     </div>

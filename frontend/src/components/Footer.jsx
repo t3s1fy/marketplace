@@ -33,7 +33,6 @@ const Footer = () => {
   // Список исключённых маршрутов
   const excludedRoutes = [
     SELLER_AUTH_TWO_ROUTE,
-    SELLER_AUTH_THREE_ROUTE,
     SELLER_AUTH_ONE_ROUTE,
     LOGIN_ROUTE,
     REGISTRATION_ROUTE,
